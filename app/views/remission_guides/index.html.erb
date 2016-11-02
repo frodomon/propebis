@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Remission Guides</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Business</th>
+      <th>Client</th>
+      <th>Driver</th>
+      <th>Vehicle</th>
+      <th>Remission guide number</th>
+      <th>Initial point</th>
+      <th>Final point</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @remission_guides.each do |remission_guide| %>
+      <tr>
+        <td><%= Business.find(remission_guide.business_id).name %></td>
+        <td><%= Client.find(remission_guide.client_id).name %></td>
+        <td><%= Driver.find(remission_guide.driver_id).name %></td>
+        <td><%= Vehicle.find(remission_guide.vehicle_id).plate %></td>
+        <td><%= remission_guide.remission_guide_number %></td>
+        <td><%= remission_guide.initial_point %></td>
+        <td><%= remission_guide.final_point %></td>
+        <td><%= remission_guide.date %></td>
+        <td><%= link_to 'Show', remission_guide %></td>
+        <td><%= link_to 'Edit', edit_remission_guide_path(remission_guide) %></td>
+        <td><%= link_to 'Destroy', remission_guide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Remission guide', new_remission_guide_path %>
+<%= link_to 'Inicio', root_path %>

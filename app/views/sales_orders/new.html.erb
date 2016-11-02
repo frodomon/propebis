@@ -1,0 +1,11 @@
+<% provide(:title, "Crear Orden de Venta | Propebis") %>
+<% content_for :header do -%>
+  <%= javascript_include_tag 'sales_orders' %>
+  <%= stylesheet_link_tag 'purchase_orders' %>
+  <%= stylesheet_link_tag 'sales_orders' %>
+<% end -%>
+<h1>New Sales Order</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', sales_orders_path %>

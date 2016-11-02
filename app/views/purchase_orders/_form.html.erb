@@ -1,0 +1,89 @@
+<%= form_for @purchase_order, html: { multipart: true } do |f| %>
+  <% if @purchase_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_order.errors.count, "error") %> prohibited this purchase_order from being saved:</h2>
+
+      <ul>
+      <% @purchase_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :business_id, 'Empresa' %><br>
+    <%= f.collection_select :business_id, Business.order(:name), :id, :name, :prompt => 'Seleccione una Empresa' %>
+  </div>
+  <div class="field">
+    <%= f.label :supplier_id, 'Proveedor' %><br>
+    <%= f.collection_select :supplier_id, Supplier.order(:name), :id, :name, :prompt => 'Seleccione un Proveedor' %>
+  </div>
+  <div class="field">
+    <%= f.label :order_number %><br>
+    <%= f.text_field :order_number %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.text_field :date, placeholder: @today, readonly: true %>
+  </div>
+  <div class="field">
+    <%= f.label :billing_address %><br>
+    <%= f.text_field :billing_address %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_address %><br>
+    <%= f.text_field :delivery_address %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_date %><br>
+    <%= f.text_field :delivery_date %>
+  </div>
+  <div class="field">
+    <%= f.label :order_date %><br>
+    <%= f.text_field :order_date %>
+  </div>
+  <div class="field">
+    <%= f.label :ammount, 'Monto Final' %>
+    <%= f.number_field :ammount, readonly: true, step: :any %>
+  </div>
+  <div class='detail_header'>
+    <div class='detail_column'>
+      <p>Producto</p>
+    </div>
+    <div class='detail_column'>
+      <p>Unidad de Medida</p>
+    </div>
+    <div class='detail_column'>
+      <p>Cantidad</p>
+    </div>
+    <div class='detail_column'>
+      <p>P. Unit</p>
+    </div>
+    <div class='detail_column'>
+      <p>Subtotal</p>
+    </div>
+    <div class='detail_column'>
+      <p>Eliminar</p>
+    </div>
+  </div>
+  <div class= 'details'>
+    <%= f.fields_for :purchase_order_details do |builder| %>
+      <%= render 'purchase_order_detail_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Añadir Producto", f, :purchase_order_details %>
+  </div>
+  <div class= "attachments">
+    <h3>Documentos Adjuntos</h3>
+    <%= f.fields_for :purchase_order_documents do |pod| %>  
+      <%= render 'purchase_order_document_fields', f: pod %> 
+    <% end %>
+    <%= link_to_add_fields "Añadir Documento", f, :purchase_order_documents %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= javascript_tag "businesses = #{@businesses.to_json.html_safe};" %>
+<%= javascript_tag "products = #{@products.to_json.html_safe};" %>

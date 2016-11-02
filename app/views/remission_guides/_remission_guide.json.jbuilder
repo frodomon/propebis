@@ -1,0 +1,2 @@
+json.extract! remission_guide, :id, :business_id, :client_id, :driver_id, :vehicle_id, :remission_guide_number, :initial_point, :final_point, :date, :created_at, :updated_at
+json.url remission_guide_url(remission_guide, format: :json)

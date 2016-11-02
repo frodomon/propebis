@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Sales Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Business</th>
+      <th>Client</th>
+      <th>Contrato</th>
+      <th>Sales order number</th>
+      <th>Date</th>
+      <th>Billing address</th>
+      <th>Delivery address</th>
+      <th>Order date</th>
+      <th>Delivery date</th>
+      <th>Monto Final</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sales_orders.each do |sales_order| %>
+      <tr>
+        <td><%= Business.find(sales_order.business_id).name %></td>
+        <td><%= Client.find(sales_order.client_id).name %></td>
+        <td><%= Contract.find(sales_order.contract_id).contract_number %></td>
+        <td><%= sales_order.sales_order_number %></td>
+        <td><%= sales_order.date %></td>
+        <td><%= sales_order.billing_address %></td>
+        <td><%= sales_order.delivery_address %></td>
+        <td><%= sales_order.order_date %></td>
+        <td><%= sales_order.delivery_date %></td>
+        <td><%= sales_order.ammount %></td>
+        <td><%= link_to 'Show', sales_order %></td>
+        <td><%= link_to 'Edit', edit_sales_order_path(sales_order) %></td>
+        <td><%= link_to 'Destroy', sales_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sales order', new_sales_order_path %>
+<%= link_to 'Inicio', root_path %>

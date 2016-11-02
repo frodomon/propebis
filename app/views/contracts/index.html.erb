@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Contracts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Business</th>
+      <th>Client</th>
+      <th>Contract number</th>
+      <th>Date</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Final price</th>
+      <th>Credit</th>
+      <th colspan="6"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contracts.each do |contract| %>
+      <tr>
+        <td><%= Business.find(contract.business).name %></td>
+        <td><%= Client.find(contract.client).name %></td>
+        <td><%= contract.contract_number %></td>
+        <td><%= contract.date %></td>
+        <td><%= contract.start_date %></td>
+        <td><%= contract.end_date %></td>
+        <td><%= contract.final_price %></td>
+        <td><%= contract.credit %></td>
+        <td><%= link_to 'Show', contract %></td>
+        <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
+        <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to "Agregar Adenda", { controller: :addendums , action: :new, contract_id: contract.id} , method: :get %></td>
+        <td><%= button_to "Ver Adendas", { controller: :addendums , action: :index, contract_id: contract.id} , method: :get %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contract', new_contract_path %>
+<%= link_to "Inicio", root_path %>

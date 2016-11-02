@@ -1,0 +1,7 @@
+<div class='rgd_details'>
+  <%= f.collection_select :product_id, Product.order(:name), :id, :name, { prompt: 'Seleccione un Producto'}, html_options = {class: 'product_select'} %>
+  <%= text_field '#', 'unit_of_measurement', class: 'unit_of_measurement', readonly: true %>
+  <%= f.number_field :quantity, class: 'rgd_quantity', step: :any %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to 'Eliminar', '#', class: "remove_fields" %>
+</div>

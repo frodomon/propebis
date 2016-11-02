@@ -1,0 +1,41 @@
+<%= form_for(@product_lot) do |f| %>
+  <% if @product_lot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_lot.errors.count, "error") %> prohibited this products_lot from being saved:</h2>
+
+      <ul>
+      <% @product_lot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :product_id, 'Producto' %><br>
+    <%= f.collection_select :product_id, Product.order(:name), :id, :name, :prompt => 'Seleccione un Producto' %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.text_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :sanitary_registry %><br>
+    <%= f.text_field :sanitary_registry %>
+  </div>
+  <div class="field">
+    <%= f.label :due_date %><br>
+    <%= f.text_field :due_date %>
+  </div>
+  <div class="field">
+    <%= f.label :lot_number %><br>
+    <%= f.text_field :lot_number %>
+  </div>
+  <div class="field">
+    <%= f.label :production_date %><br>
+    <%= f.text_field :production_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

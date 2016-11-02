@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Registro Sanitario</th>
+      <th>Número de Lote</th>
+      <th>Fecha de Producción</th>
+      <th>Fecha de Vencimiento</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_lots.each do |product_lot| %>
+      <tr>
+        <td><%= Product.find(product_lot.product_id).name %></td>
+        <td><%= product_lot.quantity %></td>
+        <td><%= product_lot.sanitary_registry %></td>
+        <td><%= product_lot.lot_number %></td>
+        <td><%= product_lot.production_date %></td>
+        <td><%= product_lot.due_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

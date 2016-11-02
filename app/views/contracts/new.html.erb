@@ -1,0 +1,10 @@
+<% provide(:title, "Crear Contrato | Propebis") %>
+<% content_for :header do -%>
+  <%= javascript_include_tag 'contracts' %>
+  <%= stylesheet_link_tag 'purchase_orders' %>
+<% end -%>
+<h1>New Contract</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', contracts_path %>

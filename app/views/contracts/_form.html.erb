@@ -1,0 +1,84 @@
+<%= form_for @contract, html: { multipart: true } do |f| %>
+  <% if @contract.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+
+      <ul>
+      <% @contract.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :business_id, 'Empresa' %><br>
+    <%= f.collection_select :business_id, Business.order(:name), :id, :name, :prompt => 'Seleccione una Empresa' %>
+  </div>
+  <div class="field">
+    <%= f.label :client_id, 'Cliente' %><br>
+    <%= f.collection_select :client_id, Client.order(:name), :id, :name, :prompt => 'Seleccione un Cliente' %>
+  </div>
+  <div class="field">
+    <%= f.label :contract_number %><br>
+    <%= f.text_field :contract_number %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.text_field :date, placeholder: @today, readonly: true %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.text_field :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.text_field :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :final_price %><br>
+    <%= f.number_field :final_price, placeholder: 0, readonly: true %>
+  </div>
+  <div class="field">
+    <%= f.label :credit %><br>
+    <%= f.number_field :credit, readonly: true %>
+  </div>
+  <div class='detail_header'>
+    <div class='detail_column'>
+      <p>Producto</p>
+    </div>
+    <div class='detail_column'>
+      <p>Unidad de Medida</p>
+    </div>
+    <div class='detail_column'>
+      <p>Cantidad</p>
+    </div>
+    <div class='detail_column'>
+      <p>P. Unit</p>
+    </div>
+    <div class='detail_column'>
+      <p>Subtotal</p>
+    </div>
+    <div class='detail_column'>
+      <p>Eliminar</p>
+    </div>
+  </div>
+  <div class= 'details'>
+    <%= f.fields_for :contract_details do |builder| %>
+      <%= render 'contract_detail_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Añadir Producto", f, :contract_details %>
+  </div>
+  <div class= "attachments">
+    <h3>Documentos Adjuntos</h3>
+    <%= f.fields_for :contract_documents do |pod| %>  
+      <%= render 'contract_document_fields', f: pod %> 
+    <% end %>
+    <%= link_to_add_fields "Añadir Documento", f, :contract_documents %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= javascript_tag "products = #{@products.to_json.html_safe};" %>

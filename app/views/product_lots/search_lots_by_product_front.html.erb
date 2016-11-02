@@ -1,0 +1,19 @@
+<% provide(:title, "Buscar Lotes por Producto | Propebis") %>
+<% content_for :header do -%>
+  <%= javascript_include_tag 'product_lots' %>
+<% end -%>
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Product Lots</h1>
+  <%= form_tag search_lots_by_product_front_product_lots_path, method: 'get' do %>
+    <p>
+      <%= select_tag :search, options_from_collection_for_select(Product.order(:name), :id, :name, params[:search]), include_blank: true %>
+      <%= submit_tag "Search", name: nil, class: 'search_button' %>
+  	</p>
+  <% end %>
+<div id='content'>
+
+</div>
+<br>
+
+<%= link_to 'Back', product_lots_path %>

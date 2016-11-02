@@ -1,0 +1,19 @@
+<% provide(:title, "Buscar Lotes por Vencer | Propebis") %>
+<% content_for :header do -%>
+  <%= javascript_include_tag 'product_lots' %>
+<% end -%>
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Product Lots</h1>
+  <%= form_tag search_lots_close_to_expire_front_product_lots_path, method: 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search], id: 'search_by_date' %>
+      <%= submit_tag "Search", name: nil, class: 'search_by_date_button' %>
+  	</p>
+  <% end %>
+<div id='content'>
+
+</div>
+<br>
+
+<%= link_to 'Back', product_lots_path %>

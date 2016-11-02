@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Business:</strong>
+  <%= @sales_order.business %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @sales_order.client %>
+</p>
+
+<p>
+  <strong>Sales order number:</strong>
+  <%= @sales_order.sales_order_number %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @sales_order.date %>
+</p>
+
+<p>
+  <strong>Billing address:</strong>
+  <%= @sales_order.billing_address %>
+</p>
+
+<p>
+  <strong>Delivery address:</strong>
+  <%= @sales_order.delivery_address %>
+</p>
+
+<p>
+  <strong>Order date:</strong>
+  <%= @sales_order.order_date %>
+</p>
+
+<p>
+  <strong>Delivery date:</strong>
+  <%= @sales_order.delivery_date %>
+</p>
+
+<%= link_to 'Edit', edit_sales_order_path(@sales_order) %> |
+<%= link_to 'Back', sales_orders_path %>

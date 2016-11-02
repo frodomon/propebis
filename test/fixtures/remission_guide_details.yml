@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  remission_guide_id: 
+  product_id: 
+  quantity: 1.5
+
+two:
+  remission_guide_id: 
+  product_id: 
+  quantity: 1.5

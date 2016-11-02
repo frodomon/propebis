@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supplier_id: 
+  business_id: 
+  order_number: MyString
+  date: 2016-10-28
+  order_date: 2016-10-28
+  delivery_date: 2016-10-28
+  billing_address: MyString
+  delivery_address: MyString
+
+two:
+  supplier_id: 
+  business_id: 
+  order_number: MyString
+  date: 2016-10-28
+  order_date: 2016-10-28
+  delivery_date: 2016-10-28
+  billing_address: MyString
+  delivery_address: MyString

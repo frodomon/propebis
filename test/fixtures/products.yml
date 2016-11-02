@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nameÑstring: MyString
+  unit_of_measurement: MyString
+  description: MyString
+  trademark: MyString
+  category_id: 
+
+two:
+  nameÑstring: MyString
+  unit_of_measurement: MyString
+  description: MyString
+  trademark: MyString
+  category_id: 

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Contract Number:</strong>
+  <%= Contract.find(@addendum.contract_id).contract_number %>
+</p>
+
+<p>
+  <strong>Addendum Number:</strong>
+  <%= @addendum.addendum_number %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @addendum.date %>
+</p>
+
+<p>
+  <strong>Ammount:</strong>
+  <%= @addendum.ammount %>
+</p>
+
+<%= link_to 'Edit', edit_contract_addendum_path(@addendum.contract_id, @addendum.id) %> |
+<%= link_to 'Back', contract_addendums_path %>

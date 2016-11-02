@@ -1,0 +1,11 @@
+<% provide(:title, "Editar Orden de Compra | Propebis") %>
+<% content_for :header do -%>
+  <%= javascript_include_tag 'purchase_orders' %>
+  <%= stylesheet_link_tag 'purchase_orders' %>
+<% end -%>
+<h1>Editing Purchase Order</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @purchase_order %> |
+<%= link_to 'Back', purchase_orders_path %>

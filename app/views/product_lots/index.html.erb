@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Product Lots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_lots.each do |product_lot| %>
+      <tr>
+        <td><%= Product.find(product_lot.product_id).name %></td>
+        <td><%= product_lot.quantity %></td>
+        <td><%= button_to "Ver Lotes de Producto", { action: "lot_by_product", product_id: product_lot.product_id }, method: :get %></td>
+        <td><%= button_to 'Ver Lotes Vacios',{ action: "empty_lots", product_id: product_lot.product_id }, method: :get %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= button_to "Agregar Lote", { action: "new" }, method: :get %>
+<%= button_to 'Ver Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, method: :get %>
+<%= button_to 'Buscar Lotes por Producto', { action: "search_lots_by_product_front" }, method: :get %>
+<%= link_to "Inicio", root_path %>
+

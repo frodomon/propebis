@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Business:</strong>
+  <%= @purchase_order.business %>
+</p>
+
+<p>
+  <strong>Order number:</strong>
+  <%= @purchase_order.order_number %>
+</p>
+
+<p>
+  <strong>Supplier:</strong>
+  <%= @purchase_order.supplier %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @purchase_order.date %>
+</p>
+
+<p>
+  <strong>Order date:</strong>
+  <%= @purchase_order.order_date %>
+</p>
+
+<p>
+  <strong>Delivery date:</strong>
+  <%= @purchase_order.delivery_date %>
+</p>
+
+<p>
+  <strong>Billing address:</strong>
+  <%= @purchase_order.billing_address %>
+</p>
+
+<p>
+  <strong>Delivery address:</strong>
+  <%= @purchase_order.delivery_address %>
+</p>
+
+<%= link_to 'Edit', edit_purchase_order_path(@purchase_order) %> |
+<%= link_to 'Back', purchase_orders_path %>

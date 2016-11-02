@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Business:</strong>
+  <%= @contract.business %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @contract.client %>
+</p>
+
+<p>
+  <strong>Contract number:</strong>
+  <%= @contract.contract_number %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @contract.date %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @contract.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @contract.end_date %>
+</p>
+
+<p>
+  <strong>Final price:</strong>
+  <%= @contract.final_price %>
+</p>
+
+<p>
+  <strong>Credit:</strong>
+  <%= @contract.credit %>
+</p>
+
+<%= link_to 'Edit', edit_contract_path(@contract) %> |
+<%= link_to 'Back', contracts_path %>

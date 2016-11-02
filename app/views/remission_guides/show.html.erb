@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Business:</strong>
+  <%= @remission_guide.business %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @remission_guide.client %>
+</p>
+
+<p>
+  <strong>Driver:</strong>
+  <%= @remission_guide.driver %>
+</p>
+
+<p>
+  <strong>Vehicle:</strong>
+  <%= @remission_guide.vehicle %>
+</p>
+
+<p>
+  <strong>Remission guide number:</strong>
+  <%= @remission_guide.remission_guide_number %>
+</p>
+
+<p>
+  <strong>Initial point:</strong>
+  <%= @remission_guide.initial_point %>
+</p>
+
+<p>
+  <strong>Final point:</strong>
+  <%= @remission_guide.final_point %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @remission_guide.date %>
+</p>
+
+<%= link_to 'Edit', edit_remission_guide_path(@remission_guide) %> |
+<%= link_to 'Back', remission_guides_path %>

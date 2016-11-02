@@ -1,0 +1,70 @@
+<%= form_for ([@contract,@addendum]), html: { multipart: true } do |f| %>
+  <% if @addendum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@addendum.errors.count, "error") %> prohibited this addendum from being saved:</h2>
+
+      <ul>
+      <% @addendum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :contract_id %>
+    <label>Contrato</label>
+    <%= text_field '#', 'contract_number', class: 'contract_number', readonly: true %>
+  </div>
+  <div class="field">
+    <%= f.label :addendum_number %>
+    <%= f.text_field :addendum_number, class: 'addendum_number' %>
+  </div>
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.text_field :date, class: 'addendum_date' %>
+  </div>
+  <div class="field">
+    <%= f.label :ammount %>
+    <%= f.number_field :ammount,placeholder: 0, readonly: true, class: 'addendum_ammount' %>
+  </div>
+  <div class='detail_header'>
+    <div class='detail_column'>
+      <p>Producto</p>
+    </div>
+    <div class='detail_column'>
+      <p>Unidad de Medida</p>
+    </div>
+    <div class='detail_column'>
+      <p>Cantidad</p>
+    </div>
+    <div class='detail_column'>
+      <p>P. Unit</p>
+    </div>
+    <div class='detail_column'>
+      <p>Subtotal</p>
+    </div>
+    <div class='detail_column'>
+      <p>Eliminar</p>
+    </div>
+  </div>
+  <div class= 'details'>
+    <%= f.fields_for :addendum_details do |builder| %>
+      <%= render 'addendum_detail_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Añadir Producto", f, :addendum_details %>
+  </div>
+  <div class= "attachments">
+    <h3>Documentos Adjuntos</h3>
+    <%= f.fields_for :addendum_documents do |pod| %>  
+      <%= render 'addendum_document_fields', f: pod %> 
+    <% end %>
+    <%= link_to_add_fields "Añadir Documento", f, :addendum_documents %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= javascript_tag "products = #{@products.to_json.html_safe};" %>
+<%= javascript_tag "contract = #{@contract.to_json.html_safe};" %>

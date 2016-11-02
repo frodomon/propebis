@@ -1,0 +1,1 @@
+json.partial! "product_lots/product_lot", product_lot: @product_lot

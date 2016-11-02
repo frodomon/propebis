@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Addendums</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contract number</th>
+      <th>Addendum number</th>
+      <th>Date</th>
+      <th>Monto</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @addendums.each do |addendum| %>
+      <tr>
+        <td><%= Contract.find(addendum.contract_id).contract_number %></td>
+        <td><%= addendum.addendum_number %></td>
+        <td><%= addendum.date %></td>
+        <td><%= addendum.ammount %></td>
+        <td><%= button_to "Ver", { controller: :addendums, action: :show, contract_id: addendum.contract_id, id: addendum.id } , method: :get %></td>
+        <td><%= button_to "Editar", { controller: :addendums, action: :edit, contract_id: addendum.contract_id, id: addendum.id } , method: :get %></td>
+        <td><%= button_to 'Destroy', { controller: :addendums, action: :destroy, contract_id: addendum.contract_id, id: addendum.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if addendum.updated == false %>
+          <td><%= button_to 'Actualizar Credito', { controller: :addendums, action: :update_credit, contract_id: addendum.contract_id, id: addendum.id } , method: :put %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "Volver", contracts_path %>

@@ -1,0 +1,2 @@
+json.extract! contract, :id, :client_id, :business_id, :name, :contract_number, :date, :start_date, :end_date, :final_price, :credit, :created_at, :updated_at
+json.url contract_url(contract, format: :json)

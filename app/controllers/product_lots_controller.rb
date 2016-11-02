@@ -1,0 +1,106 @@
+class ProductLotsController < ApplicationController
+  before_action :set_product_lot, only: [:show, :edit, :update, :destroy]
+
+  # GET /products_lots
+  # GET /products_lots.json
+  def index
+    @product_lots = ProductLot.select("product_id, sum(quantity) as quantity").group("product_id")
+    
+  end
+
+  # GET /products_lots/1
+  # GET /products_lots/1.json
+  def show
+  end
+
+  # GET /products_lots/new
+  def new
+    @product_lot = ProductLot.new
+  end
+
+  # GET /products_lots/1/edit
+  def edit
+  end
+
+  # POST /products_lots
+  # POST /products_lots.json
+  def create
+    @product_lot = ProductLot.new(product_lot_params)
+
+    respond_to do |format|
+      if @product_lot.save
+        format.html { redirect_to @product_lot, notice: 'Products lot was successfully created.' }
+        format.json { render :show, status: :created, location: @product_lot }
+      else
+        format.html { render :new }
+        format.json { render json: @product_lot.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /products_lots/1
+  # PATCH/PUT /products_lots/1.json
+  def update
+    respond_to do |format|
+      if @product_lot.update(product_lot_params)
+        format.html { redirect_to @product_lot, notice: 'Products lot was successfully updated.' }
+        format.json { render :show, status: :ok, location: @product_lot }
+      else
+        format.html { render :edit }
+        format.json { render json: @product_lot.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /products_lots/1
+  # DELETE /products_lots/1.json
+  def destroy
+    @product_lot.destroy
+    respond_to do |format|
+      format.html { redirect_to product_lots_url, notice: 'Products lot was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def lot_by_product
+    product_id = params[:product_id]
+    @product_lots = ProductLot.where("product_id = ? and quantity > 0",product_id)
+  end
+
+  def empty_lots
+    product_id = params[:product_id]
+    @product_lots = ProductLot.where("product_id = ? and quantity = 0",product_id)
+  end
+
+  def all_lots_by_product
+    product_id = params[:product_id]
+    @product_lots = ProductLot.where("product_id = ?",product_id)
+  end
+
+  def search_lots_by_product_front
+  end
+
+  def search_lots_by_product
+    @product_lots = ProductLot.search(params[:search])
+    render :partial => 'search_table'
+  end
+
+  def search_lots_close_to_expire_front
+  end
+
+  def search_lots_close_to_expire
+    @product_lots = ProductLot.search_by_date(params[:search])
+    render :partial => 'search_table'    
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_product_lot
+      @product_lot = ProductLot.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def product_lot_params
+      params.require(:product_lot).permit(:quantity, :sanitary_registry, :due_date, :lot_number, :production_date, :product_id)
+    end
+end

@@ -1,0 +1,13 @@
+<div class="field">
+  <% if f.object.document.exists? %>
+    <h4>Documento Adjunto: </h4>
+    <%= link_to f.object.document_file_name, f.object.document.url(:original) %><br>
+  	<%= f.hidden_field :_destroy %>
+    <%= link_to 'Eliminar Adjunto', "#", class: "remove_fields" %>
+  	<p>Actualizar Adjunto</p>
+  	<%= f.file_field :document %>
+  <% else %>
+    <p>Adjuntar Documento</p>
+    <%= f.file_field :document %>
+  <% end %>
+</div>

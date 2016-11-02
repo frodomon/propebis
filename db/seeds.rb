@@ -1,0 +1,32 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
+lacteos = Category.create(name: 'Lacteos')
+Category.create(name: 'Menestras')
+azucar = Category.create(name: 'Azucar')
+arroz = Category.create(name: 'Arroz')
+leche_gloria = Product.create(name:"Leche Gloria en latas", unit_of_measurement:'latas', description: 'leche en latas de 500ml', trademark: 'Gloria', category: lacteos)
+azucar_cartavio = Product.create(name:"Azucar Cartavio a granel", unit_of_measurement:'Kg', description: 'Azucar a granel en sacos de 20Kg', trademark: 'Cartavio', category: azucar)
+arroz_paisana = Product.create(name:"Arroz paisana a granel", unit_of_measurement:'Kg', description: 'Arroz a granel en sacos de 20Kg', trademark: 'Paisana', category: arroz)
+ProductLot.create(quantity: 500, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('31/12/2016', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: leche_gloria)
+ProductLot.create(quantity: 125, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('24/2/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: leche_gloria)
+ProductLot.create(quantity: 1200, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('3/3/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: leche_gloria)
+ProductLot.create(quantity: 42, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('16/4/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: leche_gloria)
+ProductLot.create(quantity: 0, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('26/3/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: azucar_cartavio)
+ProductLot.create(quantity: 500, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('5/2/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: azucar_cartavio)
+ProductLot.create(quantity: 500, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('19/7/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: azucar_cartavio)
+ProductLot.create(quantity: 500, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('16/9/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: arroz_paisana)
+ProductLot.create(quantity: 500, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('16/8/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: arroz_paisana)
+ProductLot.create(quantity: 500, sanitary_registry: 'AAAABBBBB', due_date: Date.strptime('27/8/2017', '%d/%m/%Y'), lot_number: '12345678', production_date: Date.strptime('01/01/2016', '%d/%m/%Y'), product: arroz_paisana)
+Supplier.create(name: 'Comercial Pepe', ruc: '12345678901', address: 'Av. La marina 123', telephone: '1234567', contact: 'Pepe el Toro', active: 1)
+Supplier.create(name: 'Comercial Lucho', ruc: '12345678901', address: 'Av. La marina 123', telephone: '1234567', contact: 'Luchin', active: 1)
+Supplier.create(name: 'Comercial PepeLucho', ruc: '12345678901', address: 'Av. La marina 123', telephone: '1234567', contact: 'PepeLucho', active: 1)
+Client.create(name: 'Oruga Tech', ruc: '12345678901', billing_address: 'Av. Javier Prado 123', delivery_address: 'Av. Universitaria 987', telephone: '1234567', contact: 'Bambucha', active: 1)
+Client.create(name: 'Hospital Santa Rosa', ruc: '12345678901', billing_address: 'Av. Javier Prado 456', delivery_address: 'Av. Universitaria 654', telephone: '1234567', contact: 'Don Jose')
+Business.create(name: 'Propebis', ruc: '12345678901', billing_address: 'Av. La marina 123', delivery_address: 'Av. La Molina 987', telephone: '1234567', contact: 'Melba', active: 1)
+Business.create(name: 'EMCA', ruc: '12345678901', billing_address: 'Av. La marina 456', delivery_address: 'Av. La Molina 654', telephone: '1234567', contact: 'Melba', active: 1)
+Business.create(name: 'Coralima', ruc: '12345678901', billing_address: 'Av. La marina 789', delivery_address: 'Av. La Molina 321', telephone: '1234567', contact: 'Melba', active: 1)

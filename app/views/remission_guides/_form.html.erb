@@ -1,0 +1,74 @@
+<%= form_for@remission_guide, html: { multipart: true } do |f| %>
+  <% if @remission_guide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@remission_guide.errors.count, "error") %> prohibited this remission_guide from being saved:</h2>
+
+      <ul>
+      <% @remission_guide.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :business_id, 'Empresa' %><br>
+    <%= f.collection_select :business_id, Business.order(:name), :id, :name, :prompt => 'Seleccione una Empresa' %>
+  </div>
+  <div class="field">
+    <%= f.label :client_id, 'Cliente' %><br>
+    <%= f.collection_select :client_id, Client.order(:name), :id, :name, :prompt => 'Seleccione un Cliente' %>
+  </div>
+  <div class="field">
+    <%= f.label :driver_id, 'Transportista' %><br>
+    <%= f.collection_select :driver_id, Driver.order(:name), :id, :name, :prompt => 'Seleccione un Transportista' %>
+  </div>
+  <div class="field">
+    <%= f.label :vehicle_id, 'Vehículo' %><br>
+    <%= f.collection_select :vehicle_id, Vehicle.order(:plate), :id, :plate, :prompt => 'Seleccione un Vehículo' %>
+  </div>
+  <div class="field">
+    <%= f.label :remission_guide_number %><br>
+    <%= f.text_field :remission_guide_number %>
+  </div>
+  <div class="field">
+    <%= f.label :initial_point %><br>
+    <%= f.text_field :initial_point %>
+  </div>
+  <div class="field">
+    <%= f.label :final_point %><br>
+    <%= f.text_field :final_point %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.text_field :date %>
+  </div>
+  <div class='detail_header'>
+    <div class='detail_column'>
+      <p>Producto</p>
+    </div>
+    <div class='detail_column'>
+      <p>Unidad de Medida</p>
+    </div>
+    <div class='detail_column'>
+      <p>Cantidad</p>
+    </div>
+    <div class='detail_column'>
+      <p>Eliminar</p>
+    </div>
+  </div>
+  <br>
+  <div class= 'details'>
+    <%= f.fields_for :remission_guide_details do |builder| %>
+      <%= render 'remission_guide_detail_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Añadir Producto", f, :remission_guide_details %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= javascript_tag "clients = #{@clients.to_json.html_safe};" %>
+<%= javascript_tag "products = #{@products.to_json.html_safe};" %>
+<%= javascript_tag "businesses = #{@businesses.to_json.html_safe};" %>

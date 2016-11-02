@@ -1,0 +1,1 @@
+json.array! @remission_guides, partial: 'remission_guides/remission_guide', as: :remission_guide

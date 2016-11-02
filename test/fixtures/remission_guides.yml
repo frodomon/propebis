@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  business_id: 
+  client_id: 
+  driver_id: 
+  vehicle_id: 
+  remission_guide_number: MyString
+  initial_point: MyString
+  final_point: MyString
+  date: 2016-10-30
+
+two:
+  business_id: 
+  client_id: 
+  driver_id: 
+  vehicle_id: 
+  remission_guide_number: MyString
+  initial_point: MyString
+  final_point: MyString
+  date: 2016-10-30
