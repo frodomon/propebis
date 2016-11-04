@@ -6,6 +6,7 @@ class Contract < ActiveRecord::Base
   validates_presence_of :end_date, message: "Debe ingresar la fecha em la que termina el contrato"
   validates_presence_of :final_price
   validates_presence_of :credit
+  validates_presence_of :active
   belongs_to :client
   belongs_to :business
   has_many :contract_details, dependent: :destroy

@@ -108,9 +108,9 @@ ActiveRecord::Schema.define(version: 20161102212204) do
     t.date     "end_date"
     t.float    "final_price",     limit: 24
     t.float    "credit",          limit: 24
-    t.boolean  "active"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "active",                     default: true
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.index ["business_id"], name: "index_contracts_on_business_id", using: :btree
     t.index ["client_id"], name: "index_contracts_on_client_id", using: :btree
   end

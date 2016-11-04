@@ -13,6 +13,7 @@
       <th>End date</th>
       <th>Final price</th>
       <th>Credit</th>
+      <th>Active</th>
       <th colspan="6"></th>
     </tr>
   </thead>
@@ -28,6 +29,11 @@
         <td><%= contract.end_date %></td>
         <td><%= contract.final_price %></td>
         <td><%= contract.credit %></td>
+        <td><%= if contract.active == true
+         'Vigente'
+          else 'Finalizado'
+         end
+         %></td>
         <td><%= link_to 'Show', contract %></td>
         <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
         <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>

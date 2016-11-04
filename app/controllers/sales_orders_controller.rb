@@ -20,7 +20,7 @@ class SalesOrdersController < ApplicationController
     @sales_order.sales_order_details.build
     @sales_order.sales_order_documents.build
     clients_with_contracts
-    @contracts = Contract.all
+    @contracts = Contract.where('active = true')
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
   end

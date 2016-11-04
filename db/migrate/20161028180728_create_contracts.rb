@@ -9,7 +9,7 @@ class CreateContracts < ActiveRecord::Migration
       t.date :end_date
       t.float :final_price
       t.float :credit
-      t.boolean :active
+      t.boolean :active, default: true
 
       t.timestamps null: false
     end
