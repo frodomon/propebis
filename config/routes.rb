@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_scope :user do
+    authenticated :user do
+      root :to => 'static_pages#home', as: :authenticated_root
+    end
+    unauthenticated :user do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+  scope '/admin' do
+    resources :users
+  end
+
   resources :remission_guides
 
   resources :vehicles
@@ -37,6 +50,8 @@ Rails.application.routes.draw do
   resources :products
 
   resources :categories
+
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -92,5 +107,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  root "static_pages#home"
+
 end

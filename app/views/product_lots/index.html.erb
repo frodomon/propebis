@@ -28,5 +28,5 @@
 <%= button_to "Agregar Lote", { action: "new" }, method: :get %>
 <%= button_to 'Ver Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, method: :get %>
 <%= button_to 'Buscar Lotes por Producto', { action: "search_lots_by_product_front" }, method: :get %>
-<%= link_to "Inicio", root_path %>
+<%= link_to "Inicio", authenticated_root_path %>
 

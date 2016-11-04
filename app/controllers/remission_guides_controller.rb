@@ -1,4 +1,6 @@
 class RemissionGuidesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show ]
+  load_and_authorize_resource
   before_action :set_remission_guide, only: [:show, :edit, :update, :destroy]
 
   # GET /remission_guides

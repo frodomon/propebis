@@ -1,4 +1,6 @@
 class PurchaseOrdersController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show ]
+  load_and_authorize_resource
   before_action :set_purchase_order, only: [:show, :edit, :update, :destroy]
 
   # GET /purchase_orders

@@ -1,7 +1,21 @@
 <% provide(:title, "Propebis | Home") %>
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+<div>
+  <% if user_signed_in? %>
+    Logged in as <strong><%= current_user.name %><strong>.
+      <%= link_to "Edit Profile", edit_user_registration_path %>
+      <%= link_to "sign out", destroy_user_session_path, method: :delete   %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %>
+      <%= link_to "Login", new_user_session_path %>
+  <% end %>
+  <br>
+</div>
 <div class= "header">
     <h1>Propebis</h1>
 </div>
+
 <div class= "content">
   <%= link_to "Negocios", businesses_path %> <br>
   <%= link_to "Proveedores", suppliers_path %> <br>
@@ -15,4 +29,8 @@
   <%= link_to "Vehículos", vehicles_path %> <br>
   <%= link_to "Transportistas", drivers_path %> <br>
   <%= link_to "Guías de Remisión", remission_guides_path %> <br>
+  <% if can? :manage, :all %>
+    <%= link_to "Usuarios", users_path %> <br>
+  <% end %>
+  
 </div>

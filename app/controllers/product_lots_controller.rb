@@ -1,4 +1,6 @@
 class ProductLotsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show ]
+  load_and_authorize_resource
   before_action :set_product_lot, only: [:show, :edit, :update, :destroy]
 
   # GET /products_lots
