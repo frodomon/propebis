@@ -43,6 +43,16 @@
     <%= f.label :date %><br>
     <%= f.text_field :date %>
   </div>
+  <div class="field">
+    <%= f.label :ammount %><br>
+    <%= f.number_field :ammount, readlony: true, step: :any %>
+  </div>
+  <br>
+  <div>
+    <%= select_tag :search, options_from_collection_for_select(SalesOrder.order(:sales_order_number), :id, :sales_order_number, params[:search]), options = {class: 'sales_order_select',  :prompt => 'Seleccione una Orden de Compra'} %>
+    <button class='load_details'>Cargar Datos</button>
+  </div>
+  <br>
   <div class='detail_header'>
     <div class='detail_column'>
       <p>Producto</p>
@@ -54,16 +64,25 @@
       <p>Cantidad</p>
     </div>
     <div class='detail_column'>
+      <p>P. Unit</p>
+    </div>
+    <div class='detail_column'>
+      <p>Subtotal</p>
+    </div>
+    <div class='detail_column'>
       <p>Eliminar</p>
     </div>
   </div>
-  <br>
-  <div class= 'details'>
+  <div id='details'>
     <%= f.fields_for :remission_guide_details do |builder| %>
-      <%= render 'remission_guide_detail_fields', f: builder %>
+      <div id='content_details'>
+        <%= render 'remission_guide_detail_fields', f: builder %>
+      </div>
     <% end %>
-    <%= link_to_add_fields "Añadir Producto", f, :remission_guide_details %>
-  </div>
+</div>
+<div class='add_fields'>
+  <%= link_to_add_fields "Añadir Producto", f, :remission_guide_details %>
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>

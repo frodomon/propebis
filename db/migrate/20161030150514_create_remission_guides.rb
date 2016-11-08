@@ -9,6 +9,7 @@ class CreateRemissionGuides < ActiveRecord::Migration
       t.string :initial_point
       t.string :final_point
       t.date :date
+      t.float :ammount
 
       t.timestamps null: false
     end

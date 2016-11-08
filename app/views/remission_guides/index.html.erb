@@ -13,6 +13,7 @@
       <th>Initial point</th>
       <th>Final point</th>
       <th>Date</th>
+      <th>Ammount</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -28,6 +29,7 @@
         <td><%= remission_guide.initial_point %></td>
         <td><%= remission_guide.final_point %></td>
         <td><%= remission_guide.date %></td>
+        <td><%= remission_guide.ammount %></td>
         <td><%= link_to 'Show', remission_guide %></td>
         <td><%= link_to 'Edit', edit_remission_guide_path(remission_guide) %></td>
         <td><%= link_to 'Destroy', remission_guide, method: :delete, data: { confirm: 'Are you sure?' } %></td>

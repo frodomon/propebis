@@ -4,6 +4,8 @@ class CreateRemissionGuideDetails < ActiveRecord::Migration
       t.references :remission_guide, index: true
       t.references :product, index: true
       t.float :quantity
+      t.float :unit_price
+      t.float :subtotal
 
       t.timestamps null: false
     end

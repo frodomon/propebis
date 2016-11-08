@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function () {
   	if (search != 0 ) {
   	  parameters = {search: search }; 
   	  load_partials('/product_lots/search_lots_by_product','content', parameters);
-	}
+	  }
   });
   $('form').on('click','.search_by_date_button', function(e){
   	e.preventDefault();

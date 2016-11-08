@@ -1,4 +1,7 @@
 $(document).on('turbolinks:load', function () {
+  if($('form[id^="edit_"]').length > 0) {
+      $('.active').show();
+    };
   $('select[class="product_select"]').each(function(i){
     p_id = parseInt($(this).find(':selected').val()) - 1;
     if (p_id >= 0){

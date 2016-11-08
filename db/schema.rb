@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(version: 20161102212204) do
     t.integer  "remission_guide_id"
     t.integer  "product_id"
     t.float    "quantity",           limit: 24
+    t.float    "unit_price",         limit: 24
+    t.float    "subtotal",           limit: 24
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["product_id"], name: "index_remission_guide_details_on_product_id", using: :btree
@@ -203,8 +205,9 @@ ActiveRecord::Schema.define(version: 20161102212204) do
     t.string   "initial_point"
     t.string   "final_point"
     t.date     "date"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.float    "ammount",                limit: 24
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["business_id"], name: "index_remission_guides_on_business_id", using: :btree
     t.index ["client_id"], name: "index_remission_guides_on_client_id", using: :btree
     t.index ["driver_id"], name: "index_remission_guides_on_driver_id", using: :btree

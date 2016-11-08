@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :remission_guides
+  resources :remission_guides do
+    collection do
+      get 'search_sales_order_details' => 'remission_guides#search_sales_order_details', as: :search_sales_order_details
+    end
+  end
 
   resources :vehicles
 

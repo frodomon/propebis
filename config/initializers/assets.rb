@@ -17,6 +17,7 @@ Rails.application.config.assets.precompile += %w( purchase_orders.css )
 Rails.application.config.assets.precompile += %w( product_lots.js )
 #Contratos
 Rails.application.config.assets.precompile += %w( contracts.js )
+Rails.application.config.assets.precompile += %w( contracts.css )
 Rails.application.config.assets.precompile += %w( addendums.js )
 #Ordenes de Venta
 Rails.application.config.assets.precompile += %w( sales_orders.js )

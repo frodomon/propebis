@@ -71,6 +71,13 @@ class RemissionGuidesController < ApplicationController
     end
   end
 
+  def search_sales_order_details
+    @sales_order_details = SalesOrderDetail.search_details(params[:search])
+    respond_to do |format|
+      format.json { render json: @sales_order_details }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_remission_guide
@@ -79,7 +86,7 @@ class RemissionGuidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def remission_guide_params
-      params.require(:remission_guide).permit(:business_id, :client_id, :driver_id, :vehicle_id, :remission_guide_number, :initial_point, :final_point, :date,
-        remission_guide_details_attributes: [:id, :remission_guide_id, :product_id, :quantity, :_destroy])
+      params.require(:remission_guide).permit(:business_id, :client_id, :driver_id, :vehicle_id, :remission_guide_number, :initial_point, :final_point, :date, :ammount,
+        remission_guide_details_attributes: [:id, :remission_guide_id, :product_id, :quantity, :unit_price, :subtotal, :_destroy])
     end
 end

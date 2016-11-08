@@ -30,4 +30,5 @@ class SalesOrder < ActiveRecord::Base
       end
     end
   end
+
 end
