@@ -26,7 +26,7 @@ class AddendumsController < ApplicationController
 
   def create
     @addendum = Addendum.new(addendum_params)
-    @addendum.date = Time.now
+
     respond_to do |format|
       if @addendum.save
         format.html { redirect_to contracts_url, notice: 'Addendum was successfully created.' }
