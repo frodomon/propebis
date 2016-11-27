@@ -1,9 +1,36 @@
+<% provide(:title, "Propebis | Lotes de Producto Vacíos") %>
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Product Lots</h1>
-
-<%= render partial: 'lots_table' %>
-
-<br>
-
-<%= link_to 'Back', product_lots_path %>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Lotes de Producto Vacíos</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'product_lots', :action => 'index' %>">Almacén</a>
+      </li>
+      <li class="active">
+        <strong>Lotes de Producto Vacíos</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+  	<div class="col-lg-12">
+      <div class="ibox float-e-margins">
+     	  <div class="ibox-title">
+    	    <h3>Lotes de Producto Vacíos</h3>
+    	  </div>
+    	  <div class="ibox-content">
+    	      <%= render partial: 'lots_table' %>
+            <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+    	  </div>
+      </div>
+	  </div>
+  </div>	
+</div>

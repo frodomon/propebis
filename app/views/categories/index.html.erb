@@ -1,28 +1,69 @@
+<% provide(:title, "Propebis | Categorías de Producto") %>
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Categories</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Categorías de Producto</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li class="active">
+        <strong>Categorías de Producto</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Categorías de Producto</h5>
+        </div>
+        <div class="ibox-content">
+          <%= button_to 'Nueva Categoría', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
+          <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categories.each do |category| %>
+                <tr>
+                  <td><%= category.name %></td>
+                  <td class="center"><%= button_to 'Editar', { action: 'edit', id: category.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                  <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: category.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan='5'>
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          
+        </div>
+        <!--Fin Ibox Content-->
+      </div>
+      <!--Fin Ibox-->
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.name %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Category', new_category_path %>
-<%= link_to "Inicio", authenticated_root_path %>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.footable').footable();
+      $('.footable2').footable();
+    });
+  </script>
+<% end %>

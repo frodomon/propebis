@@ -1,10 +1,38 @@
-<% provide(:title, "Editar Lote de Producto | Propebis") %>
+<% provide(:title, "Propebis | Editar Lote de Producto") %>
+<p id="notice"><%= notice %></p>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Editar Lote de Producto</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'product_lots', :action => 'index' %>">Almacén</a>
+      </li>
+      <li class="active">
+        <strong>Editar Lote de Producto</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+  	<div class="col-lg-6">
+      <div class="ibox float-e-margins">
+     	  <div class="ibox-title">
+    	    <h3>Editar Lote de Producto</h3>
+    	  </div>
+    	  <div class="ibox-content">
+    	      <%= render 'form' %>
+            <%= button_to 'Volver', :back, method: :get, class: 'btn btn-w-m btn-info' %>
+    	  </div>
+      </div>
+	  </div>
+  </div>	
+</div>
+
 <% content_for :header do -%>
   <%= javascript_include_tag 'product_lots' %>
 <% end -%>
-<h1>Editing Product Lot</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @product_lot %> |
-<%= link_to 'Back', product_lots_path %>

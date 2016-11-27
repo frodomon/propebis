@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).ready(function () {
   $('form').on('click', '.add_fields', function(event){
     time = new Date().getTime();
     regexp = new RegExp($(this).data('id'), 'g');

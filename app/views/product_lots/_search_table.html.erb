@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped table-bordered table-hover datatable">
   <thead>
     <tr>
       <th>Producto</th>
@@ -9,8 +9,7 @@
       <th>Fecha de Vencimiento</th>
     </tr>
   </thead>
-
-  <tbody>
+  <tbody >
     <% @product_lots.each do |product_lot| %>
       <tr>
         <td><%= Product.find(product_lot.product_id).name %></td>
@@ -23,3 +22,4 @@
     <% end %>
   </tbody>
 </table>
+    

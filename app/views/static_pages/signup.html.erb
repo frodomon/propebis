@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propebis | Log in</title>
+    <!-- Main css styles -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <!-- Main javascript files -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+</head>
+<body class="gray-bg">
+  <div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div>
+      <div>
+        <h1 class="logo-name">IN+</h1>
+      </div>
+      <h3>Register to IN+</h3>
+      <p>Create account to see it in action.</p>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="form-group">
+          <%= f.text_field :name, placeholder: 'Nombre Completo', autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :username, placeholder: 'Nombre de Usuario', class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, placeholder: 'Correo electrónico', class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <%= f.password_field :password, placeholder:'Contraseña', autocomplete: "off", class: 'form-control' %>
+          <%= f.password_field :password_confirmation, placeholder:'Confirmar Contraseña', autocomplete: "off", class: 'form-control' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Registrarse", class: 'btn btn-primary block full-width m-b' %>
+        </div>
+      <% end %>
+        <p class="text-muted text-center"><small>¿Ya tienes una cuenta?</small></p>
+        <a class="btn btn-sm btn-white btn-block" href="#">Login</a>
+      <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</body>
+</html>

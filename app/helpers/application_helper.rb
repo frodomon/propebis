@@ -10,4 +10,32 @@ module ApplicationHelper
   	end
   	link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
+  def is_active_controller(controller_name)
+    params[:controller] == controller_name ? "active" : nil
+  end
+
+  def is_active_action(action_name)
+    params[:action] == action_name ? "active" : nil
+  end
+  def is_active_mantenimiento()
+    controller_name = params[:controller]
+    case controller_name
+    when 'businesses'
+      'active'
+    when 'suppliers'
+      'active'
+    when 'categories'
+      'active'
+    when 'products'
+      'active'
+    when 'clients'
+      'active'
+    when 'vehicles'
+      'active'
+    when 'drivers'
+      'active'
+    else
+      nil
+    end
+  end
 end

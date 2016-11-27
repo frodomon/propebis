@@ -10,63 +10,72 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :business_id, 'Empresa' %><br>
-    <%= f.collection_select :business_id, Business.order(:name), :id, :name, :prompt => 'Seleccione una Empresa' %>
-  </div>
-  <div class="field">
-    <%= f.label :supplier_id, 'Proveedor' %><br>
-    <%= f.collection_select :supplier_id, Supplier.order(:name), :id, :name, :prompt => 'Seleccione un Proveedor' %>
-  </div>
-  <div class="field">
-    <%= f.label :order_number %><br>
-    <%= f.text_field :order_number %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.text_field :date, placeholder: @today, readonly: true %>
-  </div>
-  <div class="field">
-    <%= f.label :billing_address %><br>
-    <%= f.text_field :billing_address %>
-  </div>
-  <div class="field">
-    <%= f.label :delivery_address %><br>
-    <%= f.text_field :delivery_address %>
-  </div>
-  <div class="field">
-    <%= f.label :delivery_date %><br>
-    <%= f.text_field :delivery_date %>
-  </div>
-  <div class="field">
-    <%= f.label :order_date %><br>
-    <%= f.text_field :order_date %>
-  </div>
-  <div class="field">
-    <%= f.label :ammount, 'Monto Final' %>
-    <%= f.number_field :ammount, readonly: true, step: :any %>
-  </div>
-  <div class='detail_header'>
-    <div class='detail_column'>
-      <p>Producto</p>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
+      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
-    <div class='detail_column'>
-      <p>Unidad de Medida</p>
-    </div>
-    <div class='detail_column'>
-      <p>Cantidad</p>
-    </div>
-    <div class='detail_column'>
-      <p>P. Unit</p>
-    </div>
-    <div class='detail_column'>
-      <p>Subtotal</p>
-    </div>
-    <div class='detail_column'>
-      <p>Eliminar</p>
+    <div class="form-group col-lg-6">
+      <%= f.label :supplier_id, 'Proveedor', class: 'control-label' %>
+      <%= f.collection_select :supplier_id, Supplier.order(:name), :id, :name, options = { prompt: 'Seleccione un Proveedor'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :order_number, 'Nro. Orden de Compra', class: 'control-label' %>
+      <%= f.text_field :order_number, placeholder: 'Nro. Orden de Compra', class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :date, 'Fecha', class: 'control-label' %>
+      <%= f.text_field :date, placeholder: @today, class: 'form-control', readonly: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :delivery_date, 'Fecha de Entrega', class: 'control-label' %>
+      <%= f.text_field :delivery_date, class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :order_date, 'Fecha de la Orden de Compra', class: 'control-label' %>
+      <%= f.text_field :order_date, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :billing_address, 'Dirección de Facturación', class: 'control-label' %>
+      <%= f.text_field :billing_address, class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :delivery_address, 'Dirección de Entrega', class:'control-label' %>
+      <%= f.text_field :delivery_address, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-3">
+      <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
+      <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h5>Productos</h5>
+      <table class="footable table table-stripped toggle-arrow-tiny">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Unidad de Medida</th>
+            <th>Cantidad</th>
+            <th>P. Unit</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+       
   <br>
   <div class= 'details'>
     <%= f.fields_for :purchase_order_details do |builder| %>
@@ -82,7 +91,7 @@
     <%= link_to_add_fields "Añadir Documento", f, :purchase_order_documents %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
 <% end %>
 

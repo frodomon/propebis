@@ -1,4 +1,4 @@
-<%= form_for(@business) do |f| %>
+<%= form_for(@business, html: {class: 'form-horizontal'}) do |f| %>
   <% if @business.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@business.errors.count, "error") %> prohibited this business from being saved:</h2>
@@ -11,35 +11,67 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, "Razón Social", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :name, autofocus: true, placeholder: 'Razón Social', class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :ruc %><br>
-    <%= f.text_field :ruc %>
+  <div class="form-group">
+    <%= f.label :ruc, "RUC", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :ruc, placeholder: 'RUC', class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :billing_address %><br>
-    <%= f.text_field :billing_address %>
+  <div class="form-group">
+    <%= f.label :billing_address, "Dirección de Facturación", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :billing_address, placeholder: "Dirección de Facturación", class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :delivery_address %><br>
-    <%= f.text_field :delivery_address %>
+  <div class="form-group">
+    <%= f.label :delivery_address, "Dirección de Entrega", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :delivery_address, placeholder: "Dirección de Entrega", class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :telephone %><br>
-    <%= f.text_field :telephone %>
+  <div class="form-group">
+    <%= f.label :telephone, "Teléfono", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :telephone, placeholder: "Teléfono", class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :contact %><br>
-    <%= f.text_field :contact %>
+  <div class="form-group">
+    <%= f.label :contact, "Contacto", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :contact, placeholder: 'Contacto', class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.check_box :active %>
+  <div class="form-group">
+    <%= f.label :active, 'Activo', class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.check_box :active %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
+<% end %>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+
+});
+
+</script>
+
 <% end %>

@@ -1,4 +1,4 @@
-<%= form_for(@driver) do |f| %>
+<%= form_for(@driver, html: {class: 'form-horizontal'}) do |f| %>
   <% if @driver.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@driver.errors.count, "error") %> prohibited this driver from being saved:</h2>
@@ -11,15 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, "Nombre del Conductor", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :name, autofocus: true, placeholder: 'Nombre del Conductor', class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :license %><br>
-    <%= f.text_field :license %>
+  <div class="form-group">
+    <%= f.label :license, "Licencia de Conducir", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :license, placeholder: 'Licencia de Conducir', class: 'form-control' %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
 <% end %>

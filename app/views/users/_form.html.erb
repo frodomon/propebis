@@ -1,40 +1,28 @@
-<h2>Sign up</h2>
-
-<%= form_for(@user) do |f| %>
-
-  <% for role in User::ROLES %>
-    <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
-    <%= label_tag "user_roles_#{role}", role.to_s.humanize %><br />
-  <% end %>
-  <%= text_field_tag "user[roles][]", "" %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+<%= form_for(@user, html: {class: 'm-t'}) do |f| %>
+  <div class="form-group">
+    <%= f.text_field :name, placeholder: 'Nombre Completo', autofocus: true, class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
+  <div class="form-group">
+    <%= f.text_field :username, placeholder: 'Nombre de Usuario', class: 'form-control' %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
+  <div class="form-group">
+    <%= f.email_field :email, placeholder: 'Correo electrónico', class: 'form-control' %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
+  <div class="form-group">
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    <%= f.password_field :password, placeholder:'Contraseña', autocomplete: "off", class: 'form-control' %>
+    <%= f.password_field :password_confirmation, placeholder:'Confirmar Contraseña', autocomplete: "off", class: 'form-control' %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class='form-group'>
+    <% for role in User::ROLES %>
+      <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
+      <%= label_tag "user_roles_#{role}", role.to_s.humanize %><br />
+    <% end %>
+    <%= hidden_field_tag "user[roles][]", "" %>
   </div>
-
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
 <% end %>

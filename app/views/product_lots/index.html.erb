@@ -1,32 +1,73 @@
+<% provide(:title, "Propebis | Almacén") %>
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Product Lots</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Almacén</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li class="active">
+        <strong>Almacén</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Almacén</h5>
+        </div>
+        <div class="ibox-content">
+          <%= button_to 'Nuevo Lote de Producto', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
+          <%= button_to 'Ver Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
+          <%= button_to 'Buscar Lotes por Producto', { action: "search_lots_by_product_front" }, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+          <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @product_lots.each do |product_lot| %>
+                <tr>
+                  <td class="center"><%= Product.find(product_lot.product_id).name %></td>
+                  <td class="center"><%= product_lot.quantity %></td>
+                  <td class="center"><%= button_to "Ver Lotes de Producto", { action: "lot_by_product", product_id: product_lot.product_id }, method: :get, class: 'btn btn-w-m btn-success btn-xs' %></td>
+                  <td class="center"><%= button_to 'Ver Lotes Vacios',{ action: "empty_lots", product_id: product_lot.product_id }, method: :get, class: 'btn btn-w-m btn-success btn-xs' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan='5'>
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          
+        </div>
+        <!--Fin Ibox Content-->
+      </div>
+      <!--Fin Ibox-->
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @product_lots.each do |product_lot| %>
-      <tr>
-        <td><%= Product.find(product_lot.product_id).name %></td>
-        <td><%= product_lot.quantity %></td>
-        <td><%= button_to "Ver Lotes de Producto", { action: "lot_by_product", product_id: product_lot.product_id }, method: :get %></td>
-        <td><%= button_to 'Ver Lotes Vacios',{ action: "empty_lots", product_id: product_lot.product_id }, method: :get %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= button_to "Agregar Lote", { action: "new" }, method: :get %>
-<%= button_to 'Ver Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, method: :get %>
-<%= button_to 'Buscar Lotes por Producto', { action: "search_lots_by_product_front" }, method: :get %>
-<%= link_to "Inicio", authenticated_root_path %>
-
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.footable').footable();
+    });
+  </script>
+<% end %>

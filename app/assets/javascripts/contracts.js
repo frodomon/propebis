@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).ready(function () {
   if($('form[id^="edit_"]').length > 0) {
       $('.active').show();
     };

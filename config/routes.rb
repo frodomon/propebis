@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       root :to => 'static_pages#home', as: :authenticated_root
     end
     unauthenticated :user do
-      root :to => 'devise/sessions#new', as: :unauthenticated_root
+      root :to => 'static_pages#login', as: :unauthenticated_root
     end
   end
   scope '/admin' do
@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
   resources :categories
 
+  get 'static_pages/signup'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

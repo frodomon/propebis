@@ -1,6 +1,7 @@
 <% provide(:title, "Propebis | Home") %>
 <p id="notice"><%= notice %></p>
 <p id="alert"><%= alert %></p>
+
 <div>
   <% if user_signed_in? %>
     Logged in as <strong><%= current_user.name %><strong>.
@@ -12,25 +13,18 @@
   <% end %>
   <br>
 </div>
-<div class= "header">
-    <h1>Propebis</h1>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="text-center m-t-lg">
+        <h1>
+          <%= @mainTitle %>
+        </h1>
+        <small>
+          <%= @mainDesc %>
+        </small>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class= "content">
-  <%= link_to "Negocios", businesses_path %> <br>
-  <%= link_to "Proveedores", suppliers_path %> <br>
-  <%= link_to "Categorias de Productos", categories_path %> <br>
-  <%= link_to "Productos", products_path %> <br>
-  <%= link_to "Almacen", product_lots_path %> <br>
-  <%= link_to "Ordenes de Compra", purchase_orders_path %> <br>
-  <%= link_to "Clientes", clients_path %> <br>
-  <%= link_to "Contratos", contracts_path %> <br>
-  <%= link_to "Ordenes de Venta", sales_orders_path %> <br>
-  <%= link_to "Vehículos", vehicles_path %> <br>
-  <%= link_to "Transportistas", drivers_path %> <br>
-  <%= link_to "Guías de Remisión", remission_guides_path %> <br>
-  <% if can? :manage, :all %>
-    <%= link_to "Usuarios", users_path %> <br>
-  <% end %>
-  
-</div>

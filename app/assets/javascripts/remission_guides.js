@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(document).ready(function () {
   $('select[class="product_select"]').each(function(i){
     p_id = parseInt($(this).find(':selected').val()) - 1;
     if (p_id >= 0){

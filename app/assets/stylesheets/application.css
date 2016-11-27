@@ -10,5 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
+ *= require animate/animate.css
+ *= require style
+ *= require kaihatsu-style
  *= require jquery-ui/datepicker
+ *= require datatables
  */

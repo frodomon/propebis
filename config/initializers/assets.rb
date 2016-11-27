@@ -10,15 +10,22 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
+Rails.application.config.assets.precompile += %w( businesses.js )
+Rails.application.config.assets.precompile += %w( businesses.css )
+
+Rails.application.config.assets.precompile += %w( products.js )
+Rails.application.config.assets.precompile += %w( products.css )
 #Ordenes de Compra
 Rails.application.config.assets.precompile += %w( purchase_orders.js )
 Rails.application.config.assets.precompile += %w( purchase_orders.css )
 #Lotes de Producto
 Rails.application.config.assets.precompile += %w( product_lots.js )
+Rails.application.config.assets.precompile += %w( product_lots.css )
 #Contratos
 Rails.application.config.assets.precompile += %w( contracts.js )
 Rails.application.config.assets.precompile += %w( contracts.css )
 Rails.application.config.assets.precompile += %w( addendums.js )
+Rails.application.config.assets.precompile += %w( addendums.css )
 #Ordenes de Venta
 Rails.application.config.assets.precompile += %w( sales_orders.js )
 Rails.application.config.assets.precompile += %w( sales_orders.css )
