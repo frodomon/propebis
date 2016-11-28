@@ -11,67 +11,78 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :business_id, 'Empresa' %><br>
-    <%= f.collection_select :business_id, Business.order(:name), :id, :name, :prompt => 'Seleccione una Empresa' %>
-  </div>
-  <div class="field">
-    <%= f.label :client_id, 'Cliente' %><br>
-    <%= f.collection_select :client_id, Client.order(:name), :id, :name, :prompt => 'Seleccione un Cliente' %>
-  </div>
-  <div class="field">
-    <%= f.label :contract_number %><br>
-    <%= f.text_field :contract_number %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.text_field :date, placeholder: @today, readonly: true %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.text_field :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.text_field :end_date %>
-  </div>
-  <div class="field">
-    <%= f.label :final_price %><br>
-    <%= f.number_field :final_price, placeholder: 0, readonly: true %>
-  </div>
-  <div class="field">
-    <%= f.label :credit %><br>
-    <%= f.number_field :credit, readonly: true %>
-  </div>
-  <div class='active'>
-    <%= f.label :active %>
-    <%= f.check_box :active %>
-  </div>
-  <div class='detail_header'>
-    <div class='detail_column'>
-      <p>Producto</p>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
+      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
-    <div class='detail_column'>
-      <p>Unidad de Medida</p>
+    <div class="form-group col-lg-6">
+      <%= f.label :client_id, 'Cliente', class: 'control-label' %><br>
+      <%= f.collection_select :client_id, Client.order(:name), :id, :name, options = { prompt: 'Seleccione un Cliente'}, html_options = { class: 'select2_demo_1 form-control'} %>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :contract_number, 'Nro. de Contrato', class: 'control-label' %>
+      <%= f.text_field :contract_number, placeholder: 'Nro. de Contrato', class: 'form-control' %>
     </div>
-    <div class='detail_column'>
-      <p>Cantidad</p>
-    </div>
-    <div class='detail_column'>
-      <p>P. Unit</p>
-    </div>
-    <div class='detail_column'>
-      <p>Subtotal</p>
-    </div>
-    <div class='detail_column'>
-      <p>Eliminar</p>
+    <div class="form-group col-lg-6">
+      <%= f.label :date, 'Fecha', class: 'control-label' %>
+      <%= f.text_field :date, placeholder: @today, class: 'form-control', readonly: true %>
     </div>
   </div>
-  <div class= 'details'>
-    <%= f.fields_for :contract_details do |builder| %>
-      <%= render 'contract_detail_fields', f: builder %>
-    <% end %>
-    <%= link_to_add_fields "Añadir Producto", f, :contract_details %>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :start_date, 'Fecha de Inicio', class: 'control-label' %>
+      <%= f.text_field :start_date, class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :end_date, 'Fecha Final', class: 'control-label' %>
+      <%= f.text_field :end_date, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :final_price, 'Precio Final', class: 'control-label' %>
+      <%= f.text_field :final_price, placeholder: 0, readonly: true, class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :credit, 'Credito', class:'control-label' %>
+      <%= f.text_field :credit, readonly: true, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-2">
+      <%= f.label :active, 'Activo', class: 'control-label' %>
+    </div>
+    <div class='col-lg-4'>
+        <%= f.check_box :active, class: 'form-control', readonly: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Productos</h3>
+      <table class="footable table table-stripped">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Unidad de Medida</th>
+            <th>Cantidad</th>
+            <th>P. Unit</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :contract_details do |builder| %>
+            <%= render 'contract_detail_fields', f: builder %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class= 'details'>
+        <%= link_to_add_row_fields "Añadir Producto", f, :contract_details %>
+      </div>
+    </div>
   </div>
   <div class= "attachments">
     <h3>Documentos Adjuntos</h3>

@@ -6,10 +6,10 @@ $(document).ready(function () {
     $(this).before($(this).data('fields').replace(regexp, time));
   });
   $('form').on('click', '.add_row_fields', function(event){
+    event.preventDefault();
     time = new Date().getTime();
     regexp = new RegExp($(this).data('id'), 'g');
-    $(this).closest('tr').before($(this).data('fields').replace(regexp, time));
-    event.preventDefault();
+    $('table tr:last').after($(this).data('fields').replace(regexp, time));
   });
   $('form').on('click','.remove_fields', function(e){
     e.preventDefault();

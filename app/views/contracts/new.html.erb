@@ -1,11 +1,34 @@
-<% provide(:title, "Crear Contrato | Propebis") %>
-<% content_for :header do -%>
-  <%= javascript_include_tag 'contracts' %>
-  <%= stylesheet_link_tag 'purchase_orders' %>
-  <%= stylesheet_link_tag 'contracts' %>
-<% end -%>
-<h1>New Contract</h1>
+<% provide(:title, "Propebis | Nuevo Contrato") %>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', contracts_path %>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Nuevo Contrato</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'contracts', :action => 'index' %>">Contratos</a>
+      </li>
+      <li class="active">
+        <strong>Nueva Contrato</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+  	<div class="col-lg-12">
+      <div class="ibox float-e-margins">
+     	<div class="ibox-title">
+    	  <h3>Nueva Contrato</h3>
+    	</div>
+    	<div class="ibox-content">
+	  	      <%= render 'form' %>
+	          <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+    	</div>
+      </div>
+	</div>
+  </div>	
+</div>

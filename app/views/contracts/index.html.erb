@@ -1,50 +1,86 @@
+<% provide(:title, "Propebis | Contratos") %>
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Contracts</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Contratos</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li class="active">
+        <strong>Contratos</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Contratos</h5>
+        </div>
+        <div class="ibox-content">
+          <%= button_to 'Nuevo Contrato', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
+          <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
+            <thead>
+              <tr>
+                <th>Eḿpresa</th>
+                <th>Cliente</th>
+                <th>Nro. Contrato</th>
+                <th>Fecha</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha Final</th>
+                <th>Precio Final</th>
+                <th>Credito</th>
+                <th>Activo</th>
+                <th colspan="4"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @contracts.each do |contract| %>
+                <tr>
+                  <td><%= Business.find(contract.business).name %></td>
+                  <td><%= Client.find(contract.client).name %></td>
+                  <td><%= contract.contract_number %></td>
+                  <td><%= contract.date %></td>
+                  <td><%= contract.start_date %></td>
+                  <td><%= contract.end_date %></td>
+                  <td><%= contract.final_price %></td>
+                  <td><%= contract.credit %></td>
+                  <td><%= human_boolean(contract.active) %></td>
+                  <td align="center"><%= button_to 'Editar', { action: 'edit', id: contract.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                  <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: contract.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <td><%= button_to "Agregar Adenda", { controller: :addendums , action: :new, contract_id: contract.id} , method: :get %></td>
+                  <td><%= button_to "Ver Adendas", { controller: :addendums , action: :index, contract_id: contract.id} , method: :get %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan='5'>
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          
+        </div>
+        <!--Fin Ibox Content-->
+      </div>
+      <!--Fin Ibox-->
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Business</th>
-      <th>Client</th>
-      <th>Contract number</th>
-      <th>Date</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Final price</th>
-      <th>Credit</th>
-      <th>Active</th>
-      <th colspan="6"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @contracts.each do |contract| %>
-      <tr>
-        <td><%= Business.find(contract.business).name %></td>
-        <td><%= Client.find(contract.client).name %></td>
-        <td><%= contract.contract_number %></td>
-        <td><%= contract.date %></td>
-        <td><%= contract.start_date %></td>
-        <td><%= contract.end_date %></td>
-        <td><%= contract.final_price %></td>
-        <td><%= contract.credit %></td>
-        <td><%= if contract.active == true
-         'Vigente'
-          else 'Finalizado'
-         end
-         %></td>
-        <td><%= link_to 'Show', contract %></td>
-        <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
-        <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= button_to "Agregar Adenda", { controller: :addendums , action: :new, contract_id: contract.id} , method: :get %></td>
-        <td><%= button_to "Ver Adendas", { controller: :addendums , action: :index, contract_id: contract.id} , method: :get %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Contract', new_contract_path %>
-<%= link_to "Inicio", authenticated_root_path %>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.footable').footable();
+    });
+  </script>
+<% end %>

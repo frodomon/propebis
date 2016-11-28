@@ -1,3 +1,5 @@
+//= require jasny/jasny-bootstrap.min.js
+
 $(document).ready(function () {
   if($('form[id^="edit_"]').length > 0) {
       $('.active').show();

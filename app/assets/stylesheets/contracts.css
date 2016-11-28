@@ -1,3 +1,7 @@
+/*
+*= require jasny/jasny-bootstrap.min.css
+*/
+
 .active{
 	display:none;
 }
