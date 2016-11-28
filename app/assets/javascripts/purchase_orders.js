@@ -1,3 +1,5 @@
+//= require jasny/jasny-bootstrap.min.js
+
 $(document).ready(function () {
   if($('form[id^="edit_"]').length > 0) {
       $('.contract').show();
@@ -22,26 +24,28 @@ $(document).ready(function () {
     event.preventDefault();
     product_id = parseInt($(this).find(':selected').val()) -1;
     unit_of_measurement = products[product_id].unit_of_measurement;
-    $(this).next().val(unit_of_measurement);
+    $(this).closest('tr').find('.unit_of_measurement').val(unit_of_measurement);
   });
   $('form').on('change','.pod_unit_price',function(event){
     event.preventDefault();
     unit_price = parseFloat($(this).val());
-    quantity = parseFloat($(this).prev().val());
+    quantity = parseFloat($(this).closest('tr').find('.pod_quantity').val());
     if (isNaN(quantity)) { quantity = 0;}
     subtotal = unit_price * quantity;
-    $(this).next().val(subtotal);
+    $(this).closest('tr').find('.pod_subtotal').val(subtotal);
     total = calcular_precio_final();
+    alert(total);
     $('#purchase_order_ammount').val(total);
   });
   $('form').on('change','.pod_quantity',function(e){
     e.preventDefault();
     quantity = parseFloat($(this).val());
-    unit_price = parseFloat($(this).next().val());
+    unit_price = parseFloat($(this).closest('tr').find('.pod_unit_price').val());
     if (isNaN(unit_price)) { unit_price = 0;}
     subtotal = unit_price * quantity;
-    $(this).next().next().val(subtotal);
+    $(this).closest('tr').find('.pod_subtotal').val(subtotal);
     total = calcular_precio_final();
+    alert(total);
     $('#purchase_order_ammount').val(total);
   });
   $('#purchase_order_date').datepicker({
@@ -66,7 +70,7 @@ function fill_product_blank_fields(){
 }
 function calcular_precio_final(){
   total = 0.0;
-  $('input[class="pod_subtotal"]').each(function(i){
+  $('input[class="pod_subtotal form-control"]').each(function(i){
     value = parseFloat($(this).val());
     total = total + value;
   });

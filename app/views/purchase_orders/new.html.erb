@@ -9,7 +9,7 @@
         <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
       </li>
       <li>
-        <a href="<%= url_for :controller => 'products', :action => 'index' %>">Productos</a>
+        <a href="<%= url_for :controller => 'purchase_orders', :action => 'index' %>">Órdenes de Compra</a>
       </li>
       <li class="active">
         <strong>Nueva Orden de Compra</strong>
@@ -25,8 +25,8 @@
     	    <h3>Nueva Orden de Compra</h3>
     	  </div>
     	  <div class="ibox-content">
-    	      <%= render 'form' %>
-            <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+  	      <%= render 'form' %>
+          <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
     	  </div>
       </div>
 	  </div>
