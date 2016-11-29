@@ -1,12 +1,29 @@
 $(document).ready(function () {
   $('#product_lot_due_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    format: 'yyyy/mm/dd'
   });
   $('#product_lot_production_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    format: 'yyyy/mm/dd'
   });
   $('#search_by_date').datepicker({
-    dateFormat: 'yy-mm-dd'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    format: 'yyyy-mm-dd'
   });
   $('form').on('click','.search_button', function(e){
   	e.preventDefault();

@@ -14,6 +14,7 @@
  *= require animate/animate.css
  *= require style
  *= require kaihatsu-style
- *= require jquery-ui/datepicker
  *= require datatables
+ *= require iCheck/custom.css
+ *= require datapicker/datepicker3.css
  */

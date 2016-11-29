@@ -44,8 +44,8 @@
             <tbody>
               <% @purchase_orders.each do |purchase_order| %>
                 <tr>
-                  <td><%= Business.find(purchase_order.business).name %></td>
-                  <td><%= Supplier.find(purchase_order.supplier).name %></td>
+                  <td><%= Business.find(purchase_order.business_id).name %></td>
+                  <td><%= Supplier.find(purchase_order.supplier_id).name %></td>
                   <td><%= purchase_order.order_number %></td>
                   <td><%= purchase_order.date %></td>
                   <td><%= purchase_order.order_date %></td>

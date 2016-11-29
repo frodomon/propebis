@@ -2,7 +2,15 @@
 
 $(document).ready(function () {
   if($('form[id^="edit_"]').length > 0) {
-      $('.contract').show();
+    $('.contract').show();
+    $('#purchase_order_date').datepicker({
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true,
+      format: 'yyyy-mm-dd'
+    });
   };
   $('select[class="product_select"]').each(function(i){
     p_id = parseInt($(this).find(':selected').val()) - 1;
@@ -48,14 +56,22 @@ $(document).ready(function () {
     alert(total);
     $('#purchase_order_ammount').val(total);
   });
-  $('#purchase_order_date').datepicker({
-    dateFormat: 'dd-mm-yy'
-  });
+  
   $('#purchase_order_delivery_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    format: 'yyyy-mm-dd'
   });
   $('#purchase_order_order_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    format: 'yyyy-mm-dd'
   });
 });
 function fill_product_blank_fields(){
@@ -64,7 +80,7 @@ function fill_product_blank_fields(){
     p_id = parseInt(product) - 1;
     if (p_id > 0){
       pum= products[p_id].unit_of_measurement;
-    $(this).next.val(pum);  
+    $(this).closest('tr').find('.unit_of_measurement').val(pum);  
     }
   });
 }

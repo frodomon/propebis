@@ -30,21 +30,31 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :due_date, "Fecha de Vencimiento", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
-      <%= f.text_field :due_date, placeholder: 'Fecha de Vencimiento', class: 'form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
     <%= f.label :lot_number, "Lote de Producto", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :lot_number, placeholder: 'Lote de Producto', class: 'form-control' %>
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :due_date, "Fecha de Vencimiento", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>  
+      <div class="input-group date">
+        <span class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </span>
+        <%= f.text_field :due_date, placeholder: 'Fecha de Vencimiento', class: 'form-control' %>
+      </div>
+    </div>  
+  </div>
+  <div class="form-group">
     <%= f.label :production_date, "Fecha de Producción", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
-      <%= f.text_field :production_date, placeholder: 'Fecha de Producción', class: 'form-control' %>
+      <div class="input-group date">
+        <span class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </span>
+        <%= f.text_field :production_date, placeholder: 'Fecha de Producción', class: 'form-control' %>
+      </div>
     </div>
   </div>
   <div class="actions">

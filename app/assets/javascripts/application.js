@@ -17,7 +17,8 @@
 //= require pace/pace.min.js
 //= require slimscroll/jquery.slimscroll.min.js
 //= require inspinia.js
-//= require jquery-ui/datepicker
 //= require add_remove_fields
 //= require datatables
+//= require iCheck/icheck.min.js
+//= require datapicker/bootstrap-datepicker.js
 

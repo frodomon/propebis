@@ -50,10 +50,21 @@
    <div class="form-group">
     <%= f.label :active, 'Activo', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
-      <%= f.check_box :active %>
+      <%= f.check_box :active, class: 'checkbox' %>
     </div>    
   </div>
   <div class="actions">
     <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.checkbox').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+    });
+  </script>
 <% end %>

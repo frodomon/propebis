@@ -21,7 +21,7 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order.purchase_order_documents.build
     @businesses = Business.all
     @products = Product.all
-    @today = Time.now.strftime("%d-%m-%Y")
+    @today = Time.now.strftime("%Y-%m-%d")
   end
 
   # GET /purchase_orders/1/edit
