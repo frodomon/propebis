@@ -20,7 +20,7 @@
         <td align="center"><%= product_lot.production_date %></td>
         <td align="center"><%= product_lot.due_date %></td>
         <td align="center"><%= button_to 'Editar', { action: 'edit', id: product_lot.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-        <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: product_lot.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+        <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: product_lot.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
