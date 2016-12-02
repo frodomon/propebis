@@ -1,9 +1,21 @@
 $(document).ready(function () {
-  $('select[class="product_select"]').each(function(i){
+  if($('form[id^="edit_"]').length > 0) {
+    $('#remission_guide_date').datepicker({
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true,
+      todayHighlight: true,
+      format: 'yyyy-mm-dd'
+    });
+  };
+
+  $('select[class="product_select select2_demo_1 form-control"]').each(function(i){
     p_id = parseInt($(this).find(':selected').val()) - 1;
     if (p_id >= 0){
       pum= products[p_id].unit_of_measurement;
-      $(this).next().val(pum);  
+      $(this).closest('tr').find('.unit_of_measurement').val(pum);  
     }
   });
   $('form').on('click', '.load_details', function(e){
@@ -28,35 +40,33 @@ $(document).ready(function () {
     event.preventDefault();
     product_id = parseInt($(this).find(':selected').val()) -1;
     unit_of_measurement = products[product_id].unit_of_measurement;
-    $(this).next().val(unit_of_measurement);
+    $(this).closest('tr').find('.unit_of_measurement').val(unit_of_measurement);
   });
   $('form').on('change','.rgd_unit_price',function(event){
     event.preventDefault();
     unit_price = parseFloat($(this).val());
-    quantity = parseFloat($(this).prev().val());
+    quantity = parseFloat($(this).closest('tr').find('.rgd_quantity').val());
     if (isNaN(quantity)) { quantity = 0;}
     subtotal = unit_price * quantity;
-    $(this).next().val(subtotal);
+    $(this).closest('tr').find('.rgd_subtotal').val(subtotal);
     total = calcular_precio_final();
     $('#remission_guide_ammount').val(total);
   });
   $('form').on('change','.rgd_quantity',function(e){
     e.preventDefault();
     quantity = parseFloat($(this).val());
-    unit_price = parseFloat($(this).next().val());
+    unit_price = parseFloat($(this).closest('tr').find('.rgd_unit_price').val());
     if (isNaN(unit_price)) { unit_price = 0;}
     subtotal = unit_price * quantity;
-    $(this).next().next().val(subtotal);
+    $(this).closest('tr').find('.rgd_subtotal').val(subtotal);
     total = calcular_precio_final();
     $('#remission_guide_ammount').val(total);
   });
-  $('#remission_guide_date').datepicker({
-    dateFormat: 'dd-mm-yy'
-  });
+  
 });
 function calcular_precio_final(){
   total = 0.0;
-  $('input[class="rgd_subtotal"]').each(function(i){
+  $('input[class="rgd_subtotal form-control"]').each(function(i){
     value = parseFloat($(this).val());
     total = total + value;
   });

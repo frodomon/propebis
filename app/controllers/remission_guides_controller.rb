@@ -41,7 +41,7 @@ class RemissionGuidesController < ApplicationController
         format.html { redirect_to @remission_guide, notice: 'Remission guide was successfully created.' }
         format.json { render :show, status: :created, location: @remission_guide }
       else
-        format.html { render :new }
+        format.html { redirect_to action: :new, errors: @remission_guide.errors }
         format.json { render json: @remission_guide.errors, status: :unprocessable_entity }
       end
     end

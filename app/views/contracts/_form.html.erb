@@ -56,7 +56,7 @@
       <%= f.label :active, 'Activo', class: 'control-label' %>
     </div>
     <div class='col-lg-4'>
-        <%= f.check_box :active, class: 'form-control', readonly: true %>
+        <%= f.check_box :active, class: 'checkbox', readonly: true %>
     </div>
   </div>
   <div class="row">
@@ -92,8 +92,19 @@
     <%= link_to_add_fields "Añadir Documento", f, :contract_documents %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
 <% end %>
 
 <%= javascript_tag "products = #{@products.to_json.html_safe};" %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.checkbox').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+    });
+  </script>
+<% end %>

@@ -1,36 +1,78 @@
+<% provide(:title, "Propebis | Adendas") %>
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Addendums</h1>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Adendas</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'contracts', :action => 'index' %>">Contratos</a>
+      </li>
+      <li class="active">
+        <strong>Adendas</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Adendas</h5>
+        </div>
+        <div class="ibox-content">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
+            <thead>
+              <tr>
+                <th>Nro. Contrato</th>
+                <th>Nro. Adenda</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+                <th colspan="4"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @addendums.each do |addendum| %>
+                <tr>
+                  <td align="center"><%= Contract.find(addendum.contract_id).contract_number %></td>
+                  <td align="center"><%= addendum.addendum_number %></td>
+                  <td align="center"><%= addendum.date %></td>
+                  <td align="center"><%= addendum.ammount %></td>
+                  <td align="center"><%= button_to "Editar", { controller: :addendums, action: :edit, contract_id: addendum.contract_id, id: addendum.id } , method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                  <td align="center"><%= button_to 'Eliminar', { controller: :addendums, action: :destroy, contract_id: addendum.contract_id, id: addendum.id }, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <% if addendum.updated == false %>
+                    <td align="center"><%= button_to 'Actualizar Credito', { controller: :addendums, action: :update_credit, contract_id: addendum.contract_id, id: addendum.id } , method: :put, class: 'btn btn-wm btn-success btn-xs' %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan='5'>
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          
+        </div>
+        <!--Fin Ibox Content-->
+      </div>
+      <!--Fin Ibox-->
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Contract number</th>
-      <th>Addendum number</th>
-      <th>Date</th>
-      <th>Monto</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @addendums.each do |addendum| %>
-      <tr>
-        <td><%= Contract.find(addendum.contract_id).contract_number %></td>
-        <td><%= addendum.addendum_number %></td>
-        <td><%= addendum.date %></td>
-        <td><%= addendum.ammount %></td>
-        <td><%= button_to "Ver", { controller: :addendums, action: :show, contract_id: addendum.contract_id, id: addendum.id } , method: :get %></td>
-        <td><%= button_to "Editar", { controller: :addendums, action: :edit, contract_id: addendum.contract_id, id: addendum.id } , method: :get %></td>
-        <td><%= button_to 'Destroy', { controller: :addendums, action: :destroy, contract_id: addendum.contract_id, id: addendum.id }, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% if addendum.updated == false %>
-          <td><%= button_to 'Actualizar Credito', { controller: :addendums, action: :update_credit, contract_id: addendum.contract_id, id: addendum.id } , method: :put %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to "Volver", contracts_path %>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.footable').footable();
+    });
+  </script>
+<% end %>

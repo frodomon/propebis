@@ -53,8 +53,8 @@
                   <td><%= purchase_order.billing_address %></td>
                   <td><%= purchase_order.delivery_address %></td>
                   <td><%= purchase_order.ammount %></td>
-                  <td class="center"><%= button_to 'Editar', { action: 'edit', id: purchase_order.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-                  <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: purchase_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <td align="center"><%= button_to 'Editar', { action: 'edit', id: purchase_order.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                  <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: purchase_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                 </tr>
               <% end %>
             </tbody>

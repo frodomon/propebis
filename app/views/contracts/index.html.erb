@@ -55,8 +55,8 @@
                   <td><%= human_boolean(contract.active) %></td>
                   <td align="center"><%= button_to 'Editar', { action: 'edit', id: contract.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                   <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: contract.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
-                  <td><%= button_to "Agregar Adenda", { controller: :addendums , action: :new, contract_id: contract.id} , method: :get %></td>
-                  <td><%= button_to "Ver Adendas", { controller: :addendums , action: :index, contract_id: contract.id} , method: :get %></td>
+                  <td><%= button_to "Agregar Adenda", { controller: :addendums , action: :new, contract_id: contract.id} , method: :get, class: 'btn btn-wm btn-success btn-xs' %></td>
+                  <td><%= button_to "Ver Adendas", { controller: :addendums , action: :index, contract_id: contract.id} , method: :get, class: 'btn btn-wm btn-success btn-xs' %></td>
                 </tr>
               <% end %>
             </tbody>

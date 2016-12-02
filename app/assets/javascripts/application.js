@@ -21,4 +21,5 @@
 //= require datatables
 //= require iCheck/icheck.min.js
 //= require datapicker/bootstrap-datepicker.js
+//= require jasny/jasny-bootstrap.min.js
 

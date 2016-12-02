@@ -11,80 +11,95 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :business_id, 'Empresa' %><br>
-    <%= f.collection_select :business_id, Business.order(:name), :id, :name, :prompt => 'Seleccione una Empresa' %>
-  </div>
-  <div class="field">
-    <%= f.label :client_id, 'Cliente' %><br>
-    <%= f.collection_select :client_id, Client.order(:name), :id, :name, :prompt => 'Seleccione un Cliente' %>
-  </div>
-  <div class="field">
-    <%= f.label :driver_id, 'Transportista' %><br>
-    <%= f.collection_select :driver_id, Driver.order(:name), :id, :name, :prompt => 'Seleccione un Transportista' %>
-  </div>
-  <div class="field">
-    <%= f.label :vehicle_id, 'Vehículo' %><br>
-    <%= f.collection_select :vehicle_id, Vehicle.order(:plate), :id, :plate, :prompt => 'Seleccione un Vehículo' %>
-  </div>
-  <div class="field">
-    <%= f.label :remission_guide_number %><br>
-    <%= f.text_field :remission_guide_number %>
-  </div>
-  <div class="field">
-    <%= f.label :initial_point %><br>
-    <%= f.text_field :initial_point %>
-  </div>
-  <div class="field">
-    <%= f.label :final_point %><br>
-    <%= f.text_field :final_point %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.text_field :date %>
-  </div>
-  <div class="field">
-    <%= f.label :ammount %><br>
-    <%= f.number_field :ammount, readlony: true, step: :any %>
-  </div>
-  <br>
-  <div>
-    <%= select_tag :search, options_from_collection_for_select(SalesOrder.order(:sales_order_number), :id, :sales_order_number, params[:search]), options = {class: 'sales_order_select',  :prompt => 'Seleccione una Orden de Compra'} %>
-    <button class='load_details'>Cargar Datos</button>
-  </div>
-  <br>
-  <div class='detail_header'>
-    <div class='detail_column'>
-      <p>Producto</p>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
+      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
-    <div class='detail_column'>
-      <p>Unidad de Medida</p>
-    </div>
-    <div class='detail_column'>
-      <p>Cantidad</p>
-    </div>
-    <div class='detail_column'>
-      <p>P. Unit</p>
-    </div>
-    <div class='detail_column'>
-      <p>Subtotal</p>
-    </div>
-    <div class='detail_column'>
-      <p>Eliminar</p>
+    <div class="form-group col-lg-6">
+      <%= f.label :client_id, 'Cliente', class: 'control-label' %>
+      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
-  <div id='details'>
-    <%= f.fields_for :remission_guide_details do |builder| %>
-      <div id='content_details'>
-        <%= render 'remission_guide_detail_fields', f: builder %>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :driver_id, 'Transportista', class: 'control-label' %>
+      <%= f.collection_select :driver_id, Driver.order(:name), :id, :name, options = { prompt: 'Seleccione un Transportista'}, html_options = { class: 'select2_demo_1 form-control'} %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :vehicle_id, 'Vehículo', class: 'control-label' %>
+      <%= f.collection_select :vehicle_id, Vehicle.order(:trademark), :id, :trademark, options = { prompt: 'Selecciona un Vehículo'}, html_options = { class: 'select2_demo_1 form-control' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :remission_guide_number, 'Nro. Guía de Remisión', class: 'control-label' %>
+      <%= f.text_field :remission_guide_number, placeholder: 'Nro. Guía de Remisión', class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :date, 'Fecha', class: 'control-label' %>
+      <div class="input-group date">
+        <span class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </span>
+        <%= f.text_field :date, placeholder: @today, class: 'form-control', readonly: true %>
       </div>
-    <% end %>
-</div>
-<div class='add_fields'>
-  <%= link_to_add_fields "Añadir Producto", f, :remission_guide_details %>
-</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6">
+      <%= f.label :initial_point, 'Punto Inicial', class: 'control-label' %>
+      <%= f.text_field :initial_point, class: 'form-control' %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :final_point, 'Punto Final', class: 'control-label' %>
+      <%= f.text_field :final_point, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-3">
+      <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
+      <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-3">
+    </div>
+    <div class="form-group col-lg-4">
+      <%= select_tag :search, options_from_collection_for_select(SalesOrder.order(:sales_order_number), :id, :sales_order_number, params[:search]), options = {class: 'sales_order_select select2_demo_1 form-control',  :prompt => 'Seleccione una Orden de Compra'} %>
+    </div>
+    <div>
+      <button class='load_details col-lg-2 btn btn-success'>Cargar Datos</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Productos</h3>
+      <table class="footable table table-stripped toggle-arrow-tiny">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Unidad de Medida</th>
+            <th>Cantidad</th>
+            <th>P. Unit</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :remission_guide_details do |builder| %>
+            <%= render 'remission_guide_detail_fields', f: builder %>
+          <% end %>
+        </tbody>
+      </table>
+        <div class='add_fields'>
+          <%= link_to_add_row_fields "Añadir Producto", f, :remission_guide_details %>
+        </div>
+    </div>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary block m-b'%>
   </div>
 <% end %>
 

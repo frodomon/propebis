@@ -1,5 +1,3 @@
-//= require jasny/jasny-bootstrap.min.js
-
 $(document).ready(function () {
   if($('form[id^="edit_"]').length > 0) {
     $('.contract').show();
@@ -9,6 +7,7 @@ $(document).ready(function () {
       forceParse: false,
       calendarWeeks: true,
       autoclose: true,
+      todayHighlight: true,
       format: 'yyyy-mm-dd'
     });
   };
@@ -21,21 +20,21 @@ $(document).ready(function () {
     $('#purchase_order_billing_address').val(billing_address);
     $('#purchase_order_delivery_address').val(delivery_address);
   });
-  $('form').on('change','.pod_unit_price',function(event){
-    event.preventDefault();
-    unit_price = parseFloat($(this).val());
-    quantity = parseFloat($(this).closest('tr').find('.pod_quantity').val());
-    if (isNaN(quantity)) { quantity = 0;}
+    $('form').on('change','.pod_quantity',function(e){
+    e.preventDefault();
+    quantity = parseFloat($(this).val());
+    unit_price = parseFloat($(this).closest('tr').find('.pod_unit_price').val());
+    if (isNaN(unit_price)) { unit_price = 0;}
     subtotal = unit_price * quantity;
     $(this).closest('tr').find('.pod_subtotal').val(subtotal);
     total = calcular_precio_final();
     $('#purchase_order_ammount').val(total);
   });
-  $('form').on('change','.pod_quantity',function(e){
+  $('form').on('change','.pod_unit_price',function(e){
     e.preventDefault();
-    quantity = parseFloat($(this).val());
-    unit_price = parseFloat($(this).closest('tr').find('.pod_unit_price').val());
-    if (isNaN(unit_price)) { unit_price = 0;}
+    unit_price = parseFloat($(this).val());
+    quantity = parseFloat($(this).closest('tr').find('.pod_quantity').val());
+    if (isNaN(quantity)) { quantity = 0;}
     subtotal = unit_price * quantity;
     $(this).closest('tr').find('.pod_subtotal').val(subtotal);
     total = calcular_precio_final();
@@ -60,6 +59,7 @@ $(document).ready(function () {
     forceParse: false,
     calendarWeeks: true,
     autoclose: true,
+    todayHighlight: true,
     format: 'yyyy-mm-dd'
   });
   $('#purchase_order_order_date').datepicker({
@@ -68,6 +68,7 @@ $(document).ready(function () {
     forceParse: false,
     calendarWeeks: true,
     autoclose: true,
+    todayHighlight: true,
     format: 'yyyy-mm-dd'
   });
 });

@@ -64,7 +64,7 @@ function load_details(url, element_id, params){
 
             });
 
-            $(newNestedForm).appendTo('#content_details').last();
+            $(newNestedForm).appendTo('table').last();
 
             fill_fields_from_json('#remission_guide_remission_guide_details_attributes_',formsOnPage,object);
           }

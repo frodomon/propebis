@@ -1,9 +1,12 @@
 $(document).ready(function () {
-  $('select[class="product_select"]').each(function(i){
+  if($('form[id^="edit_"]').length > 0) {
+    $('.contract').show();
+  };
+  $('select[class="product_select select2_demo_1 form-control"]').each(function(i){
     p_id = parseInt($(this).find(':selected').val()) - 1;
     if (p_id >= 0){
       pum= products[p_id].unit_of_measurement;
-      $(this).next().val(pum);  
+      $(this).closest('tr').find('.unit_of_measurement').val(pum);  
     }
   });
   $('form').on('change', '#sales_order_client_id',function(e){
@@ -33,41 +36,59 @@ $(document).ready(function () {
     event.preventDefault();
     product_id = parseInt($(this).find(':selected').val()) -1;
     unit_of_measurement = products[product_id].unit_of_measurement;
-    $(this).next().val(unit_of_measurement);
+    $(this).closest('tr').find('.unit_of_measurement').val(unit_of_measurement);
   });
   $('form').on('change','.sod_unit_price',function(e){
     e.preventDefault();
     unit_price = parseFloat($(this).val());
-    quantity = parseFloat($(this).prev().val());
+    quantity = parseFloat($(this).closest('tr').find('.sod_quantity').val());
     if (isNaN(quantity)) { quantity = 0;}
     subtotal = unit_price * quantity;
-    $(this).next().val(subtotal);
+    $(this).closest('tr').find('.sod_subtotal').val(subtotal);
     total = calcular_precio_final();
     $('#sales_order_ammount').val(total);
   });
   $('form').on('change','.sod_quantity',function(e){
     e.preventDefault();
     quantity = parseFloat($(this).val());
-    unit_price = parseFloat($(this).next().val());
+    unit_price = parseFloat($(this).closest('tr').find('.sod_unit_price').val());
     if (isNaN(unit_price)) { unit_price = 0;}
     subtotal = unit_price * quantity;
-    $(this).next().next().val(subtotal);
+    $(this).closest('tr').find('.sod_subtotal').val(subtotal);
     total = calcular_precio_final();
     $('#sales_order_ammount').val(total)
   });
   $('#sales_order_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    format: 'yyyy-mm-dd'
   });
   $('#sales_order_delivery_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    format: 'yyyy-mm-dd'
   });
   $('#sales_order_order_date').datepicker({
-    dateFormat: 'dd-mm-yy'
+    todayBtn: "linked",
+    keyboardNavigation: false,
+    forceParse: false,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    format: 'yyyy-mm-dd'
   });
 });
 function calcular_precio_final(){
   total = 0.0;
-  $('input[class="sod_subtotal"]').each(function(i){
+  $('input[class="sod_subtotal form-control"]').each(function(i){
     value = parseFloat($(this).val());
     total = total + value;
   });

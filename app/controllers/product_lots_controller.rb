@@ -59,7 +59,7 @@ class ProductLotsController < ApplicationController
   def destroy
     @product_lot.destroy
     respond_to do |format|
-      format.html { redirect_to product_lots_url, notice: 'Products lot was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Products lot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

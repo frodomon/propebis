@@ -23,6 +23,7 @@ $(document).ready(function () {
     forceParse: false,
     calendarWeeks: true,
     autoclose: true,
+    todayHighlight: true,
     format: 'yyyy-mm-dd'
   });
   $('form').on('click','.search_button', function(e){
