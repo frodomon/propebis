@@ -56,7 +56,8 @@
       <%= f.label :active, 'Activo', class: 'control-label' %>
     </div>
     <div class='col-lg-4'>
-        <%= f.check_box :active, class: 'checkbox', readonly: true %>
+      <%= check_box_tag '#', value='1', checked= true, options = { id: 'chk_active',class: 'checkbox', readonly: true} %>
+      <%= f.hidden_field :active %>
     </div>
   </div>
   <div class="row">

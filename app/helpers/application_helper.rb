@@ -46,4 +46,35 @@ module ApplicationHelper
       nil
     end
   end
+  def is_active_almacen()
+    controller_name = params[:controller]
+    case controller_name
+    when 'product_lots'
+      'active'
+    when 'remission_guides'
+      'active'
+    else
+      nil
+    end
+  end
+  def is_active_compras()
+    controller_name = params[:controller]
+    case controller_name
+    when 'purchase_orders'
+      'active'
+    else
+      nil
+    end
+  end
+  def is_active_ventas()
+    controller_name = params[:controller]
+    case controller_name
+    when 'sales_orders'
+      'active'
+    when 'contracts'
+      'active'
+    else
+      nil
+    end
+  end
 end

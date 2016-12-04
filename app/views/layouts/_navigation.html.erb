@@ -6,12 +6,18 @@
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="clear">
               <span class="block m-t-xs">
-                <strong class="font-bold">Example user</strong>
-              </span> <span class="text-muted text-xs block">Example menu <b class="caret"></b></span>
+                <strong class="font-bold"><%= current_user.name %></strong>
+              </span> <span class="text-muted text-xs block">Nombre del Rol<b class="caret"></b></span>
             </span>
           </a>
           <ul class="dropdown-menu animated fadeInRight m-t-xs">
-            <li><a href="#">Logout</a></li>
+            <li>
+              <%= link_to "Editar Perfil", edit_user_registration_path %>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+            </li>
           </ul>
         </div>
         <div class="logo-element">
@@ -24,7 +30,7 @@
         <% end %>
       </li>
     <% if can? :manage, :all %>
-      <li class="<%= 'active' if current_page?('/users') %>">
+      <li class="<%= is_active_controller('users') %>">
         <%= link_to users_path  do %> <br>
           <i class="fa fa-users"></i> <span class="nav-label">Usuarios</span>
         <% end %>
@@ -55,30 +61,36 @@
             <%= link_to 'Transportistas', drivers_path %>
           </li>
         </ul>
-      <li class="<%= 'active' if current_page?('/product_lots') %>">
-        <%= link_to product_lots_path  do %> <br>
-        <i class="fa fa-cubes"></i> <span class="nav-label">Almacen</span>
-        <% end %>
+      </li> 
+      <li class="<%= is_active_almacen() %>">
+        <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Almacén</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse <%= is_active_almacen() %>">
+          <li class="<%= is_active_controller('product_lots') %>">
+            <%= link_to "Almacén", product_lots_path %>
+          </li>
+          <li class="<%= is_active_controller('remission_guides') %>">
+            <%= link_to 'Guías de Remisión', remission_guides_path %>
+          </li>
+        </ul>
       </li>
-      <li class="<%= 'active' if current_page?('/purchase_orders') %>">
-        <%= link_to purchase_orders_path  do %> <br>
-        <i class="fa fa-desktop"></i> <span class="nav-label">Orden de Compra</span>
-        <% end %>
+      <li class="<%= is_active_compras() %>">
+        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Compras</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse <%= is_active_compras() %>">
+          <li class="<%= is_active_controller('purchase_orders') %>">
+            <%= link_to 'Órdenes de Compra', purchase_orders_path %>
+          </li>
+        </ul>
       </li>
-      <li class="<%= 'active' if current_page?('/contracts') %>">
-        <%= link_to contracts_path  do %> <br>
-        <i class="fa fa-desktop"></i> <span class="nav-label">Contratos</span>
-        <% end %>
-      </li>
-      <li class="<%= 'active' if current_page?('/sales_orders') %>">
-        <%= link_to sales_orders_path  do %> <br>
-        <i class="fa fa-desktop"></i> <span class="nav-label">Ordenes de Venta</span>
-        <% end %>
-      </li>
-      <li class="<%= 'active' if current_page?('/remission_guides') %>">
-        <%= link_to remission_guides_path  do %> <br>
-        <i class="fa fa-desktop"></i> <span class="nav-label">Guías de Remisión</span>
-        <% end %>
+      <li class="<%= is_active_ventas() %>">
+        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Ventas</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse <%= is_active_ventas() %>">
+          <li class="<%= is_active_controller('contracts') %>">
+            <%= link_to 'Contratos', contracts_path %>
+          </li>
+          <li class="<%= is_active_controller('sales_orders') %>">
+            <%= link_to 'Órdenes de Venta', sales_orders_path %>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>

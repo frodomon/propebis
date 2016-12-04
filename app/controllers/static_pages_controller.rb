@@ -9,4 +9,7 @@ class StaticPagesController < ApplicationController
   def signup
   	render layout: false
   end
+  def forgot_password
+    render layout: false
+  end
 end

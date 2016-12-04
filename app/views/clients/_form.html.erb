@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-   <div class="form-group">
+  <div class="form-group">
     <%= f.label :name, "Razón Social", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :name, autofocus: true, placeholder: 'Razón Social', class: 'form-control' %>
@@ -50,7 +50,8 @@
    <div class="form-group">
     <%= f.label :active, 'Activo', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
-      <%= f.check_box :active, class: 'checkbox' %>
+      <%= check_box_tag '#', value='1', checked= true, options = { id: 'chk_active',class: 'checkbox', readonly: true} %>
+      <%= f.hidden_field :active %>
     </div>    
   </div>
   <div class="actions">

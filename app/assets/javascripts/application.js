@@ -18,8 +18,11 @@
 //= require slimscroll/jquery.slimscroll.min.js
 //= require inspinia.js
 //= require add_remove_fields
+//= require fill_blank_fields
+//= require load_data
 //= require datatables
 //= require iCheck/icheck.min.js
 //= require datapicker/bootstrap-datepicker.js
 //= require jasny/jasny-bootstrap.min.js
+//= require uiux
 

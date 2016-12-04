@@ -13,6 +13,10 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( businesses.js )
 Rails.application.config.assets.precompile += %w( businesses.css )
 
+Rails.application.config.assets.precompile += %w( suppliers.js )
+
+Rails.application.config.assets.precompile += %w( clients.js )
+
 Rails.application.config.assets.precompile += %w( products.js )
 Rails.application.config.assets.precompile += %w( products.css )
 #Ordenes de Compra

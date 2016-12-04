@@ -1,18 +1,5 @@
 $(document).ready(function () {
-  mostrar_numero_contrato();
-  $('select[class="product_select select2_demo_1 form-control"]').each(function(i){
-    p_id = parseInt($(this).find(':selected').val()) - 1;
-    if (p_id >= 0){
-      pum= products[p_id].unit_of_measurement;
-      $(this).closest('tr').find('.unit_of_measurement').val(pum);
-    }
-  });
-  $('form').on('change','.product_select',function(event){
-    event.preventDefault();
-    product_id = parseInt($(this).find(':selected').val()) -1;
-    unit_of_measurement = products[product_id].unit_of_measurement;
-    $(this).closest('tr').find('.unit_of_measurement').val(unit_of_measurement);
-  });  
+  mostrar_numero_contrato(); 
   $('form').on('change','.addendum_quantity',function(e){
     e.preventDefault();
     quantity = parseFloat($(this).val());

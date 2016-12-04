@@ -2,17 +2,6 @@
 <p id="notice"><%= notice %></p>
 <p id="alert"><%= alert %></p>
 
-<div>
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.name %><strong>.
-      <%= link_to "Edit Profile", edit_user_registration_path %>
-      <%= link_to "sign out", destroy_user_session_path, method: :delete   %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %>
-      <%= link_to "Login", new_user_session_path %>
-  <% end %>
-  <br>
-</div>
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
     <div class="col-lg-12">

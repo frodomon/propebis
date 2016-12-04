@@ -1,28 +1,53 @@
-<%= form_for(@user, html: {class: 'm-t'}) do |f| %>
-  <div class="form-group">
-    <%= f.text_field :name, placeholder: 'Nombre Completo', autofocus: true, class: 'form-control' %>
+<%= form_for(@user) do |f| %>
+  <div class="row">
+    <div class="form-group col-lg-12">
+      <%= f.text_field :name, placeholder: 'Nombre Completo', autofocus: true, class: 'form-control' %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.text_field :username, placeholder: 'Nombre de Usuario', class: 'form-control' %>
+  <div class="row">
+    <div class="form-group col-lg-12">
+      <%= f.text_field :username, placeholder: 'Nombre de Usuario', class: 'form-control' %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.email_field :email, placeholder: 'Correo electrónico', class: 'form-control' %>
+  <div class="row">
+    <div class="form-group col-lg-12">
+      <%= f.email_field :email, placeholder: 'Correo electrónico', class: 'form-control' %>
+    </div>
   </div>
-  <div class="form-group">
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    <%= f.password_field :password, placeholder:'Contraseña', autocomplete: "off", class: 'form-control' %>
-    <%= f.password_field :password_confirmation, placeholder:'Confirmar Contraseña', autocomplete: "off", class: 'form-control' %>
+  <div class="row">
+    <div class="form-group col-lg-12">
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= f.password_field :password, placeholder:'Contraseña', autocomplete: "off", class: 'form-control' %>
+      <%= f.password_field :password_confirmation, placeholder:'Confirmar Contraseña', autocomplete: "off", class: 'form-control' %>
+    </div>
   </div>
-  <div class='form-group'>
+  <div class="row">
+    <label class="control-label col-lg-12">Rol</label>
+    <div class='hr-line-dashed'></div>
     <% for role in User::ROLES %>
-      <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
-      <%= label_tag "user_roles_#{role}", role.to_s.humanize %><br />
-    <% end %>
-    <%= hidden_field_tag "user[roles][]", "" %>
+      <div class='col-lg-1'>
+        <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]", class: 'checkbox' } %>
+      </div>
+      <div class="form-group col-lg-11">
+        <%= label_tag "user_roles_#{role}", role.to_s.humanize, class: 'control-label' %><br />
+      </div>
+      <%= hidden_field_tag "user[roles][]", "" %>
+    <% end %>  
   </div>
   <div class="actions">
     <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.checkbox').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+    });
+  </script>
 <% end %>
