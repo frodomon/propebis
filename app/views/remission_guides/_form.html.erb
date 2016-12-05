@@ -1,4 +1,4 @@
-<%= render 'shared/flash_errors' %>
+<%= flash_errors_for @remission_guide %>
 
 <%= form_for@remission_guide, html: { multipart: true } do |f| %>
   <%= form_errors_for @remission_guide %>

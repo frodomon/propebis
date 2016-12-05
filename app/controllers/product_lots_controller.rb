@@ -31,7 +31,10 @@ class ProductLotsController < ApplicationController
 
     respond_to do |format|
       if @product_lot.save
-        format.html { redirect_to @product_lot, notice: 'Products lot was successfully created.' }
+        format.html { 
+          flash[:notice] = 'El Lote se creó satisfactoriamente.'
+          redirect_to product_lots_path
+        }
         format.json { render :show, status: :created, location: @product_lot }
       else
         format.html { render :new }
@@ -45,7 +48,10 @@ class ProductLotsController < ApplicationController
   def update
     respond_to do |format|
       if @product_lot.update(product_lot_params)
-        format.html { redirect_to @product_lot, notice: 'Products lot was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'El Lote se actualizó satisfactoriamente.'
+          redirect_to product_lots_path
+        }
         format.json { render :show, status: :ok, location: @product_lot }
       else
         format.html { render :edit }
@@ -59,7 +65,10 @@ class ProductLotsController < ApplicationController
   def destroy
     @product_lot.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Products lot was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'El Lote se eliminó satisfactoriamente.'
+        redirect_to :back
+      }
       format.json { head :no_content }
     end
   end

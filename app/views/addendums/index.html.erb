@@ -1,7 +1,7 @@
 <% provide(:title, "Propebis | Adendas") %>
-<p id="notice"><%= notice %></p>
+<%= render 'shared/notifications' %>
 
-<div class="row wrapper border-bottom white-bg page-heading">
+<div class="row wrapper border-bottom white-bg page-heading breadcrumbs-margin">
   <div class="col-lg-10">
     <h2>Adendas</h2>
     <ol class="breadcrumb">
@@ -60,9 +60,10 @@
               </tr>
             </tfoot>
           </table>
-          
+          <%= button_to 'Volver', { controller: 'contracts', action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
         </div>
         <!--Fin Ibox Content-->
+        
       </div>
       <!--Fin Ibox-->
     </div>

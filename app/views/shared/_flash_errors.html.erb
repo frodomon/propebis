@@ -1,5 +1,5 @@
 <% if flash[:error] %>
   <% flash[:error].each do |error| %>
-    <% @remission_guide.errors.add(error[0], error[1][0]) %>
+    <% object.errors.add(error[0], error[1][0]) %>
   <% end %>
 <% end %>

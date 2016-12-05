@@ -1,41 +1,31 @@
 <%= form_for(@product_lot, html: {class: 'form-horizontal'}) do |f| %>
-  <% if @product_lot.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product_lot.errors.count, "error") %> prohibited this products_lot from being saved:</h2>
+  <%= form_errors_for @product_lot %>
 
-      <ul>
-      <% @product_lot.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
+  <div class= "<%= field_class(@product_lot, :product_id) %>">
     <%= f.label :product_id, 'Producto', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
-      <%= f.collection_select :product_id, Product.order(:name), :id, :name, options = {  :prompt => 'Seleccione un Producto'}, html_options = { class: 'select2_demo_1 form-control' } %>
+      <%= f.collection_select :product_id, Product.order(:name), :id, :name, options = {  :prompt => 'Seleccione un Producto'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true } %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@product_lot, :quantity) %>">
     <%= f.label :quantity, "Cantidad", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
-      <%= f.number_field :quantity, autofocus: true, placeholder: '0', class: 'form-control' %>
+      <%= f.number_field :quantity, placeholder: '0', class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@product_lot, :sanitary_registry) %>">
     <%= f.label :sanitary_registry, "Registro Sanitario", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>     
       <%= f.text_field :sanitary_registry, placeholder: 'Registro Sanitario', class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@product_lot, :lot_number) %>">
     <%= f.label :lot_number, "Lote de Producto", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :lot_number, placeholder: 'Lote de Producto', class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@product_lot, :due_date) %>">
     <%= f.label :due_date, "Fecha de Vencimiento", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>  
       <div class="input-group date">
@@ -46,7 +36,7 @@
       </div>
     </div>  
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@product_lot, :production_date) %>">
     <%= f.label :production_date, "Fecha de Producción", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <div class="input-group date">

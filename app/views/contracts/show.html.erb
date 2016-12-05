@@ -2,12 +2,12 @@
 
 <p>
   <strong>Business:</strong>
-  <%= @contract.business %>
+  <%= Business.find(@contract.business_id) %>
 </p>
 
 <p>
   <strong>Client:</strong>
-  <%= @contract.client %>
+  <%= Client.find(@contract.client_id) %>
 </p>
 
 <p>

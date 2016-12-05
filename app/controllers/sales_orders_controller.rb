@@ -36,13 +36,19 @@ class SalesOrdersController < ApplicationController
   # POST /sales_orders.json
   def create
     @sales_order = SalesOrder.new(sales_order_params)
-    @sales_order.date = Time.now.strftime("%d-%m-%Y")
+    @sales_order.date = Time.now
     respond_to do |format|
       if @sales_order.save
-        format.html { redirect_to @sales_order, notice: 'Sales order was successfully created.' }
+        format.html {
+          flash[:notice] = 'La Orden de Venta se creó satisfactoriamente.'
+          redirect_to sales_orders_path
+        }
         format.json { render :show, status: :created, location: @sales_order }
       else
-        format.html { redirect_to action: :new }
+        format.html { 
+          flash[:error] = @sales_order.errors
+          redirect_to new_sales_order_path
+        }
         format.json { render json: @sales_order.errors, status: :unprocessable_entity }
       end
     end
@@ -53,10 +59,16 @@ class SalesOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @sales_order.update(sales_order_params)
-        format.html { redirect_to @sales_order, notice: 'Sales order was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'La Orden de Venta se actualizó satisfactoriamente.'
+          redirect_to sales_orders_path
+        }
         format.json { render :show, status: :ok, location: @sales_order }
       else
-        format.html { render :edit }
+        format.html { 
+          flash[:error] = @sales_order.errors
+          redirect_to edit_sales_order_path(@sales_order.id)
+        }
         format.json { render json: @sales_order.errors, status: :unprocessable_entity }
       end
     end
@@ -67,7 +79,10 @@ class SalesOrdersController < ApplicationController
   def destroy
     @sales_order.destroy
     respond_to do |format|
-      format.html { redirect_to sales_orders_url, notice: 'Sales order was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'La Orden de Venta se eliminó satisfactoriamente.'
+        redirect_to sales_orders_path
+      }
       format.json { head :no_content }
     end
   end
@@ -82,7 +97,6 @@ class SalesOrdersController < ApplicationController
       @contratos = Contract.all
       clients = []
       @contratos.each do |c|
-        puts c.client_id
         clients << c.client_id
       end
       valid_clients = []

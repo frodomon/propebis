@@ -1,7 +1,7 @@
 <% provide(:title, "Propebis | Contratos") %>
-<p id="notice"><%= notice %></p>
+<%= render 'shared/notifications' %>
 
-<div class="row wrapper border-bottom white-bg page-heading">
+<div class="row wrapper border-bottom white-bg page-heading breadcrumbs-margin">
   <div class="col-lg-10">
     <h2>Contratos</h2>
     <ol class="breadcrumb">
@@ -44,8 +44,8 @@
             <tbody>
               <% @contracts.each do |contract| %>
                 <tr>
-                  <td><%= Business.find(contract.business).name %></td>
-                  <td><%= Client.find(contract.client).name %></td>
+                  <td><%= Business.find(contract.business_id).name %></td>
+                  <td><%= Client.find(contract.client_id).name %></td>
                   <td><%= contract.contract_number %></td>
                   <td><%= contract.date %></td>
                   <td><%= contract.start_date %></td>

@@ -4,9 +4,8 @@ class Contract < ActiveRecord::Base
   validates_presence_of :contract_number, message: "Debe ingresar el número del contrato"
   validates_presence_of :start_date, message: "Debe ingresar la fecha en la que empieza el contrato"
   validates_presence_of :end_date, message: "Debe ingresar la fecha em la que termina el contrato"
-  validates_presence_of :final_price
-  validates_presence_of :credit
-  validates_presence_of :active
+  validates_presence_of :final_price, message: "Debe ingresar productos para poder calcular el precio final"
+  validates_presence_of :credit, message: "Debe ingresar productos para poder calcular el credito"
   belongs_to :client
   belongs_to :business
   has_many :contract_details, dependent: :destroy

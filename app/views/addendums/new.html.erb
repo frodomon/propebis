@@ -1,5 +1,5 @@
 <% provide(:title, "Propebis | Nueva Adenda") %>
-<p id="notice"><%= notice %></p>
+
 
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
@@ -25,6 +25,7 @@
     	  <h3>Nueva Adenda</h3>
     	</div>
     	<div class="ibox-content">
+          <p id='notice'><%= notice %></p>
 	  	      <%= render 'form' %>
 	          <%= button_to 'Volver', { controller: 'contracts', action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
     	</div>

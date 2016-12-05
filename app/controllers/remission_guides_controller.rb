@@ -38,7 +38,10 @@ class RemissionGuidesController < ApplicationController
     @remission_guide.date = Time.now
     respond_to do |format|
       if @remission_guide.save
-        format.html { redirect_to @remission_guide, notice: 'La Guía de Remisión fue creada satisfactoriamente.' }
+        format.html {
+          flash[:notice] = 'La Guía de Remisión se creó satisfactoriamente.'
+          redirect_to remission_guides_path
+        }
         format.json { render :show, status: :created, location: @remission_guide }
       else
         format.html { 
@@ -55,7 +58,10 @@ class RemissionGuidesController < ApplicationController
   def update
     respond_to do |format|
       if @remission_guide.update(remission_guide_params)
-        format.html { redirect_to @remission_guide, notice: 'Remission guide was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'La Guía de Remisión se actualizó satisfactoriamente.'
+          redirect_to remission_guides_path
+        }
         format.json { render :show, status: :ok, location: @remission_guide }
       else
         format.html { render :edit }
@@ -69,7 +75,10 @@ class RemissionGuidesController < ApplicationController
   def destroy
     @remission_guide.destroy
     respond_to do |format|
-      format.html { redirect_to remission_guides_url, notice: 'Remission guide was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'La Guía de Remisión se eliminó satisfactoriamente.'
+        redirect_to remission_guides_path
+      }
       format.json { head :no_content }
     end
   end

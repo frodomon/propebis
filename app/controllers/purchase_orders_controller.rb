@@ -37,7 +37,10 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order.date = Time.now
     respond_to do |format|
       if @purchase_order.save
-        format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
+        format.html { 
+          flash[:notice] = 'La Orden de Compra se creó satisfactoriamente.'
+          redirect_to purchase_orders_path
+        }
         format.json { render :show, status: :created, location: @purchase_order }
       else
         format.html { render :new }
@@ -51,7 +54,10 @@ class PurchaseOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @purchase_order.update(purchase_order_params)
-        format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully updated.' }
+        format.html {
+          flash[:notice] = 'La Orden de Compra se actualizó satisfactoriamente.'
+          redirect_to purchase_orders_path
+        }
         format.json { render :show, status: :ok, location: @purchase_order }
       else
         format.html { render :edit }
@@ -65,7 +71,10 @@ class PurchaseOrdersController < ApplicationController
   def destroy
     @purchase_order.destroy
     respond_to do |format|
-      format.html { redirect_to purchase_orders_url, notice: 'Purchase order was successfully destroyed.' }
+      format.html {
+        flash[:notice] = 'La Orden de Compra se eliminó satisfactoriamente.'
+        redirect_to purchase_orders_path
+      }
       format.json { head :no_content }
     end
   end

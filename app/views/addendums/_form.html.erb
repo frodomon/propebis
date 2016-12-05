@@ -1,35 +1,25 @@
 <%= form_for ([:contract, @addendum]), html: { multipart: true } do |f| %>
-  <% if @addendum.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@addendum.errors.count, "error") %> prohibited this addendum from being saved:</h2>
-
-      <ul>
-      <% @addendum.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors_for @addendum %>
 
   <div class="row">
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@addendum, :contract_id) %> col-lg-6">
       <%= f.hidden_field :contract_id %>
       <label class='control-label'>Contrato</label>
-      <%= text_field '#', 'contract_number', class: 'form-control contract_number', readonly: true %>
+      <%= text_field '*', 'contract_number', class: 'form-control contract_number', readonly: true %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@addendum, :addendum_number) %> col-lg-6">
       <%= f.label :addendum_number, 'Nro. de Adenda', class: 'control-label' %>
       <%= f.text_field :addendum_number, placeholder: 'Nro. de Adenda', class: 'form-control' %>
     </div>
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@addendum, :date) %> col-lg-6">
       <%= f.label :date, 'Fecha', class: 'control-label' %>
       <%= f.text_field :date, placeholder: @today, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-3">
+    <div class= "<%= field_class(@addendum, :ammount) %> col-lg-3">
       <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
       <%= f.number_field :ammount, placeholder: 0, class: 'form-control', readonly: true, step: :any %>
     </div>

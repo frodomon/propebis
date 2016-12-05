@@ -1,3 +1,3 @@
 $(document).ready(function () {
-  smart_checkbox('suppliers','active');
+  smart_checkbox('supplier','active');
 });

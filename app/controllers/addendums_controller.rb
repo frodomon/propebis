@@ -29,7 +29,10 @@ class AddendumsController < ApplicationController
 
     respond_to do |format|
       if @addendum.save
-        format.html { redirect_to contracts_url, notice: 'Addendum was successfully created.' }
+        format.html { 
+          flash[:notice] = 'La Adenda se creó satisfactoriamente.'
+          redirect_to contract_addendums_path(@addendum.contract_id)
+        }
         format.json { render :show, status: :created, location: @addendum }
       else
         format.html { render :new }
@@ -41,10 +44,16 @@ class AddendumsController < ApplicationController
   def update
     respond_to do |format|
       if @addendum.update(addendum_params)
-        format.html { redirect_to contract_addendums_url(@addendum.contract_id), notice: 'Addendum was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'La Adenda se actualizó satisfactoriamente.'
+          redirect_to contract_addendums_path(@addendum.contract_id)
+        }
         format.json { render :show, status: :ok, location: @addendum }
       else
-        format.html { render :edit }
+        format.html { 
+          flash[:notice] = 'jojojojo' + @addendum.contract_id
+          render :edit 
+        }
         format.json { render json: @addendum.errors, status: :unprocessable_entity }
       end
     end
@@ -55,7 +64,10 @@ class AddendumsController < ApplicationController
     @addendum = @contract.addendums.find(params[:id])
     @addendum.destroy
     respond_to do |format|
-      format.html { redirect_to contract_addendums_url(@addendum.contract_id), notice: 'Addendum was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'La Adenda se eliminó satisfactoriamente.'
+        redirect_to contract_addendums_path(@addendum.contract_id)
+      }
       format.json { head :no_content }
     end
   end

@@ -12,7 +12,6 @@ class ContractsController < ApplicationController
   # GET /contracts/1
   # GET /contracts/1.json
   def show
-    @addendums = Addendum.where('contract_id = ?',params[:id])
   end
 
   # GET /contracts/new
@@ -37,7 +36,10 @@ class ContractsController < ApplicationController
     @contract.credit = @contract.final_price
     respond_to do |format|
       if @contract.save
-        format.html { redirect_to @contract, notice: 'Contract was successfully created.' }
+        format.html { 
+          flash[:notice] = 'El Contrato se creó satisfactoriamente.'
+          redirect_to contracts_path
+        }
         format.json { render :show, status: :created, location: @contract }
       else
         format.html { render :new }
@@ -51,23 +53,36 @@ class ContractsController < ApplicationController
   def update
     respond_to do |format|
       if @contract.update(contract_params)
-        format.html { redirect_to @contract, notice: 'Contract was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'El Contrato se actualizó satisfactoriamente.'
+          puts 'laconchadelalora'
+          redirect_to contracts_path
+        }
         format.json { render :show, status: :ok, location: @contract }
       else
-        format.html { render :edit }
+        format.html { 
+          redirect_to edit_contract_path(@contract) }
         format.json { render json: @contract.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # DELETE /contracts/1
   # DELETE /contracts/1.json
   def destroy
     @contract.destroy
     respond_to do |format|
-      format.html { redirect_to contracts_url, notice: 'Contract was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'El Contrato se eliminó satisfactoriamente.'
+        redirect_to contracts_path
+      }
       format.json { head :no_content }
     end
+  end
+
+  def show_addendums
+    @addendums = Addendum.where('contract_id = ?',params[:id])
   end
 
   private
@@ -78,7 +93,7 @@ class ContractsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contract_params
-      params.require(:contract).permit(:client_id, :business_id, :contract_number, :date, :start_date, :end_date, :final_price, :credit,
+      params.require(:contract).permit(:client_id, :business_id, :contract_number, :date, :start_date, :end_date, :final_price, :credit, :active,
         contract_details_attributes: [:id, :contract_id, :product_id, :quantity, :unit_price, :subtotal, :_destroy],
         contract_documents_attributes: [:id, :contract_id, :document, :_destroy])
     end

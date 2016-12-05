@@ -1,3 +1,3 @@
 $(document).ready(function () {
-  smart_checkbox('clients','active');
+  smart_checkbox('client','active');
 });

@@ -1,7 +1,6 @@
 $(document).ready(function () {
-  smart_checkbox('contracts','active');
+  smart_checkbox('contract','active');
   if($('form[id^="edit_"]').length > 0) {
-    $('.active').show();
     $('#contract_date').datepicker({
       todayBtn: "linked",
       keyboardNavigation: false,
@@ -51,5 +50,4 @@ $(document).ready(function () {
     todayHighlight: true,
     format: 'yyyy-mm-dd'
   });
-  
 });
