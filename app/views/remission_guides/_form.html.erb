@@ -1,42 +1,34 @@
+<%= render 'shared/flash_errors' %>
+
 <%= form_for@remission_guide, html: { multipart: true } do |f| %>
-  <% if @remission_guide.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@remission_guide.errors.count, "error") %> prohibited this remission_guide from being saved:</h2>
-
-      <ul>
-      <% @remission_guide.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= form_errors_for @remission_guide %>
+  
   <div class="row">
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :business_id) %> col-lg-6">
       <%= f.label :business_id, 'Empresa', class: 'control-label' %>
       <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :client_id) %> col-lg-6">
       <%= f.label :client_id, 'Cliente', class: 'control-label' %>
       <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :driver_id) %> col-lg-6">
       <%= f.label :driver_id, 'Transportista', class: 'control-label' %>
       <%= f.collection_select :driver_id, Driver.order(:name), :id, :name, options = { prompt: 'Seleccione un Transportista'}, html_options = { class: 'select2_demo_1 form-control'} %>
     </div>
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :vehicle_id) %> col-lg-6">
       <%= f.label :vehicle_id, 'Vehículo', class: 'control-label' %>
       <%= f.collection_select :vehicle_id, Vehicle.order(:trademark), :id, :trademark, options = { prompt: 'Selecciona un Vehículo'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :remission_guide_number) %> col-lg-6">
       <%= f.label :remission_guide_number, 'Nro. Guía de Remisión', class: 'control-label' %>
       <%= f.text_field :remission_guide_number, placeholder: 'Nro. Guía de Remisión', class: 'form-control' %>
     </div>
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :date) %> col-lg-6">
       <%= f.label :date, 'Fecha', class: 'control-label' %>
       <div class="input-group date">
         <span class="input-group-addon">
@@ -47,17 +39,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :initial_point) %> col-lg-6">
       <%= f.label :initial_point, 'Punto Inicial', class: 'control-label' %>
       <%= f.text_field :initial_point, class: 'form-control' %>
     </div>
-    <div class="form-group col-lg-6">
+    <div class= "<%= field_class(@remission_guide, :final_point) %> col-lg-6">
       <%= f.label :final_point, 'Punto Final', class: 'control-label' %>
       <%= f.text_field :final_point, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-3">
+    <div class= "<%= field_class(@remission_guide, :ammount) %> col-lg-3">
       <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
       <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
     </div>

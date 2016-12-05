@@ -1,0 +1,14 @@
+<% if object.errors.any? %>
+  <div class="alert alert-danger">
+    <% if object.errors.count > 1 %>
+      <h3><strong><%= object.errors.count %> errores</strong> impidieron que se guardara el formulario:</h3>
+    <% else %>
+      <h3><strong><%= object.errors.count %> error</strong> impidió que se guardara el formulario:</h3>
+    <% end %>
+    <ul>
+	  <% object.errors.each do |attribute, message| %>
+	    <li><%= message %></li>
+	  <% end %>
+	</ul>
+  </div>
+<% end %>

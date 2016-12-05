@@ -30,7 +30,10 @@ class DriversController < ApplicationController
 
     respond_to do |format|
       if @driver.save
-        format.html { redirect_to @driver, notice: 'Driver was successfully created.' }
+        format.html { 
+          flash[:notice] = 'El transportista se creó satisfactoriamente.'
+          redirect_to drivers_path
+        }
         format.json { render :show, status: :created, location: @driver }
       else
         format.html { render :new }
@@ -44,7 +47,10 @@ class DriversController < ApplicationController
   def update
     respond_to do |format|
       if @driver.update(driver_params)
-        format.html { redirect_to @driver, notice: 'Driver was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'El transportista se actualizó satisfactoriamente.'
+          redirect_to drivers_path
+        }
         format.json { render :show, status: :ok, location: @driver }
       else
         format.html { render :edit }
@@ -58,7 +64,10 @@ class DriversController < ApplicationController
   def destroy
     @driver.destroy
     respond_to do |format|
-      format.html { redirect_to drivers_url, notice: 'Driver was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'El transportista se eliminó satisfactoriamente.'
+        redirect_to drivers_path
+      }
       format.json { head :no_content }
     end
   end

@@ -19,7 +19,7 @@ class RemissionGuidesController < ApplicationController
     @remission_guide = RemissionGuide.new
     @remission_guide.remission_guide_details.build
     @clients = Client.all
-    @business = Business.all
+    @businesses = Business.all
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
   end
@@ -38,10 +38,13 @@ class RemissionGuidesController < ApplicationController
     @remission_guide.date = Time.now
     respond_to do |format|
       if @remission_guide.save
-        format.html { redirect_to @remission_guide, notice: 'Remission guide was successfully created.' }
+        format.html { redirect_to @remission_guide, notice: 'La Guía de Remisión fue creada satisfactoriamente.' }
         format.json { render :show, status: :created, location: @remission_guide }
       else
-        format.html { redirect_to action: :new, errors: @remission_guide.errors }
+        format.html { 
+          flash[:error] = @remission_guide.errors
+          redirect_to new_remission_guide_path
+        }
         format.json { render json: @remission_guide.errors, status: :unprocessable_entity }
       end
     end

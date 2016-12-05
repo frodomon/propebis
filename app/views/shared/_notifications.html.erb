@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+  <div class='row notifications-margin'>
+    <div class="ibox-content ">
+      <div class="alert alert-success no-notifications-margin"><%= notice %></div>
+    </div>
+  </div>
+<% elsif flash[:alert] %>
+  <div class='row notifications-margin'>
+    <div class="ibox-content ">
+      <div class="alert alert-warning no-notifications-margin"><%= alert %></div>
+    </div>
+  </div>
+<% end %>

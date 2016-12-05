@@ -28,6 +28,13 @@ $(document).ready(function () {
     delivery_address = clients[c_id].delivery_address;
     $('#remission_guide_final_point').val(delivery_address);
   });
+  $('form').on('change', '#remission_guide_business_id',function(e){
+    e.preventDefault();
+    business = $(this).find(':selected').val();
+    b_id = parseInt(business) - 1;
+    delivery_address = businesses[b_id].delivery_address;
+    $('#remission_guide_initial_point').val(delivery_address);
+  });
   $('form').on('change','.rgd_unit_price',function(event){
     event.preventDefault();
     unit_price = parseFloat($(this).val());

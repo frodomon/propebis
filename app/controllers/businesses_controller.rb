@@ -30,7 +30,10 @@ class BusinessesController < ApplicationController
 
     respond_to do |format|
       if @business.save
-        format.html { redirect_to @business, notice: 'Business was successfully created.' }
+        format.html { 
+          flash[:notice] = 'La empresa se creó satisfactoriamente.'
+          redirect_to businesses_path
+        }
         format.json { render :show, status: :created, location: @business }
       else
         format.html { render :new }
@@ -44,7 +47,10 @@ class BusinessesController < ApplicationController
   def update
     respond_to do |format|
       if @business.update(business_params)
-        format.html { redirect_to @business, notice: 'Business was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'La empresa se actualizó satisfactoriamente.'
+          redirect_to businesses_path
+        }
         format.json { render :show, status: :ok, location: @business }
       else
         format.html { render :edit }
@@ -58,7 +64,10 @@ class BusinessesController < ApplicationController
   def destroy
     @business.destroy
     respond_to do |format|
-      format.html { redirect_to businesses_url, notice: 'Business was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'La empresa se eliminó satisfactoriamente.'
+        redirect_to businesses_path
+      }
       format.json { head :no_content }
     end
   end

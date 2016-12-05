@@ -77,4 +77,15 @@ module ApplicationHelper
       nil
     end
   end
+  # Displays object errors
+  def form_errors_for(object)
+    render('shared/form_errors', object: object) unless object.blank?
+  end
+  def field_class(resource, field_name)
+    if (resource.errors[field_name].length > 0)
+      return "form-group has-error".html_safe
+    else
+      return 'form-group'.html_safe
+    end
+  end
 end

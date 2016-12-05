@@ -30,7 +30,10 @@ class SuppliersController < ApplicationController
 
     respond_to do |format|
       if @supplier.save
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
+        format.html { 
+          flash[:notice] = 'El Proveedor se creó satisfactoriamente.'
+          redirect_to suppliers_path
+        }
         format.json { render :show, status: :created, location: @supplier }
       else
         format.html { render :new }
@@ -44,7 +47,10 @@ class SuppliersController < ApplicationController
   def update
     respond_to do |format|
       if @supplier.update(supplier_params)
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully updated.' }
+        format.html { 
+          flash[:notice] = 'El Proveedor se actualizó satisfactoriamente.'
+          redirect_to suppliers_path
+        }
         format.json { render :show, status: :ok, location: @supplier }
       else
         format.html { render :edit }
@@ -58,7 +64,10 @@ class SuppliersController < ApplicationController
   def destroy
     @supplier.destroy
     respond_to do |format|
-      format.html { redirect_to suppliers_url, notice: 'Supplier was successfully destroyed.' }
+      format.html { 
+        flash[:notice] = 'El Proveedor se eliminó satisfactoriamente.'
+        redirect_to suppliers_path
+      }
       format.json { head :no_content }
     end
   end

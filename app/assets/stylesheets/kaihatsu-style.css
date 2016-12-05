@@ -1,7 +1,16 @@
 .inline_buttons{
-	margin-right: 15px;
-	float:left;
+  margin-right: 15px;
+  float:left;
 }
 .align-left{
-	text-align: left !important;
+  text-align: left !important;
+}
+.notifications-margin{
+  margin: 15px 0 15px 0;
+}
+.no-notifications-margin{
+  margin-bottom: 0;
+}
+.breadcrumbs-margin{
+  margin-top: 10px;
 }

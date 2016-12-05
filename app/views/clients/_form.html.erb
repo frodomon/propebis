@@ -1,53 +1,43 @@
 <%= form_for(@client, html: {class: 'form-horizontal'}) do |f| %>
-  <% if @client.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+  <%= form_errors_for @client %>
 
-      <ul>
-      <% @client.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
+  <div class= "<%= field_class(@client, :name) %>">
     <%= f.label :name, "Razón Social", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :name, autofocus: true, placeholder: 'Razón Social', class: 'form-control' %>
     </div>    
   </div>
-   <div class="form-group">
+  <div class= "<%= field_class(@client, :ruc) %>">
     <%= f.label :ruc, "RUC", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :ruc, placeholder: 'RUC', class: 'form-control' %>
     </div>
   </div>
-   <div class="form-group">
+  <div class= "<%= field_class(@client, :billing_address) %>">
     <%= f.label :billing_address, "Dirección de Facturación", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :billing_address, placeholder: "Dirección de Facturación", class: 'form-control' %>
     </div>    
   </div>
-   <div class="form-group">
+  <div class= "<%= field_class(@client, :delivery_address) %>">
     <%= f.label :delivery_address, "Dirección de Entrega", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :delivery_address, placeholder: "Dirección de Entrega", class: 'form-control' %>
     </div>
   </div>
-   <div class="form-group">
+  <div class= "<%= field_class(@client, :telephone) %>">
     <%= f.label :telephone, "Teléfono", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :telephone, placeholder: "Teléfono", class: 'form-control' %>
     </div>    
   </div>
-   <div class="form-group">
+  <div class= "<%= field_class(@client, :contact) %>">
     <%= f.label :contact, "Contacto", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :contact, placeholder: 'Contacto', class: 'form-control' %>
     </div>    
   </div>
-   <div class="form-group">
+  <div class= "<%= field_class(@client, :active) %>">
     <%= f.label :active, 'Activo', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= check_box_tag '#', value='1', checked= true, options = { id: 'chk_active',class: 'checkbox', readonly: true} %>

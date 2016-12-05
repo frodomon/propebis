@@ -1,17 +1,7 @@
 <%= form_for(@category, html: {class: 'form-horizontal'}) do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+  <%= form_errors_for @category %>
 
-      <ul>
-      <% @category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
+  <div class= "<%= field_class(@category, :name) %>">
     <%= f.label :name, 'Nombre', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :name, placeholder: 'Nombre de la Categoría', class: 'form-control' %>

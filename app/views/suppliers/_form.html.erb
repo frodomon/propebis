@@ -1,41 +1,31 @@
 <%= form_for(@supplier, html: {class: 'form-horizontal'}) do |f| %>
-  <% if @supplier.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+  <%= form_errors_for @supplier %>
 
-      <ul>
-      <% @supplier.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
+  <div class= "<%= field_class(@supplier, :name) %>">
     <%= f.label :name, "Nombre del Proveedor", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :name, autofocus: true, placeholder: 'Nombre del Proveedor', class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@supplier, :ruc) %>">
     <%= f.label :ruc, "RUC", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :ruc, placeholder: 'RUC', class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@supplier, :address) %>">
     <%= f.label :address, "Dirección", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :address, placeholder: "Dirección", class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@supplier, :telephone) %>">
     <%= f.label :telephone, "Teléfono", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :telephone, placeholder: "Teléfono", class: 'form-control' %>
     </div>
   </div>
-  <div class="form-group">
+  <div class= "<%= field_class(@supplier, :contact) %>">
     <%= f.label :contact, "Contacto", class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
       <%= f.text_field :contact, placeholder: 'Contacto', class: 'form-control' %>
