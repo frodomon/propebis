@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 20161102212204) do
   create_table "vehicles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "plate"
     t.string   "trademark"
+    t.string   "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

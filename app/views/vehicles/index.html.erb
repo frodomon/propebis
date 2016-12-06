@@ -31,6 +31,7 @@
               <tr>
                 <th>Placa</th>
                 <th>Marca</th>
+                <th>Capacidad</th>
                 <th colspan="2"></th>
               </tr>
             </thead>
@@ -39,6 +40,7 @@
                 <tr>
                   <td><%= vehicle.plate %></td>
                   <td><%= vehicle.trademark %></td>
+                  <td><%= vehicle.capacity %></td>
                   <td class="center"><%= button_to 'Editar', { action: 'edit', id: vehicle.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                   <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: vehicle.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                 </tr>

@@ -3,6 +3,7 @@ class CreateVehicles < ActiveRecord::Migration
     create_table :vehicles do |t|
       t.string :plate
       t.string :trademark
+      t.string :capacity
 
       t.timestamps null: false
     end
