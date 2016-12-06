@@ -38,7 +38,7 @@
                 <th>Dirección de Facturación</th>
                 <th>Dirección de Entrega</th>
                 <th>Monto Final</th>
-                <th colspan="2"></th>
+                <th colspan="3"></th>
               </tr>
             </thead>
             <tbody>
@@ -53,6 +53,7 @@
                   <td><%= purchase_order.billing_address %></td>
                   <td><%= purchase_order.delivery_address %></td>
                   <td><%= purchase_order.ammount %></td>
+                  <td align="center"><%= button_to 'Imprimir',{ action: 'print_document', id: purchase_order.id}, method: :get, class: 'btn btn-w-m btn-success btn-xs', form: {target: "_blank"} %></td>
                   <td align="center"><%= button_to 'Editar', { action: 'edit', id: purchase_order.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                   <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: purchase_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                 </tr>

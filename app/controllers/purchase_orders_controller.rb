@@ -1,7 +1,7 @@
 class PurchaseOrdersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show ]
   load_and_authorize_resource
-  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchase_order, only: [:print_document, :show, :edit, :update, :destroy]
 
   # GET /purchase_orders
   # GET /purchase_orders.json
@@ -77,6 +77,11 @@ class PurchaseOrdersController < ApplicationController
       }
       format.json { head :no_content }
     end
+  end
+
+  def print_document
+    @purchase_order_details = @purchase_order.purchase_order_details
+    render :layout => "empty"
   end
 
   private

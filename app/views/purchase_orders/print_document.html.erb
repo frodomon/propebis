@@ -1,0 +1,103 @@
+<% provide(:title, "Propebis | Imprimir Orden de Compra") %>
+
+<div class="wrapper wrapper-content p-xl">
+  <div class="ibox-content p-xl">
+  	<div class="row">
+      <div class="form-group col-lg-6 col-lg-offset-3">
+        <h2><strong><%= Business.find(@purchase_order.business_id).name %></strong></h2>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Nro. Orden de Compra</label>
+      	<label class='control-label'><%= @purchase_order.order_number %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Fecha del Pedido:</label>
+      	<label class='control-label'><%= @purchase_order.order_date %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Proveedor:</label>
+      	<label class='control-label'><%= Supplier.find(@purchase_order.supplier_id).name %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Facturar a:</label>
+      	<label class='control-label'><%= Business.find(@purchase_order.business_id).name %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>RUC:</label>
+      	<label class='control-label'><%= Business.find(@purchase_order.business_id).ruc %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Dirección de Facturación:</label>
+      	<label class='control-label'><%= @purchase_order.billing_address %></label>
+      </div>
+	</div>
+	<div class="table-responsive m-t">
+        <table class="table invoice-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Unidad de Medida</th>
+              <th>Cantidad</th>
+              <th>P. Unit</th>
+              <th>Subtotal</th>
+           </tr>
+          </thead>
+          <tbody>
+          	<% @purchase_order_details.each do |pod_detail| %>
+          	  <tr>
+                <td><%= Product.find(pod_detail.product_id).name %></td>
+                <td><%= Product.find(pod_detail.product_id).unit_of_measurement %></td>
+                <td><%= pod_detail.quantity %></td>
+                <td><%= pod_detail.unit_price %></td>
+                <td><%= pod_detail.subtotal %></td>
+             </tr>
+           <% end %>
+          </tbody>
+        </table>
+      </div>
+      <table class="table invoice-total">
+        <tbody>
+          <tr>
+            <td><strong>TOTAL :</strong></td>
+            <td><%= @purchase_order.ammount %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class='row'>
+      	<label class='control-label'>Observaciones:</label>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Forma de Pago:</label>
+	      <label class='control-label'>Pago a 30 días></label>
+	    </div>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Día de entrega:</label>
+	      <label class='control-label'><%= @purchase_order.delivery_date %></label>
+	    </div>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Lugar de Entrega:</label>
+	      <label class='control-label'><%= @purchase_order.delivery_address %></label>
+	    </div>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Referencia:</label>
+	      <label class='control-label'>Agencia de Transportes San Lorenzo</label>
+	    </div>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Persona de Contacto:</label>
+	      <label class='control-label'><%= Business.find(@purchase_order.business_id).contact %></label>
+	    </div>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Horario de Entrega:</label>
+	      <label class='control-label'>08:00 a 10:00 hrs.</label>
+	    </div>
+
+	  </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    window.print();
+  </script>
+<% end %>

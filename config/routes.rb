@@ -34,7 +34,11 @@ Rails.application.routes.draw do
 
   resources :clients
 
-  resources :purchase_orders
+  resources :purchase_orders do
+    collection do
+      get ":id/print_document" => 'purchase_orders#print_document', as: :print_document
+    end
+  end
 
   resources :suppliers
 
