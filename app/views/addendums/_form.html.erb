@@ -19,6 +19,16 @@
     </div>
   </div>
   <div class="row">
+    <div class= "<%= field_class(@addendum, :start_date) %> col-lg-6">
+      <%= f.label :start_date, 'Fecha de Inicio', class: 'control-label' %>
+      <%= f.text_field :start_date, class: 'form-control' %>
+    </div>
+    <div class= "<%= field_class(@addendum, :end_date) %> col-lg-6">
+      <%= f.label :end_date, 'Fecha Final', class: 'control-label' %>
+      <%= f.text_field :end_date, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
     <div class= "<%= field_class(@addendum, :ammount) %> col-lg-3">
       <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
       <%= f.number_field :ammount, placeholder: 0, class: 'form-control', readonly: true, step: :any %>

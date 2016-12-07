@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20161102212204) do
     t.string   "addendum_number"
     t.float    "ammount",         limit: 24
     t.date     "date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.boolean  "updated",                    default: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false

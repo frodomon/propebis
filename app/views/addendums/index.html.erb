@@ -33,6 +33,8 @@
                 <th>Nro. Contrato</th>
                 <th>Nro. Adenda</th>
                 <th>Fecha</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha Final</th>
                 <th>Monto</th>
                 <th colspan="4"></th>
               </tr>
@@ -43,6 +45,8 @@
                   <td align="center"><%= Contract.find(addendum.contract_id).contract_number %></td>
                   <td align="center"><%= addendum.addendum_number %></td>
                   <td align="center"><%= addendum.date %></td>
+                  <td align="center"><%= addendum.start_date %></td>
+                  <td align="center"><%= addendum.end_date %></td>
                   <td align="center"><%= addendum.ammount %></td>
                   <td align="center"><%= button_to "Editar", { controller: :addendums, action: :edit, contract_id: addendum.contract_id, id: addendum.id } , method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                   <td align="center"><%= button_to 'Eliminar', { controller: :addendums, action: :destroy, contract_id: addendum.contract_id, id: addendum.id }, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>

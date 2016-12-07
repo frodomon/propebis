@@ -5,6 +5,8 @@ class CreateAddendums < ActiveRecord::Migration
       t.string :addendum_number
       t.float :ammount
       t.date :date
+      t.date :start_date
+      t.date :end_date
       t.boolean :updated, default: false
 
       t.timestamps null: false
