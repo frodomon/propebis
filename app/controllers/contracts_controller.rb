@@ -55,7 +55,6 @@ class ContractsController < ApplicationController
       if @contract.update(contract_params)
         format.html { 
           flash[:notice] = 'El Contrato se actualizó satisfactoriamente.'
-          puts 'laconchadelalora'
           redirect_to contracts_path
         }
         format.json { render :show, status: :ok, location: @contract }

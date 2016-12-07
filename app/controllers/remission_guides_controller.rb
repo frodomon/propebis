@@ -38,6 +38,7 @@ class RemissionGuidesController < ApplicationController
     @remission_guide.date = Time.now
     respond_to do |format|
       if @remission_guide.save
+        update_credit
         format.html {
           flash[:notice] = 'La Guía de Remisión se creó satisfactoriamente.'
           redirect_to remission_guides_path
@@ -89,8 +90,21 @@ class RemissionGuidesController < ApplicationController
       format.json { render json: @sales_order_details }
     end
   end
+  def update_credit
+    client_id = @remission_guide.client_id
+    puts client_id
+    @contratos = Contract.all
+    @contratos.each do |c|
+      if c.client_id === client_id
+        value = c.credit
+        value = value - @remission_guide.ammount
+        c.update_attribute(:credit,value)
+      end
+    end
+  end
 
   private
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_remission_guide
       @remission_guide = RemissionGuide.find(params[:id])
