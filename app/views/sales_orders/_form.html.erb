@@ -1,6 +1,6 @@
 <%= flash_errors_for @sales_order %>
 
-<%= form_for @sales_order, html: { multipart: true } do |f| %>
+<%= form_for @sales_order, html: { multipart: true, id: "submit-form"  } do |f| %>
   <%= form_errors_for @sales_order %>
   
   <div class="row">

@@ -12,13 +12,13 @@
       <span class="input-group-addon btn btn-default btn-file">
         <span class="fileinput-new">Seleccionar Archivo</span>
         <span class="fileinput-exists">Cambiar</span>
-        <%= f.file_field :document %>
+        <%= f.file_field :document, class: 'attachment' %>
       </span>
       <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Eliminar</a>
     </div>
   </div>
   <div class="col-lg-6">
-    <%= f.hidden_field :_destroy %>
+    <%= f.hidden_field :_destroy, class: 'destroy_attachment' %>
     <button class="btn btn-danger btn-circle remove_fields" type="button">
       <i class="fa fa-times"></i>
     </button>

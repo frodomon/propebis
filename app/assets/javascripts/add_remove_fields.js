@@ -21,4 +21,11 @@ $(document).ready(function () {
     $(this).closest('tr').hide();
     event.preventDefault();
   });
+  $('#submit-form').submit(function(){
+    $('input[class="attachment"]').each(function(){
+      if ( $('input[class="attachment"]').val() === ''){
+        $('input[class="attachment"]').closest('.col-lg-6').next().find('.destroy_attachment').val('1');
+      }  
+    });
+  });
 });
