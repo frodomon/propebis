@@ -26,7 +26,7 @@ class SalesOrder < ActiveRecord::Base
         contract = Contract.find(self.contract_id)  
         if contract.credit < self.ammount
           excedente = self.ammount - contract.credit
-          errors.add(:sales_order, 'No tiene el credito suficiente. Se excede en'+excedente)
+          errors.add('sales_order_credit', 'No tiene el credito suficiente. Se excede en '+excedente.to_s)
         end
       end
     end
