@@ -54,11 +54,11 @@
       <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
     </div>
   </div>
-  <div class="row">
+  <div class="row sales_orders">
     <div class="form-group col-lg-3">
     </div>
     <div class="form-group col-lg-4">
-      <%= select_tag :search, options_from_collection_for_select(SalesOrder.order(:sales_order_number), :id, :sales_order_number, params[:search]), options = {class: 'sales_order_select select2_demo_1 form-control',  :prompt => 'Seleccione una Orden de Compra'} %>
+      <%= select_tag :search, options_from_collection_for_select(SalesOrder.order(:sales_order_number), :id, :sales_order_number, params[:search]), options = {class: 'sales_order_select select2_demo_1 form-control', id: 'sales_orders_search', :prompt => 'Seleccione una Orden de Compra'} %>
     </div>
     <div>
       <button class='load_details col-lg-2 btn btn-success'>Cargar Datos</button>
@@ -98,3 +98,4 @@
 <%= javascript_tag "clients = #{@clients.to_json.html_safe};" %>
 <%= javascript_tag "products = #{@products.to_json.html_safe};" %>
 <%= javascript_tag "businesses = #{@businesses.to_json.html_safe};" %>
+<%= javascript_tag "sales_orders = #{@sales_orders.to_json.html_safe};" %>

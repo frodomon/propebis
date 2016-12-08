@@ -22,6 +22,7 @@ class RemissionGuidesController < ApplicationController
     @businesses = Business.all
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
+    @sales_orders = SalesOrder.all
   end
 
   # GET /remission_guides/1/edit
@@ -29,6 +30,7 @@ class RemissionGuidesController < ApplicationController
     @clients = Client.all
     @business = Business.all
     @products = Product.all
+    @sales_orders = SalesOrder.all
   end
 
   # POST /remission_guides

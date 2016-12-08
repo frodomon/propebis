@@ -9,6 +9,7 @@ $(document).ready(function () {
       todayHighlight: true,
       format: 'yyyy-mm-dd'
     });
+    $('.sales_orders').show();
   };
   $('form').on('click', '.load_details', function(e){
     e.preventDefault();
@@ -18,15 +19,25 @@ $(document).ready(function () {
       load_details('/remission_guides/search_sales_order_details','content_details', parameters);
       fill_blanks();
       total = calculate_final_price('rgd_subtotal');
-    $('#remission_guide_ammount').val(total);
+      $('#remission_guide_ammount').val(total);
     }
   });
   $('form').on('change', '#remission_guide_client_id',function(e){
     e.preventDefault();
-    client = $(this).find(':selected').val();
-    c_id = parseInt(client) - 1;
+    c_id = parseInt($(this).find(':selected').val()) - 1;
     delivery_address = clients[c_id].delivery_address;
     $('#remission_guide_final_point').val(delivery_address);
+    $('#sales_orders_search').empty();
+    c_id++;
+    $('#sales_orders_search').append('<option value = "default" selected>Seleccione una Orden de Compra</option>');
+    for(i=0; i < sales_orders.length; i++){
+      if (c_id === sales_orders[i].client_id) {
+        option = $('<option />');
+        option.attr('value', sales_orders[i].id).text(sales_orders[i].sales_order_number);
+        $('#sales_orders_search').append(option);
+      }
+    }
+    $('.sales_orders').show();
   });
   $('form').on('change', '#remission_guide_business_id',function(e){
     e.preventDefault();

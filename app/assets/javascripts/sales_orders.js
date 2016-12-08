@@ -16,7 +16,7 @@ $(document).ready(function () {
     $('#sales_order_contract_id').empty()
     $('#sales_order_contract_id').append('<option value = "default" selected>Seleccione un Contrato</option>');
     for(i=0; i < contracts.length; i++){
-      if (c_id = contracts[i].client_id) {
+      if (c_id === contracts[i].client_id) {
         option = $('<option />');
         option.attr('value', contracts[i].id).text(contracts[i].contract_number);
         $('#sales_order_contract_id').append(option);
