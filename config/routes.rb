@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   devise_scope :user do
     authenticated :user do
       root :to => 'static_pages#home', as: :authenticated_root
     end
     unauthenticated :user do
       root :to => 'static_pages#login', as: :unauthenticated_root
+
     end
   end
   scope '/admin' do
     resources :users
   end
-
+    get 'static_pages/signup'
+    get 'static_pages/forgot_password'
   resources :remission_guides do
     collection do
       get 'search_sales_order_details' => 'remission_guides#search_sales_order_details', as: :search_sales_order_details
     end
   end
+
+  
 
   resources :vehicles
 
@@ -59,8 +63,7 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  get 'static_pages/signup'
-  get 'static_pages/forgot_password'
+  
   
 
   # The priority is based upon order of creation: first created -> highest priority.

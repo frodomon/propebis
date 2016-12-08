@@ -16,7 +16,9 @@ class Ability
       can :read, :all
     elsif user.has_role? :user
       can :create, User
-      can :read, :all  
+      can :edit, User
+      can :read, :all
+      cannot :read, User   
     else
       can :create, User
       can :read, :all

@@ -4,12 +4,12 @@ class StaticPagesController < ApplicationController
     @mainDesc = "Kaihatsu labs"
   end
   def login
-  	render layout: false
+  	render layout: 'empty'
   end
   def signup
-  	render layout: false
+  	render layout: 'empty'
   end
   def forgot_password
-    render layout: false
+    render layout: 'empty'
   end
 end
