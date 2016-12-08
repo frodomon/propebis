@@ -26,13 +26,13 @@
       </li>
       <li class="<%= 'active' if current_page?('/') %>">
         <%= link_to "/" do %>
-          <i class="fa fa-laptop"></i> <span class="nav-label">Main page</span>
+          <i class="fa fa-home"></i> <span class="nav-label">Main page</span>
         <% end %>
       </li>
     <% if can? :manage, :all %>
       <li class="<%= is_active_controller('users') %>">
         <%= link_to users_path  do %> <br>
-          <i class="fa fa-users"></i> <span class="nav-label">Usuarios</span>
+          <i class="fa fa-user"></i> <span class="nav-label">Usuarios</span>
         <% end %>
       </li>
     <% end %>
@@ -82,7 +82,7 @@
         </ul>
       </li>
       <li class="<%= is_active_ventas() %>">
-        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Ventas</span><span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">Ventas</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse <%= is_active_ventas() %>">
           <li class="<%= is_active_controller('contracts') %>">
             <%= link_to 'Contratos', contracts_path %>

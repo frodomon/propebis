@@ -58,4 +58,9 @@ $(document).ready(function () {
     todayHighlight: true,
     format: 'yyyy-mm-dd'
   });
+  $('#submit-form').submit(function(){
+    fields = ['#purchase_order_business_id','#purchase_order_supplier_id','#purchase_order_order_number','#purchase_order_delivery_date','#purchase_order_order_date','#purchase_order_billing_address','#purchase_order_delivery_address','#purchase_order_ammount'];
+    fields_flag = validate_form(fields);
+    return fields_flag;
+  });
 });

@@ -4,6 +4,7 @@ class CreateContractDetails < ActiveRecord::Migration
       t.references :contract, index: true
       t.references :product, index: true
       t.float :quantity
+      t.float :pending
       t.float :unit_price
       t.float :subtotal
 

@@ -25,4 +25,5 @@
 //= require datapicker/bootstrap-datepicker.js
 //= require jasny/jasny-bootstrap.min.js
 //= require uiux
+//= require validations
 

@@ -93,7 +93,7 @@ class ContractsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contract_params
       params.require(:contract).permit(:client_id, :business_id, :contract_number, :date, :start_date, :end_date, :final_price, :credit, :active,
-        contract_details_attributes: [:id, :contract_id, :product_id, :quantity, :unit_price, :subtotal, :_destroy],
+        contract_details_attributes: [:id, :contract_id, :product_id, :quantity, :pending, :unit_price, :subtotal, :_destroy],
         contract_documents_attributes: [:id, :contract_id, :document, :_destroy])
     end
 end

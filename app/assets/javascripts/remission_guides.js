@@ -55,5 +55,9 @@ $(document).ready(function () {
     total = calculate_final_price('rgd_subtotal');
     $('#remission_guide_ammount').val(total);
   });
-  
+  $('#submit-form').submit(function(){
+    fields = ['#remission_guide_business_id','#remission_guide_client_id','#remission_guide_vehicle_id','#remission_guide_driver_id','#remission_guide_remission_guide_number','#remission_guide_date','#remission_guide_initial_point','#remission_guide_final_point','#remission_guide_ammount'];
+    fields_flag = validate_form(fields);
+    return fields_flag;
+  });
 });

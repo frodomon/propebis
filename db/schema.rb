@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20161208050117) do
     t.integer  "contract_id"
     t.integer  "product_id"
     t.float    "quantity",    limit: 24
+    t.float    "pending",     limit: 24
     t.float    "unit_price",  limit: 24
     t.float    "subtotal",    limit: 24
     t.datetime "created_at",             null: false

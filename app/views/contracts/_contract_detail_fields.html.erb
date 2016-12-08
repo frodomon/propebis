@@ -9,6 +9,9 @@
   	<%= f.number_field :quantity, class: 'contract_quantity form-control', step: :any %>
   </td>
   <td>
+    <%= f.number_field :pending, class: 'contract_pending form-control', readonly: true, step: :any %>
+  </td>
+  <td>
   	<%= f.number_field :unit_price, class: 'contract_unit_price form-control', step: :any %>
   </td>
   <td>

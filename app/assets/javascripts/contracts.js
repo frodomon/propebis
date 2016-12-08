@@ -17,6 +17,7 @@ $(document).ready(function () {
     unit_price = parseFloat($(this).closest('tr').find('.contract_unit_price').val());
     if (isNaN(unit_price)) { unit_price = 0;}
     subtotal = unit_price * quantity;
+    $(this).closest('tr').find('.contract_pending').val(quantity);
     $(this).closest('tr').find('.contract_subtotal').val(subtotal);
     total = calculate_final_price('contract_subtotal');
     $('#contract_final_price').val(total).trigger('change');
@@ -49,5 +50,12 @@ $(document).ready(function () {
     autoclose: true,
     todayHighlight: true,
     format: 'yyyy-mm-dd'
+  });
+  $('#submit-form').submit(function(){
+    date_flag = validate_start_end_date('#contract_start_date','#contract_end_date')
+    fields = ['#contract_business_id','#contract_client_id','#contract_contract_number','#contract_start_date','#contract_end_date','#contract_final_price'];
+    fields_flag = validate_form(fields);
+    flag = date_flag && fields_flag
+    return flag;
   });
 });

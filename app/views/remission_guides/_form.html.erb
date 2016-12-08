@@ -1,6 +1,6 @@
 <%= flash_errors_for @remission_guide %>
 
-<%= form_for@remission_guide, html: { multipart: true } do |f| %>
+<%= form_for@remission_guide, html: { multipart: true, id: 'submit-form' } do |f| %>
   <%= form_errors_for @remission_guide %>
   
   <div class="row">

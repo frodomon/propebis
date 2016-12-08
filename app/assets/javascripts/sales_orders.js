@@ -72,16 +72,19 @@ $(document).ready(function () {
     format: 'yyyy-mm-dd'
   });
   $('#submit-form').submit(function(){
-    debugger
-    c_id = parseInt($('#sales_order_contract_id').find(':selected').val())-1;
-    credit = contracts[c_id].credit;
-    result = parseFloat($('#sales_order_ammount').val()) - credit
-    if ( result > 0 ){
+    fields = ['#sales_order_business_id','#sales_order_contract_id','#sales_order_client_id','#sales_order_sales_order_number','#sales_order_date', '#sales_order_delivery_date','#sales_order_order_date','#sales_order_billing_address','#sales_order_delivery_address','#sales_order_ammount'];
+    fields_flag = validate_form(fields);
+    credit_flag = true;
+    if ($('#sales_order_contract_id').find(':selected').val() !== ''){
+      c_id = parseInt($('#sales_order_contract_id').find(':selected').val())-1;
+      credit = contracts[c_id].credit;
+      result = parseFloat($('#sales_order_ammount').val()) - credit
+      if ( result > 0 ){
         alert('La orden de venta excede al credito del cliente en ' + result );
-        return false;
+        credit_flag = false;
+      }  
     }
-    else{
-      return true;
-    }
+    flag = fields_flag && credit_flag;
+    return flag;
   });
 });
