@@ -1,0 +1,68 @@
+<% provide(:title, "Propebis | Configuración") %>
+<%= render 'shared/notifications' %>
+
+<div class="row wrapper border-bottom white-bg page-heading breadcrumbs-margin">
+  <div class="col-lg-10">
+    <h2>Configuración</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li class="active">
+        <strong>Configuración</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Configuración</h5>
+        </div>
+        <div class="ibox-content">
+          <%= button_to 'Nuevo Parametro', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
+          <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
+          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
+            <thead>
+              <tr>
+                <th>Alerta de Expiración</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @settings.each do |setting| %>
+                <tr>
+                  <td><%= setting.expiration_alert %></td>
+                  <td class="center"><%= button_to 'Editar', { action: 'edit', id: setting.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                  <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: setting.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan='5'>
+                  <ul class="pagination pull-right"></ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          
+        </div>
+        <!--Fin Ibox Content-->
+      </div>
+      <!--Fin Ibox-->
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.footable').footable();
+    });
+  </script>
+<% end %>

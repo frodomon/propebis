@@ -31,7 +31,7 @@
       </li>
     <% if can? :manage, :all %>
       <li class="<%= is_active_controller('users') %>">
-        <%= link_to users_path  do %> <br>
+        <%= link_to users_path  do %>
           <i class="fa fa-user"></i> <span class="nav-label">Usuarios</span>
         <% end %>
       </li>
@@ -91,6 +91,11 @@
             <%= link_to 'Órdenes de Venta', sales_orders_path %>
           </li>
         </ul>
+      </li>
+      <li class="<%= is_active_controller('settings') %>">
+        <%= link_to settings_path  do %>
+          <i class="fa fa-cogs"></i> <span class="nav-label">Configuración</span>
+        <% end %>
       </li>
     </ul>
   </div>

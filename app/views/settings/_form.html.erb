@@ -1,0 +1,13 @@
+<%= form_for(@setting, html: {class: 'form-horizontal'}) do |f| %>
+  <%= form_errors_for @setting %>
+
+  <div class= "<%= field_class(@setting, :expiration_alert) %>">
+    <%= f.label :expiration_alert, "Dias por vencer", class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.number_field :expiration_alert, autofocus: true, placeholder: "30", class: 'form-control'  %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary block m-b' %>
+  </div>
+<% end %>

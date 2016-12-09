@@ -4,6 +4,22 @@
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
     <div class="col-lg-12">
+      <% if @alertas.length > 0 %>
+        <div class='row notifications-margin'>
+          <div class="ibox-content ">
+            <div class="alert alert-warning no-notifications-margin">
+              <% if @alertas.length == 1 %>
+                <h3>Hay <strong><%= @alertas.length %></strong> producto por vencer</h3>
+              <% else %>
+                <h3>Hay <strong><%= @alertas.length %></strong> productos por vencer</h3>
+              <% end %>
+              <% @alertas.each do |a| %>
+                <p><%= a %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
       <div class="text-center m-t-lg">
         <h1>
           <%= @mainTitle %>
@@ -15,4 +31,3 @@
     </div>
   </div>
 </div>
-

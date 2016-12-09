@@ -36,3 +36,6 @@ Rails.application.config.assets.precompile += %w( sales_orders.css )
 #Guias de Remisión
 Rails.application.config.assets.precompile += %w( remission_guides.js )
 Rails.application.config.assets.precompile += %w( remission_guides.css )
+
+Rails.application.config.assets.precompile += %w( settings.js )
+Rails.application.config.assets.precompile += %w( settings.css )
