@@ -5,7 +5,7 @@ gem 'rails', '>= 5.0.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'font-awesome-rails', '>= 4.3.0.0'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+
 gem 'jquery-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.4'
@@ -44,9 +44,10 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'mysql2'
 end
 group :production do
-  gem 'mysql2'
+  gem 'pg'
 end
 #Gemas Adicionales
 gem 'paperclip', '~> 4.2.0'
