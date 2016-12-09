@@ -25,7 +25,7 @@
         </div>
         <div class="ibox-content">
           <%= button_to 'Nuevo Lote de Producto', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
-          <%= button_to 'Ver Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
+          <%= button_to 'Buscar Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
           <%= button_to 'Buscar Lotes por Producto', { action: "search_lots_by_product_front" }, method: :get, class: 'btn btn-w-m btn-primary inline_buttons' %>
 
           <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
