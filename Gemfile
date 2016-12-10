@@ -3,7 +3,8 @@ ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0'
 gem 'bootstrap-sass', '~> 3.3.7'
-gem 'font-awesome-rails', '>= 4.3.0.0'
+gem 'font-awesome-rails', '>= 4.7.0.0'
+
 # Use mysql as the database for Active Record
 
 gem 'jquery-rails'
