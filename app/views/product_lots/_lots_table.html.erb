@@ -1,42 +1,38 @@
-<table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
+<table class="table table-stripped table-bordered table-hover datatable">
   <thead>
     <tr>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Registro Sanitario</th>
-      <th>Número de Lote</th>
-      <th>Fecha de Producción</th>
-      <th>Fecha de Vencimiento</th>
-      <th colspan="2"></th>
+      <th align='center'>ID</td>
+      <th align='center'>Producto</th>
+      <th align='center'>Cantidad</th>
+      <th align='center'>Registro Sanitario</th>
+      <th align='center'>Número de Lote</th>
+      <th align='center'>Fecha de Producción</th>
+      <th align='center'>Fecha de Vencimiento</th>
+      <th align='center'>Editar</th>
+      <th align='center'>Eliminar</th>
     </tr>
   </thead>
   <tbody>
     <% @product_lots.each do |product_lot| %>
       <tr>
+        <td align="center"><%= product_lot.id %></td>
         <td align="center"><%= Product.find(product_lot.product_id).name %></td>
         <td align="center"><%= product_lot.quantity %></td>
         <td align="center"><%= product_lot.sanitary_registry %></td>
         <td align="center"><%= product_lot.lot_number %></td>
         <td align="center"><%= product_lot.production_date %></td>
         <td align="center"><%= product_lot.due_date %></td>
-        <td align="center"><%= button_to 'Editar', { action: 'edit', id: product_lot.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-        <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: product_lot.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+        <td align="center"><%= link_to 'Editar', { action: 'edit', id: product_lot.id}, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+        <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: product_lot.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
-  <tfoot>
-    <tr>
-      <td colspan='5'>
-        <ul class="pagination pull-right"></ul>
-      </td>
-    </tr>
-  </tfoot>
 </table>
 
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
+      load_table_controls('datatable');
     });
   </script>
 <% end %>

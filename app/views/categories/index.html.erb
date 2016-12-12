@@ -26,31 +26,28 @@
         <div class="ibox-content">
           <%= button_to 'Nueva Categoría', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
           <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
-          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th colspan="2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @categories.each do |category| %>
+          <div class='table-responsive'>
+            <table class="table table-stripped table-bordered table-hover datatable">
+              <thead>
                 <tr>
-                  <td><%= category.name %></td>
-                  <td class="center"><%= button_to 'Editar', { action: 'edit', id: category.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-                  <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: category.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <th align='center'>ID</th>
+                  <th align='center'>Nombre</th>
+                  <th align='center'>Editar</th>
+                  <th align='center'>Eliminar</th>
                 </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan='5'>
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-          
+              </thead>
+              <tbody>
+                <% @categories.each do |category| %>
+                  <tr>
+                    <td align='center'><%= category.id %></td>
+                    <td align='center'><%= category.name %></td>
+                    <td align='center'><%= link_to 'Editar', { action: 'edit', id: category.id}, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                    <td align='center'><%= link_to 'Eliminar', { action: 'destroy', id: category.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
         <!--Fin Ibox Content-->
       </div>
@@ -62,8 +59,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
-      $('.footable2').footable();
+      load_table_controls('datatable');
     });
   </script>
 <% end %>

@@ -26,40 +26,37 @@
         <div class="ibox-content">
           <%= button_to 'Nuevo Proveedor', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
           <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
-          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
-            <thead>
-              <tr>
-                <th>Razón Social</th>
-                <th>RUC</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Contacto</th>
-                <th>Activo</th>
-                <th colspan="2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @suppliers.each do |supplier| %>
+          <div class='table-responsive'>
+            <table class="table table-stripped table-bordered table-hover datatable">
+              <thead>
                 <tr>
-                  <td><%= supplier.name %></td>
-                  <td><%= supplier.ruc %></td>
-                  <td><%= supplier.address %></td>
-                  <td><%= supplier.telephone %></td>
-                  <td><%= supplier.contact %></td>
-                  <td><%= human_boolean(supplier.active) %></td>
-                  <td class="center"><%= button_to 'Editar', { action: 'edit', id: supplier.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-                  <td class="center"><%= button_to 'Eliminar', { action: 'destroy', id: supplier.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <th align='center'>ID</th>
+                  <th align='center'>Razón Social</th>
+                  <th align='center'>RUC</th>
+                  <th align='center'>Dirección</th>
+                  <th align='center'>Teléfono</th>
+                  <th align='center'>Contacto</th>
+                  <th align='center'>Activo</th>
+                  <th align='center'>Editar</th>
+                  <th align='center'>Eliminar</th>
                 </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan='5'>
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              </thead>
+              <tbody>
+                <% @suppliers.each do |supplier| %>
+                  <tr>
+                    <td align='center'><%= supplier.id %></td>
+                    <td align='center'><%= supplier.name %></td>
+                    <td align='center'><%= supplier.ruc %></td>
+                    <td align='center'><%= supplier.address %></td>
+                    <td align='center'><%= supplier.telephone %></td>
+                    <td align='center'><%= supplier.contact %></td>
+                    <td align='center'><%= human_boolean(supplier.active) %></td>
+                    <td align='center'><%= link_to 'Editar', { action: 'edit', id: supplier.id}, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                    <td align='center'><%= link_to 'Eliminar', { action: 'destroy', id: supplier.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           
         </div>
         <!--Fin Ibox Content-->
@@ -72,8 +69,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
-      $('.footable2').footable();
+      load_table_controls('datatable');
     });
   </script>
 <% end %>

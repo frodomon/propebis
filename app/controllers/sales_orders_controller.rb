@@ -86,6 +86,9 @@ class SalesOrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def contracts_index
+    @contracts = Contract.where('active = true')
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -94,7 +97,7 @@ class SalesOrdersController < ApplicationController
     end
 
     def clients_with_contracts
-      @contratos = Contract.all
+      @contratos = Contract.select([:client_id, :active]).having('active = true').group(:client_id,:active)
       clients = []
       @contratos.each do |c|
         clients << c.client_id

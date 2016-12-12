@@ -26,46 +26,41 @@
         <div class="ibox-content">
           <%= button_to 'Nueva Guía de Remisión', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
           <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
-          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
-            <thead>
-              <tr>
-                <th>Eḿpresa</th>
-                <th>Cliente</th>
-                <th>Transportista</th>
-                <th>Vehículo</th>
-                <th>Nro. Guía de Remisión</th>
-                <th>Punto de Partida</th>
-                <th>Punto Final</th>
-                <th>Fecha</th>
-                <th>Monto Final</th>
-                <th colspan="2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @remission_guides.each do |remission_guide| %>
+          <div class='table-responsive'>
+            <table class="table table-stripped table-bordered table-hover datatable">
+              <thead>
                 <tr>
-                  <td align="center"><%= Business.find(remission_guide.business_id).name %></td>
-                  <td align="center"><%= Client.find(remission_guide.client_id).name %></td>
-                  <td align="center"><%= Driver.find(remission_guide.driver_id).name %></td>
-                  <td align="center"><%= Vehicle.find(remission_guide.vehicle_id).plate %></td>
-                  <td align="center"><%= remission_guide.remission_guide_number %></td>
-                  <td align="center"><%= remission_guide.initial_point %></td>
-                  <td align="center"><%= remission_guide.final_point %></td>
-                  <td align="center"><%= remission_guide.date %></td>
-                  <td align="center"><%= remission_guide.ammount %></td>
-                  <td align="center"><%= button_to 'Editar', { action: 'edit', id: remission_guide.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-                  <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: remission_guide.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <th align='center'>Eḿpresa</th>
+                  <th align='center'>Cliente</th>
+                  <th align='center'>Transportista</th>
+                  <th align='center'>Vehículo</th>
+                  <th align='center'>Nro. Guía de Remisión</th>
+                  <th align='center'>Punto de Partida</th>
+                  <th align='center'>Punto Final</th>
+                  <th align='center'>Fecha</th>
+                  <th align='center'>Monto Final</th>
+                  <th align='center'>Editar</th>
+                  <th align='center'>Eliminar</th>
                 </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan='5'>
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              </thead>
+              <tbody>
+                <% @remission_guides.each do |remission_guide| %>
+                  <tr>
+                    <td align="center"><%= Business.find(remission_guide.business_id).name %></td>
+                    <td align="center"><%= Client.find(remission_guide.client_id).name %></td>
+                    <td align="center"><%= Driver.find(remission_guide.driver_id).name %></td>
+                    <td align="center"><%= Vehicle.find(remission_guide.vehicle_id).plate %></td>
+                    <td align="center"><%= remission_guide.remission_guide_number %></td>
+                    <td align="center"><%= remission_guide.initial_point %></td>
+                    <td align="center"><%= remission_guide.final_point %></td>
+                    <td align="center"><%= remission_guide.date %></td>
+                    <td align="center"><%= remission_guide.ammount %></td>
+                    <td align="center"><%= link_to 'Editar', { action: 'edit', id: remission_guide.id},class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                    <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: remission_guide.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           
         </div>
         <!--Fin Ibox Content-->
@@ -78,7 +73,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
+      load_table_controls('datatable');
     });
   </script>
 <% end %>

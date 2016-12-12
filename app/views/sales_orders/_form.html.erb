@@ -4,19 +4,19 @@
   <%= form_errors_for @sales_order %>
   
   <div class="row">
-    <div class= "<%= field_class(@sales_order, :business_id) %> col-lg-6">
-      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
-      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
-    </div>
     <div class= "<%= field_class(@sales_order, :client_id) %> col-lg-6">
       <%= f.label :client_id, 'Cliente', class: 'control-label' %>
       <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
-  </div>
-  <div class="row contract">
-    <div class= "<%= field_class(@sales_order, :contract_id) %> col-lg-6">
+    <div class= "<%= field_class(@sales_order, :contract_id) %> col-lg-6 contract">
       <%= f.label :contract_id, 'Contrato', class: 'control-label' %>
       <%= f.collection_select :contract_id, @contracts, :id, :contract_number, options = { prompt:'Seleccione un Contrato'}, html_options = { class: 'select2_demo_1 form-control' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "<%= field_class(@sales_order, :business_id) %> col-lg-6">
+      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
+      <%= f.collection_select :business_id, Business.order(:id), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
   </div>
   <div class="row">

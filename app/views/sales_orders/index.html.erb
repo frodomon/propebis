@@ -26,49 +26,44 @@
         <div class="ibox-content">
           <%= button_to 'Nueva Orden de Venta', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
           <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
-          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
-            <thead>
-              <tr>
-                <th>Eḿpresa</th>
-                <th>Cliente</th>
-                <th>Contrato</th>
-                <th>Nro. Orden de Venta</th>
-                <th>Fecha</th>
-                <th>Fecha de la Orden</th>
-                <th>Fecha de Entrega</th>
-                <th>Dirección de Facturación</th>
-                <th>Dirección de Entrega</th>
-                <th>Monto Final</th>
-                <th colspan="2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @sales_orders.each do |sales_order| %>
+          <div class='table-responsive'>
+            <table class="table table-stripped table-bordered table-hover datatable">
+              <thead>
                 <tr>
-                  <td><%= Business.find(sales_order.business_id).name %></td>
-                  <td><%= Client.find(sales_order.client_id).name %></td>
-                  <td><%= Contract.find(sales_order.contract_id).contract_number %></td>
-                  <td><%= sales_order.sales_order_number %></td>
-                  <td><%= sales_order.date %></td>
-                  <td><%= sales_order.order_date %></td>
-                  <td><%= sales_order.delivery_date %></td>
-                  <td><%= sales_order.billing_address %></td>
-                  <td><%= sales_order.delivery_address %></td>
-                  <td><%= sales_order.ammount %></td>
-                  <td align="center"><%= button_to 'Editar', { action: 'edit', id: sales_order.id}, method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-                  <td align="center"><%= button_to 'Eliminar', { action: 'destroy', id: sales_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  <th>Eḿpresa</th>
+                  <th>Cliente</th>
+                  <th>Contrato</th>
+                  <th>Nro. Orden de Venta</th>
+                  <th>Fecha</th>
+                  <th>Fecha de la Orden</th>
+                  <th>Fecha de Entrega</th>
+                  <th>Dirección de Facturación</th>
+                  <th>Dirección de Entrega</th>
+                  <th>Monto Final</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
                 </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan='5'>
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-          
+              </thead>
+              <tbody>
+                <% @sales_orders.each do |sales_order| %>
+                  <tr>
+                    <td align="center"><%= Business.find(sales_order.business_id).name %></td>
+                    <td align="center"><%= Client.find(sales_order.client_id).name %></td>
+                    <td align="center"><%= Contract.find(sales_order.contract_id).contract_number %></td>
+                    <td align="center"><%= sales_order.sales_order_number %></td>
+                    <td align="center"><%= sales_order.date %></td>
+                    <td align="center"><%= sales_order.order_date %></td>
+                    <td align="center"><%= sales_order.delivery_date %></td>
+                    <td align="center"><%= sales_order.billing_address %></td>
+                    <td align="center"><%= sales_order.delivery_address %></td>
+                    <td align="center"><%= sales_order.ammount %></td>
+                    <td align="center"><%= link_to 'Editar', { action: 'edit', id: sales_order.id }, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                    <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: sales_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>  
         </div>
         <!--Fin Ibox Content-->
       </div>
@@ -80,7 +75,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
+      load_table_controls('datatable');
     });
   </script>
 <% end %>

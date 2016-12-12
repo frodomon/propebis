@@ -7,27 +7,31 @@ Rails.application.routes.draw do
     end
     unauthenticated :user do
       root :to => 'static_pages#login', as: :unauthenticated_root
-
     end
   end
   scope '/admin' do
     resources :users
   end
-    get 'static_pages/signup'
-    get 'static_pages/forgot_password'
+  
+  get 'static_pages/signup'
+  get 'static_pages/forgot_password'
+  
   resources :remission_guides do
     collection do
       get 'search_sales_order_details' => 'remission_guides#search_sales_order_details', as: :search_sales_order_details
     end
   end
 
-  
-
   resources :vehicles
 
   resources :drivers
 
-  resources :sales_orders
+  resources :sales_orders do
+    collection do
+      get 'contracts_index' => 'sales_orders#contracts_index', as: :contracts_index
+      get 'new_sales_order_contract' => 'sales_orders#new_sales_order_contract', as: :new_sales_order_contract
+    end
+  end
 
   resources :contracts do
     resources :addendums do
@@ -65,8 +69,6 @@ Rails.application.routes.draw do
   resources :categories
 
   
-  
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -6,7 +6,7 @@ $(document).ready(function () {
     e.preventDefault();
     c_id = parseInt($(this).find(':selected').val());
     for(i=0; i < clients.length; i++){
-      if (c_id = clients[i].id) {
+      if (c_id === clients[i].id) {
         billing_address = clients[i].billing_address;
         delivery_address = clients[i].delivery_address;
         $('#sales_order_billing_address').val(billing_address);
@@ -23,6 +23,16 @@ $(document).ready(function () {
       }
     }
     $('.contract').show(); 
+  });
+  $('form').on('change', '#sales_order_contract_id',function(e){
+    e.preventDefault();
+    c_id = parseInt($(this).find(':selected').val());
+    for(i=0; i < contracts.length; i++){
+      if (c_id === contracts[i].id) {
+        b_id = contracts[i].business_id;    
+      }
+    }
+    $('#sales_order_business_id>option:eq('+b_id+')').prop('selected', true);
   });
   $('form').on('change','.sod_unit_price',function(e){
     e.preventDefault();

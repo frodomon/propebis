@@ -6,7 +6,6 @@ class SalesOrder < ActiveRecord::Base
   validates_presence_of :delivery_date, message: "Debe ingresar la fecha de entrega de la orden de compra"
   validates_presence_of :billing_address, message: "Debe ingresar la dirección de facturación"
   validates_presence_of :delivery_address, message: "Debe ingresar la dirección de entrega"
-  validates_presence_of :contract_id, message: "Debe elegir un contrato"
   validates_presence_of :ammount, message: "Debe ingresar productos para poder registrar el monto final"
   validate :check_contract_credit, on: :create
   belongs_to :business
