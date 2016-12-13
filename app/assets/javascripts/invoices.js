@@ -11,7 +11,6 @@ $(document).ready(function () {
       todayHighlight: true,
       format: 'yyyy-mm-dd'
     });
-  $('#invoice_business_id').attr('disabled', true);
 
   $('form').on('click', '.load_details', function(e){
     e.preventDefault();
@@ -51,12 +50,7 @@ $(document).ready(function () {
         }
       }
     }
-  });
-  $('form').on('change', '#control_guide_business_id',function(e){
-    e.preventDefault();
-    b_id = parseInt($(this).find(':selected').val()) - 1;
-    delivery_address = businesses[b_id].delivery_address;
-    $('#control_guide_initial_point').val(delivery_address);
+    $('#invoice_business_id').attr('disabled', true);
   });
   $('form').on('change','.inv_unit_price',function(event){
     event.preventDefault();
