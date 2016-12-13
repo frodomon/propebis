@@ -7,7 +7,6 @@ class ProductLotsController < ApplicationController
   # GET /products_lots.json
   def index
     @product_lots = ProductLot.select("product_id, sum(quantity) as quantity").group("product_id")
-    
   end
 
   # GET /products_lots/1

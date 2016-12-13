@@ -100,13 +100,25 @@ class RemissionGuidesController < ApplicationController
     elsif sales_order.status == 4
       sales_order.update_attribute(:status, 2)
     end
-    contrato = Contract.find(sales_order.contract_id)
-    value = contrato.credit
-    value = value - @remission_guide.ammount
-    if value >= 0
-      contrato.update_attribute(:credit,value)
-      if  value == 0
-        contrato.update_attribute(:active,false)
+    if sales_order.contract_id != 0
+      contrato = Contract.find(sales_order.contract_id)
+      value = contrato.credit
+      value = value - @remission_guide.ammount
+      if value >= 0
+        contrato.update_attribute(:credit,value)
+        if  value == 0
+          contrato.update_attribute(:active,false)
+        end
+      end
+      contract_details = contrato.contract_details
+      remission_guide_details = @remission_guide.remission_guide_details
+      remission_guide_details.each do |rgd|  
+        contract_details.each do |contract|
+          if rgd.product_id == contract.product_id
+            new_pending = contract.pending - rgd.quantity
+            contract.update_attribute(:pending, new_pending)
+          end
+        end
       end
     end
   end

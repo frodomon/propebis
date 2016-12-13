@@ -11,7 +11,6 @@ $(document).ready(function () {
     });
     $('.sales_orders').show();
   };
-  $('#remission_guide_business_id').attr('disabled', true);
 
   $('form').on('click', '.load_details', function(e){
     e.preventDefault();
@@ -26,11 +25,14 @@ $(document).ready(function () {
   });
   $('form').on('change', '#remission_guide_client_id',function(e){
     e.preventDefault();
-    c_id = parseInt($(this).find(':selected').val()) - 1;
-    delivery_address = clients[c_id].delivery_address;
-    $('#remission_guide_final_point').val(delivery_address);
+    c_id = parseInt($(this).find(':selected').val());
+    for(i=0; i < clients.length; i++){
+      if (c_id == clients[i].id) {
+        delivery_address = clients[i].delivery_address;
+        $('#remission_guide_final_point').val(delivery_address);
+      }
+    }
     $('#remission_guide_sales_order_id').empty();
-    c_id++;
     $('#remission_guide_sales_order_id').append('<option value = "default" selected>Seleccione una Orden de Compra</option>');
     for(i=0; i < sales_orders.length; i++){
       if (c_id === sales_orders[i].client_id) {
@@ -54,6 +56,7 @@ $(document).ready(function () {
         }
       }
     }
+    $('#remission_guide_business_id').attr('disabled', true);
   });
   $('form').on('change', '#remission_guide_business_id',function(e){
     e.preventDefault();

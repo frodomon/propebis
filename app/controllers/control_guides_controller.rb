@@ -100,14 +100,26 @@ class ControlGuidesController < ApplicationController
     elsif sales_order.status == 4
       sales_order.update_attribute(:status, 3)
     end
-    contrato = Contract.find(sales_order.contract_id)
-    contract_details = contrato.contract_details
+    almacen = ProductLot.where('quantity > 0').order('product_id, due_date ASC')
     control_guide_details = @control_guide.control_guide_details
     control_guide_details.each do |cgd|  
-      contract_details.each do |contract|
-        if cgd.product_id == contract.product_id
-          new_pending = contract.pending - cgd.quantity
-          contract.update_attribute(:pending, new_pending)
+      pedido = cgd.quantity
+      almacen.each do |alm|
+        if cgd.product_id == alm.product_id
+          cantidad = alm.quantity
+          if pedido > 0  
+            if cantidad < pedido
+              pedido -= cantidad
+              cantidad = 0
+            elsif cantidad == pedido
+              pedido = 0
+              cantidad = 0
+            elsif cantidad > pedido
+              cantidad -= pedido
+              pedido = 0
+            end
+            alm.update_attribute(:quantity,cantidad)
+          end
         end
       end
     end

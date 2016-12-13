@@ -11,8 +11,6 @@ $(document).ready(function () {
     });
     $('.sales_orders').show();
   };
-  $('#control_guide_business_id').attr('disabled', true);
-
   $('form').on('click', '.load_details', function(e){
     e.preventDefault();
     search = parseInt($('.sales_order_select').find(':selected').val());
@@ -26,14 +24,17 @@ $(document).ready(function () {
   });
   $('form').on('change', '#control_guide_client_id',function(e){
     e.preventDefault();
-    c_id = parseInt($(this).find(':selected').val()) - 1;
-    delivery_address = clients[c_id].delivery_address;
-    $('#control_guide_final_point').val(delivery_address);
+    c_id = parseInt($(this).find(':selected').val());
+    for(i=0; i < clients.length; i++){
+      if (c_id == clients[i].id) {
+        delivery_address = clients[i].delivery_address;
+        $('#control_guide_final_point').val(delivery_address);
+      }
+    }
     $('#control_guide_sales_order_id').empty();
-    c_id++;
     $('#control_guide_sales_order_id').append('<option value = "default" selected>Seleccione una Orden de Compra</option>');
     for(i=0; i < sales_orders.length; i++){
-      if (c_id === sales_orders[i].client_id) {
+      if (c_id == sales_orders[i].client_id) {
         option = $('<option />');
         option.attr('value', sales_orders[i].id).text(sales_orders[i].sales_order_number);
         $('#control_guide_sales_order_id').append(option);
@@ -54,6 +55,7 @@ $(document).ready(function () {
         }
       }
     }
+    $('#control_guide_business_id').attr('disabled', true);
   });
   $('form').on('change', '#control_guide_business_id',function(e){
     e.preventDefault();
