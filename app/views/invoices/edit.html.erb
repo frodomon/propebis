@@ -1,0 +1,33 @@
+<% provide(:title, "Propebis | Editar Factura") %>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Editar Factura</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'invoices', :action => 'index' %>">Facturas</a>
+      </li>
+      <li class="active">
+        <strong>Editar Factura</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+  	<div class="col-lg-12">
+      <div class="ibox float-e-margins">
+     	  <div class="ibox-title">
+    	    <h3>Editar Factura</h3>
+    	  </div>
+    	  <div class="ibox-content">
+    	    <%= render 'form' %>
+    		<%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+    	  </div>
+      </div>
+	</div>
+  </div>	
+</div>

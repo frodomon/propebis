@@ -1,0 +1,92 @@
+<% provide(:title, "Propebis | Imprimir Guía de Remisión") %>
+
+<div class="wrapper wrapper-content p-xl">
+  <div class="ibox-content p-xl">
+  	<div class="row">
+      <div class="form-group col-lg-6 col-lg-offset-3">
+        <h2><strong><%= Business.find(@remission_guide.business_id).name %></strong></h2>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Nro. Guía de Remisión</label>
+      	<label class='control-label'><%= @remission_guide.remission_guide_number %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Destinatario:</label>
+        <label class='control-label'><%= Client.find(@remission_guide.client_id).name %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>RUC:</label>
+        <label class='control-label'><%= Client.find(@remission_guide.client_id).ruc %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Punto de Partida:</label>
+        <label class='control-label'><%= @remission_guide.initial_point %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Punto de Llegada:</label>
+        <label class='control-label'><%= @remission_guide.final_point %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Fecha  de Entrega:</label>
+      	<label class='control-label'><%= @remission_guide.date %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Marca - Nro. Placa:</label>
+        <% vehiculo = Vehicle.find(@remission_guide.vehicle_id)
+             text = vehiculo.trademark + ' ' + vehiculo.plate
+         %>
+        <label class='control-label'><%= text %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Nro. Licencia de Conducir:</label>
+        <label class='control-label'><%= Driver.find(@remission_guide.driver_id).license %></label>
+      </div>
+    </div>  
+      
+	<div class="table-responsive m-t">
+    <table class="table invoice-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Unidad de Medida</th>
+          <th>Cantidad</th>
+          <th>P. Unit</th>
+          <th>Subtotal</th>
+       </tr>
+      </thead>
+      <tbody>
+      	<% @remission_guide_details.each do |rgd_detail| %>
+      	  <tr>
+            <td><%= Product.find(rgd_detail.product_id).name %></td>
+            <td><%= Product.find(rgd_detail.product_id).unit_of_measurement %></td>
+            <td><%= rgd_detail.quantity %></td>
+            <td><%= rgd_detail.unit_price %></td>
+            <td><%= rgd_detail.subtotal %></td>
+         </tr>
+       <% end %>
+      </tbody>
+    </table>
+    </div>
+    <table class="table invoice-total">
+      <tbody>
+        <tr>
+          <td><strong>TOTAL :</strong></td>
+          <td><%= @remission_guide.ammount %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class='row'>
+    	<label class='control-label'>Observaciones:</label>
+
+	    
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    window.print();
+  </script>
+<% end %>

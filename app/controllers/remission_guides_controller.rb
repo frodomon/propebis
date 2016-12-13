@@ -1,7 +1,7 @@
 class RemissionGuidesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show ]
   load_and_authorize_resource
-  before_action :set_remission_guide, only: [:show, :edit, :update, :destroy]
+  before_action :set_remission_guide, only: [:print_document, :show, :edit, :update, :destroy]
 
   # GET /remission_guides
   # GET /remission_guides.json
@@ -18,19 +18,19 @@ class RemissionGuidesController < ApplicationController
   def new
     @remission_guide = RemissionGuide.new
     @remission_guide.remission_guide_details.build
-    @clients = Client.all
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status > 2')
     @businesses = Business.all
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
-    @sales_orders = SalesOrder.all
+    @sales_orders = SalesOrder.where('status > 2 ')
   end
 
   # GET /remission_guides/1/edit
   def edit
-    @clients = Client.all
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status > 2')
     @business = Business.all
     @products = Product.all
-    @sales_orders = SalesOrder.all
+    @sales_orders = SalesOrder.where('status > 2')
   end
 
   # POST /remission_guides
@@ -93,16 +93,26 @@ class RemissionGuidesController < ApplicationController
     end
   end
   def update_credit
-    client_id = @remission_guide.client_id
-    puts client_id
-    @contratos = Contract.all
-    @contratos.each do |c|
-      if c.client_id === client_id
-        value = c.credit
-        value = value - @remission_guide.ammount
-        c.update_attribute(:credit,value)
+    sod_id = @remission_guide.sales_order_id
+    sales_order = SalesOrder.find(sod_id)
+    if sales_order.status == 3
+      sales_order.update_attribute(:status, 1)
+    elsif sales_order.status == 4
+      sales_order.update_attribute(:status, 2)
+    end
+    contrato = Contract.find(sales_order.contract_id)
+    value = contrato.credit
+    value = value - @remission_guide.ammount
+    if value >= 0
+      contrato.update_attribute(:credit,value)
+      if  value == 0
+        contrato.update_attribute(:active,false)
       end
     end
+  end
+  def print_document
+    @remission_guide_details = @remission_guide.remission_guide_details
+    render :layout => "empty"
   end
 
   private
@@ -114,7 +124,7 @@ class RemissionGuidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def remission_guide_params
-      params.require(:remission_guide).permit(:business_id, :client_id, :driver_id, :vehicle_id, :remission_guide_number, :initial_point, :final_point, :date, :ammount,
+      params.require(:remission_guide).permit(:business_id, :client_id, :driver_id, :vehicle_id, :sales_order_id, :remission_guide_number, :initial_point, :final_point, :date, :ammount,
         remission_guide_details_attributes: [:id, :remission_guide_id, :product_id, :quantity, :unit_price, :subtotal, :_destroy])
     end
 end

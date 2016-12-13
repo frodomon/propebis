@@ -75,13 +75,30 @@ class AddendumsController < ApplicationController
   end
   
   def update_credit
-    @contract = Contract.find(params[:contract_id])
-    value = @contract.credit
+    contract = Contract.find(params[:contract_id])
+    value = contract.credit
     value = value + @addendum.ammount
     end_date = @addendum.end_date
-    @contract.update_attribute(:credit,value)
-    @contract.update_attribute(:end_date,end_date)
+    contract.update_attribute(:credit,value)
+    contract.update_attribute(:end_date,end_date)
+    contract.update_attribute(:active,true)
     @addendum.update_attribute(:updated,true)
+    contract_details = contract.contract_details
+    addendum_details = @addendum.addendum_details
+    addendum_details.each do |add|  
+      found = false
+      contract_details.each do |contract|
+        if add.product_id === contract.product_id
+          found = true
+          new_pending = contract.pending + add.quantity
+          contract.update_attribute(:pending, new_pending)
+        end
+      end
+      if found == false
+        new_detail = ContractDetail.new(product_id: add.product_id, quantity: add.quantity, pending: add.quantity, unit_price: add.unit_price, subtotal: add.subtotal)
+        contract_details << new_detail
+      end
+    end
     flash[:notice] = 'La Adenda se aplicó satisfactoriamente'
     redirect_to contracts_url
   end

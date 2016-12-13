@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  if($('form[id^="edit_"]').length > 0) {
+  if($('#submit-form[class^="edit_"]').length > 0) {
     $('#remission_guide_date').datepicker({
       todayBtn: "linked",
       keyboardNavigation: false,
@@ -11,12 +11,14 @@ $(document).ready(function () {
     });
     $('.sales_orders').show();
   };
+  $('#remission_guide_business_id').attr('disabled', true);
+
   $('form').on('click', '.load_details', function(e){
     e.preventDefault();
     search = parseInt($('.sales_order_select').find(':selected').val());
     if (search != 0 ) {
       parameters = {search: search }; 
-      load_details('/remission_guides/search_sales_order_details','content_details', parameters);
+      load_details('/remission_guides/search_sales_order_details','content_details', parameters, '#remission_guide_remission_guide_details_attributes_');
       fill_blanks();
       total = calculate_final_price('rgd_subtotal');
       $('#remission_guide_ammount').val(total);
@@ -27,22 +29,35 @@ $(document).ready(function () {
     c_id = parseInt($(this).find(':selected').val()) - 1;
     delivery_address = clients[c_id].delivery_address;
     $('#remission_guide_final_point').val(delivery_address);
-    $('#sales_orders_search').empty();
+    $('#remission_guide_sales_order_id').empty();
     c_id++;
-    $('#sales_orders_search').append('<option value = "default" selected>Seleccione una Orden de Compra</option>');
+    $('#remission_guide_sales_order_id').append('<option value = "default" selected>Seleccione una Orden de Compra</option>');
     for(i=0; i < sales_orders.length; i++){
       if (c_id === sales_orders[i].client_id) {
         option = $('<option />');
         option.attr('value', sales_orders[i].id).text(sales_orders[i].sales_order_number);
-        $('#sales_orders_search').append(option);
+        $('#remission_guide_sales_order_id').append(option);
       }
     }
     $('.sales_orders').show();
   });
+  $('form').on('change', '#remission_guide_sales_order_id',function(e){
+    e.preventDefault();
+    sod_id = parseInt($(this).find(':selected').val());
+    for(i=0; i < sales_orders.length; i++){
+      if (sod_id === sales_orders[i].id){
+        b_id = sales_orders[i].business_id
+        for(j=0; j < businesses.length; j++){
+          if (b_id === businesses[j].id){
+            $('#remission_guide_business_id>option:eq('+b_id+')').prop('selected', true).trigger('change');
+          }
+        }
+      }
+    }
+  });
   $('form').on('change', '#remission_guide_business_id',function(e){
     e.preventDefault();
-    business = $(this).find(':selected').val();
-    b_id = parseInt(business) - 1;
+    b_id = parseInt($(this).find(':selected').val()) - 1;
     delivery_address = businesses[b_id].delivery_address;
     $('#remission_guide_initial_point').val(delivery_address);
   });
@@ -67,6 +82,7 @@ $(document).ready(function () {
     $('#remission_guide_ammount').val(total);
   });
   $('#submit-form').submit(function(){
+    $('#remission_guide_business_id').attr('disabled', false);
     fields = ['#remission_guide_business_id','#remission_guide_client_id','#remission_guide_vehicle_id','#remission_guide_driver_id','#remission_guide_remission_guide_number','#remission_guide_initial_point','#remission_guide_final_point','#remission_guide_ammount'];
     fields_flag = validate_form(fields);
     return fields_flag;

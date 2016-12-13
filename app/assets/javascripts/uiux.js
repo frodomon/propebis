@@ -1,6 +1,7 @@
 function smart_checkbox(controller,field){
   if($('form[id^="edit_"]').length > 0) {
 	active = $('#'+controller+'_'+field).val();
+  alert(active);
 	if (active === 'false'){
 	  $('#chk_'+field).iCheck('uncheck'); 
 	}

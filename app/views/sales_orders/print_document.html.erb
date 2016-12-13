@@ -1,0 +1,83 @@
+<% provide(:title, "Propebis | Imprimir Orden de Venta") %>
+
+<div class="wrapper wrapper-content p-xl">
+  <div class="ibox-content p-xl">
+  	<div class="row">
+      <div class="form-group col-lg-6 col-lg-offset-3">
+        <h2><strong><%= Business.find(@sales_order.business_id).name %></strong></h2>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Nro. Orden de Venta</label>
+      	<label class='control-label'><%= @sales_order.sales_order_number %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Fecha de la Orden de Venta:</label>
+      	<label class='control-label'><%= @sales_order.order_date %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Cliente:</label>
+      	<label class='control-label'><%= Client.find(@sales_order.client_id).name %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>RUC:</label>
+      	<label class='control-label'><%= Client.find(@sales_order.client_id).ruc %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Dirección de Facturación:</label>
+      	<label class='control-label'><%= @sales_order.billing_address %></label>
+      </div>
+	</div>
+	<div class="table-responsive m-t">
+    <table class="table invoice-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Unidad de Medida</th>
+          <th>Cantidad</th>
+          <th>P. Unit</th>
+          <th>Subtotal</th>
+       </tr>
+      </thead>
+      <tbody>
+      	<% @sales_order_details.each do |sod_detail| %>
+      	  <tr>
+            <td><%= Product.find(sod_detail.product_id).name %></td>
+            <td><%= Product.find(sod_detail.product_id).unit_of_measurement %></td>
+            <td><%= sod_detail.quantity %></td>
+            <td><%= sod_detail.unit_price %></td>
+            <td><%= sod_detail.subtotal %></td>
+         </tr>
+       <% end %>
+      </tbody>
+    </table>
+    </div>
+    <table class="table invoice-total">
+      <tbody>
+        <tr>
+          <td><strong>TOTAL :</strong></td>
+          <td><%= @sales_order.ammount %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class='row'>
+    	<label class='control-label'>Observaciones:</label>
+    
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Día de entrega:</label>
+	      <label class='control-label'><%= @sales_order.delivery_date %></label>
+	    </div>
+	    <div class="form-group col-lg-12">
+	      <label class='control-label'>Lugar de Entrega:</label>
+	      <label class='control-label'><%= @sales_order.delivery_address %></label>
+	    </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    window.print();
+  </script>
+<% end %>

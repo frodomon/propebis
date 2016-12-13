@@ -7,6 +7,12 @@
       <%= f.text_field :name, autofocus: true, placeholder: 'Nombre del Producto', class: 'form-control' %>
     </div>
   </div>
+   <div class= "<%= field_class(@product, :sku) %>">
+    <%= f.label :sku, 'SKU', class: 'col-lg-4 control-label' %>
+    <div class='col-lg-8'>
+      <%= f.text_field :sku, placeholder: 'Código del Producto', class: 'form-control' %>
+    </div>
+  </div>
   <div class= "<%= field_class(@product, :category_id) %>">
     <%= f.label :category_id, 'Categoŕía', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>

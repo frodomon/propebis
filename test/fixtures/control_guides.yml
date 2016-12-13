@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bussines: one
+  client: 
+  driver: one
+  vehicle: one
+  sales_order: one
+  control_guide_number: MyString
+  initial_point: MyString
+  final_point: MyString
+  date: 2016-12-13
+  ammount: 1.5
+
+two:
+  bussines: two
+  client: 
+  driver: two
+  vehicle: two
+  sales_order: two
+  control_guide_number: MyString
+  initial_point: MyString
+  final_point: MyString
+  date: 2016-12-13
+  ammount: 1.5

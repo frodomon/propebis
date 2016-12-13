@@ -2,15 +2,22 @@
 
 <%= form_for@remission_guide, html: { multipart: true, id: 'submit-form' } do |f| %>
   <%= form_errors_for @remission_guide %>
-  
+
+  <div class="row">
+    <div class= "<%= field_class(@remission_guide, :client_id) %> col-lg-6">
+      <%= f.label :client_id, 'Cliente', class: 'control-label' %>
+      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
+    </div>
+    <div class="<%= field_class(@remission_guide, :sales_order_id) %> col-lg-6 sales_orders">
+      <%= f.label :sales_order_id, 'Orden de Venta', class: 'control-label' %>
+      <%= f.collection_select :sales_order_id, SalesOrder.order(:sales_order_number), :id, :sales_order_number, options = { prompt: 'Seleccione una Orden de Compra' },html_options = {class: 'sales_order_select select2_demo_1 form-control' } %>
+      <button class='load_details btn btn-success' align='center'>Cargar Datos</button>
+    </div>
+  </div>
   <div class="row">
     <div class= "<%= field_class(@remission_guide, :business_id) %> col-lg-6">
       <%= f.label :business_id, 'Empresa', class: 'control-label' %>
       <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
-    </div>
-    <div class= "<%= field_class(@remission_guide, :client_id) %> col-lg-6">
-      <%= f.label :client_id, 'Cliente', class: 'control-label' %>
-      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
   <div class="row">
@@ -54,16 +61,7 @@
       <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
     </div>
   </div>
-  <div class="row sales_orders">
-    <div class="form-group col-lg-3">
-    </div>
-    <div class="form-group col-lg-4">
-      <%= select_tag :search, options_from_collection_for_select(SalesOrder.order(:sales_order_number), :id, :sales_order_number, params[:search]), options = {class: 'sales_order_select select2_demo_1 form-control', id: 'sales_orders_search', :prompt => 'Seleccione una Orden de Compra'} %>
-    </div>
-    <div>
-      <button class='load_details col-lg-2 btn btn-success'>Cargar Datos</button>
-    </div>
-  </div>
+  
   <div class="row">
     <div class="col-lg-12">
       <h3>Productos</h3>

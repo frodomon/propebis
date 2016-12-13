@@ -1,7 +1,7 @@
 class SalesOrdersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show ]
   load_and_authorize_resource
-  before_action :set_sales_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_sales_order, only: [:print_document, :show, :edit, :update, :destroy]
 
   # GET /sales_orders
   # GET /sales_orders.json
@@ -19,16 +19,18 @@ class SalesOrdersController < ApplicationController
     @sales_order = SalesOrder.new
     @sales_order.sales_order_details.build
     @sales_order.sales_order_documents.build
-    clients_with_contracts
-    @contracts = Contract.where('active = true')
+    @clients = Client.select(:id, :name, :delivery_address, :billing_address)
+    @clients_with_contracts = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, billing_address').joins(:contracts).where('contracts.active = true')
+    @clients_without_contracts = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, billing_address').joins("LEFT JOIN contracts ON clients.id = contracts.client_id").where('contracts.client_id is NULL')      
+    @contracts = Contract.select(:id, :contract_number, :client_id,:business_id, :credit).where('active = true')
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
   end
 
   # GET /sales_orders/1/edit
   def edit
-    clients_with_contracts
-    @contracts = Contract.all
+    @clients = Client.select(:id, :name)
+    @contracts = Contract.select(:id, :contract_number, :client_id, :business_id, :credit).where('active = true')
     @products = Product.all
   end
 
@@ -86,27 +88,21 @@ class SalesOrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def contracts_index
-    @contracts = Contract.where('active = true')
+  def search_contract_details
+    @contract_details = ContractDetail.search_details(params[:search])
+    respond_to do |format|
+      format.json { render json: @contract_details }
+    end
+  end
+  def print_document
+    @sales_order_details = @sales_order.sales_order_details
+    render :layout => "empty"
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sales_order
       @sales_order = SalesOrder.find(params[:id])
-    end
-
-    def clients_with_contracts
-      @contratos = Contract.select([:client_id, :active]).having('active = true').group(:client_id,:active)
-      clients = []
-      @contratos.each do |c|
-        clients << c.client_id
-      end
-      valid_clients = []
-      clients.each do |c_id|
-        valid_clients << Client.find(c_id)  
-      end
-      @clients = valid_clients
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,4 @@
-<tr>
+<tr id='content_details'>
   <td>
   	<%= f.collection_select :product_id, Product.order(:name), :id, :name, options = { prompt: 'Seleccione un Producto'}, html_options = {class: 'product_select select2_demo_1 form-control'} %>
   </td>

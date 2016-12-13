@@ -62,16 +62,10 @@
           </li>
         </ul>
       </li> 
-      <li class="<%= is_active_almacen() %>">
-        <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Almacén</span><span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level collapse <%= is_active_almacen() %>">
-          <li class="<%= is_active_controller('product_lots') %>">
-            <%= link_to "Almacén", product_lots_path %>
-          </li>
-          <li class="<%= is_active_controller('remission_guides') %>">
-            <%= link_to 'Guías de Remisión', remission_guides_path %>
-          </li>
-        </ul>
+      <li class="<%= is_active_controller('product_lots') %>">
+        <%= link_to product_lots_path  do %>
+          <i class="fa fa-cubes"></i> <span class="nav-label">Almacén</span>
+        <% end %>
       </li>
       <li class="<%= is_active_compras() %>">
         <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Compras</span><span class="fa arrow"></span></a>
@@ -81,14 +75,30 @@
           </li>
         </ul>
       </li>
+      <li class="<%= is_active_controller('contracts') %>">
+        <%= link_to contracts_path  do %>
+          <i class="fa fa-handshake-o"></i> <span class="nav-label">Contratos</span>
+        <% end %>
+      </li>
       <li class="<%= is_active_ventas() %>">
         <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">Ventas</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse <%= is_active_ventas() %>">
-          <li class="<%= is_active_controller('contracts') %>">
-            <%= link_to 'Contratos', contracts_path %>
-          </li>
           <li class="<%= is_active_controller('sales_orders') %>">
             <%= link_to 'Órdenes de Venta', sales_orders_path %>
+          </li>
+          <li class="<%= is_active_controller('invoices') %>">
+            <%= link_to 'Facturas', invoices_path %>
+          </li>
+        </ul>
+      </li>
+      <li class="<%= is_active_despacho() %>">
+        <a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">Despacho</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse <%= is_active_ventas() %>">
+          <li class="<%= is_active_controller('remission_guides') %>">
+            <%= link_to 'Guías de Remisión', remission_guides_path %>
+          </li>
+          <li class="<%= is_active_controller('control_guides') %>">
+            <%= link_to 'Guías de Remisión Interna', control_guides_path %>
           </li>
         </ul>
       </li>

@@ -1,0 +1,1 @@
+json.array! @control_guides, partial: 'control_guides/control_guide', as: :control_guide

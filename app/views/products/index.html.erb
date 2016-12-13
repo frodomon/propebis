@@ -32,6 +32,7 @@
                 <tr>
                   <th align='center'>ID</th>
                   <th align='center'>Nombre</th>
+                  <th align='center'>SKU</th>
                   <th align='center'>Categoría</th>
                   <th align='center'>Unidad de Medida</th>
                   <th align='center'>Descripción</th>
@@ -45,6 +46,7 @@
                 <tr>
                   <td align='center'><%= product.id %></td>
                   <td align='center'><%= product.name %></td>
+                  <td align='center'><%= product.sku %></td>
                   <td align='center'><%= Category.find(product.category_id).name %></td>
                   <td align='center'><%= product.unit_of_measurement %></td>
                   <td align='center'><%= product.description %></td>

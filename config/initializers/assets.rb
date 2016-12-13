@@ -39,3 +39,9 @@ Rails.application.config.assets.precompile += %w( remission_guides.css )
 
 Rails.application.config.assets.precompile += %w( settings.js )
 Rails.application.config.assets.precompile += %w( settings.css )
+
+Rails.application.config.assets.precompile += %w( control_guides.js )
+Rails.application.config.assets.precompile += %w( control_guides.css )
+
+Rails.application.config.assets.precompile += %w( invoices.js )
+Rails.application.config.assets.precompile += %w( invoices.css )

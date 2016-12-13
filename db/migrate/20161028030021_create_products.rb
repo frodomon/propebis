@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :unit_of_measurement
       t.string :description
       t.string :trademark
+      t.string :sku
       t.references :category, index: true, foreign_key: true
 
       t.timestamps null: false

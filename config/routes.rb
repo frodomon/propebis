@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :settings
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   devise_scope :user do
     authenticated :user do
@@ -16,9 +15,24 @@ Rails.application.routes.draw do
   get 'static_pages/signup'
   get 'static_pages/forgot_password'
   
+  resources :invoices do
+    collection do
+      get 'search_sales_order_details' => 'invoices#search_sales_order_details', as: :search_sales_order_details
+      get ":id/print_document" => 'invoices#print_document', as: :print_document
+    end
+  end
+  resources :control_guides do
+    collection do
+      get 'search_sales_order_details' => 'control_guides#search_sales_order_details', as: :search_sales_order_details
+      get ":id/print_document" => 'control_guides#print_document', as: :print_document
+    end
+  end
+  resources :settings
+
   resources :remission_guides do
     collection do
       get 'search_sales_order_details' => 'remission_guides#search_sales_order_details', as: :search_sales_order_details
+      get ":id/print_document" => 'remission_guides#print_document', as: :print_document
     end
   end
 
@@ -28,8 +42,8 @@ Rails.application.routes.draw do
 
   resources :sales_orders do
     collection do
-      get 'contracts_index' => 'sales_orders#contracts_index', as: :contracts_index
-      get 'new_sales_order_contract' => 'sales_orders#new_sales_order_contract', as: :new_sales_order_contract
+      get 'search_contract_details' => 'sales_orders#search_contract_details', as: :search_contract_details      
+      get ":id/print_document" => 'sales_orders#print_document', as: :print_document
     end
   end
 

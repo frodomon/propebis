@@ -34,11 +34,13 @@
                   <th align='center'>Cliente</th>
                   <th align='center'>Transportista</th>
                   <th align='center'>Vehículo</th>
+                  <th align='center'>Nro. Orden de Venta</th>
                   <th align='center'>Nro. Guía de Remisión</th>
                   <th align='center'>Punto de Partida</th>
                   <th align='center'>Punto Final</th>
                   <th align='center'>Fecha</th>
                   <th align='center'>Monto Final</th>
+                  <th align='center'>Imprimir</th>
                   <th align='center'>Editar</th>
                   <th align='center'>Eliminar</th>
                 </tr>
@@ -50,11 +52,13 @@
                     <td align="center"><%= Client.find(remission_guide.client_id).name %></td>
                     <td align="center"><%= Driver.find(remission_guide.driver_id).name %></td>
                     <td align="center"><%= Vehicle.find(remission_guide.vehicle_id).plate %></td>
+                    <td align="center"><%= SalesOrder.find(remission_guide.sales_order_id).sales_order_number %></td>
                     <td align="center"><%= remission_guide.remission_guide_number %></td>
                     <td align="center"><%= remission_guide.initial_point %></td>
                     <td align="center"><%= remission_guide.final_point %></td>
                     <td align="center"><%= remission_guide.date %></td>
                     <td align="center"><%= remission_guide.ammount %></td>
+                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: remission_guide.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: remission_guide.id},class: 'btn btn-w-m btn-warning btn-xs' %></td>
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: remission_guide.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                   </tr>

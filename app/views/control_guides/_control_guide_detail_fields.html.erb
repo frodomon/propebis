@@ -1,0 +1,23 @@
+<tr id='content_details'>
+  <td>
+  	<%= f.collection_select :product_id, Product.order(:name), :id, :name, options = { prompt: 'Seleccione un Producto'}, html_options = {class: 'product_select select2_demo_1 form-control'} %>
+  </td>
+  <td>
+  	<%= text_field '#', 'unit_of_measurement', class: 'unit_of_measurement form-control', readonly: true %>
+  </td>
+  <td>
+  	<%= f.number_field :quantity, class: 'cgd_quantity form-control', step: :any %>
+  </td>
+  <td>
+  	<%= f.number_field :unit_price, class: 'cgd_unit_price form-control', step: :any %>
+  </td>
+  <td>
+  	<%= f.number_field :subtotal, class: 'cgd_subtotal form-control', step: :any, readonly: true %>
+  </td>
+  <td align='center'>
+  	<%= f.hidden_field :_destroy %>
+    <button class="btn btn-danger btn-circle remove_row_fields" type="button">
+      <i class="fa fa-times"></i>
+    </button>
+  </td>
+</tr>

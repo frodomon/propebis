@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209152310) do
+ActiveRecord::Schema.define(version: 20161213055121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,11 +121,69 @@ ActiveRecord::Schema.define(version: 20161209152310) do
     t.index ["client_id"], name: "index_contracts_on_client_id", using: :btree
   end
 
+  create_table "control_guide_details", force: :cascade do |t|
+    t.integer  "control_guide_id"
+    t.integer  "product_id"
+    t.float    "quantity"
+    t.float    "unit_price"
+    t.float    "subtotal"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["control_guide_id"], name: "index_control_guide_details_on_control_guide_id", using: :btree
+    t.index ["product_id"], name: "index_control_guide_details_on_product_id", using: :btree
+  end
+
+  create_table "control_guides", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "client_id"
+    t.integer  "driver_id"
+    t.integer  "vehicle_id"
+    t.integer  "sales_order_id"
+    t.string   "control_guide_number"
+    t.string   "initial_point"
+    t.string   "final_point"
+    t.date     "date"
+    t.float    "ammount"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["business_id"], name: "index_control_guides_on_business_id", using: :btree
+    t.index ["client_id"], name: "index_control_guides_on_client_id", using: :btree
+    t.index ["driver_id"], name: "index_control_guides_on_driver_id", using: :btree
+    t.index ["sales_order_id"], name: "index_control_guides_on_sales_order_id", using: :btree
+    t.index ["vehicle_id"], name: "index_control_guides_on_vehicle_id", using: :btree
+  end
+
   create_table "drivers", force: :cascade do |t|
     t.string   "name"
     t.string   "license"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "invoice_details", force: :cascade do |t|
+    t.integer  "invoice_id"
+    t.integer  "product_id"
+    t.float    "quantity"
+    t.float    "unit_price"
+    t.float    "subtotal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_invoice_details_on_invoice_id", using: :btree
+    t.index ["product_id"], name: "index_invoice_details_on_product_id", using: :btree
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "client_id"
+    t.integer  "sales_order_id"
+    t.string   "invoice_number"
+    t.date     "date"
+    t.float    "ammount"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["business_id"], name: "index_invoices_on_business_id", using: :btree
+    t.index ["client_id"], name: "index_invoices_on_client_id", using: :btree
+    t.index ["sales_order_id"], name: "index_invoices_on_sales_order_id", using: :btree
   end
 
   create_table "product_lots", force: :cascade do |t|
@@ -145,6 +203,7 @@ ActiveRecord::Schema.define(version: 20161209152310) do
     t.string   "unit_of_measurement"
     t.string   "description"
     t.string   "trademark"
+    t.string   "sku"
     t.integer  "category_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -207,6 +266,7 @@ ActiveRecord::Schema.define(version: 20161209152310) do
     t.integer  "client_id"
     t.integer  "driver_id"
     t.integer  "vehicle_id"
+    t.integer  "sales_order_id"
     t.string   "remission_guide_number"
     t.string   "initial_point"
     t.string   "final_point"
@@ -217,6 +277,7 @@ ActiveRecord::Schema.define(version: 20161209152310) do
     t.index ["business_id"], name: "index_remission_guides_on_business_id", using: :btree
     t.index ["client_id"], name: "index_remission_guides_on_client_id", using: :btree
     t.index ["driver_id"], name: "index_remission_guides_on_driver_id", using: :btree
+    t.index ["sales_order_id"], name: "index_remission_guides_on_sales_order_id", using: :btree
     t.index ["vehicle_id"], name: "index_remission_guides_on_vehicle_id", using: :btree
   end
 
@@ -264,11 +325,11 @@ ActiveRecord::Schema.define(version: 20161209152310) do
     t.date     "order_date"
     t.date     "delivery_date"
     t.float    "ammount"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "status",             default: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["business_id"], name: "index_sales_orders_on_business_id", using: :btree
     t.index ["client_id"], name: "index_sales_orders_on_client_id", using: :btree
-    t.index ["contract_id"], name: "index_sales_orders_on_contract_id", using: :btree
   end
 
   create_table "settings", force: :cascade do |t|
@@ -331,6 +392,18 @@ ActiveRecord::Schema.define(version: 20161209152310) do
   add_foreign_key "contract_documents", "contracts"
   add_foreign_key "contracts", "businesses"
   add_foreign_key "contracts", "clients"
+  add_foreign_key "control_guide_details", "control_guides"
+  add_foreign_key "control_guide_details", "products"
+  add_foreign_key "control_guides", "businesses"
+  add_foreign_key "control_guides", "clients"
+  add_foreign_key "control_guides", "drivers"
+  add_foreign_key "control_guides", "sales_orders"
+  add_foreign_key "control_guides", "vehicles"
+  add_foreign_key "invoice_details", "invoices"
+  add_foreign_key "invoice_details", "products"
+  add_foreign_key "invoices", "businesses"
+  add_foreign_key "invoices", "clients"
+  add_foreign_key "invoices", "sales_orders"
   add_foreign_key "product_lots", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "purchase_order_details", "products"
@@ -343,11 +416,11 @@ ActiveRecord::Schema.define(version: 20161209152310) do
   add_foreign_key "remission_guides", "businesses"
   add_foreign_key "remission_guides", "clients"
   add_foreign_key "remission_guides", "drivers"
+  add_foreign_key "remission_guides", "sales_orders"
   add_foreign_key "remission_guides", "vehicles"
   add_foreign_key "sales_order_details", "products"
   add_foreign_key "sales_order_details", "sales_orders"
   add_foreign_key "sales_order_documents", "sales_orders"
   add_foreign_key "sales_orders", "businesses"
   add_foreign_key "sales_orders", "clients"
-  add_foreign_key "sales_orders", "contracts"
 end

@@ -1,0 +1,1 @@
+json.partial! "control_guides/control_guide", control_guide: @control_guide

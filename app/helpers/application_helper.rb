@@ -2,6 +2,20 @@ module ApplicationHelper
   def human_boolean(boolean)
     boolean ? 'Si' : 'No'
   end
+  def sales_order_status(status)
+    case status
+      when 0
+        'Facturado'
+      when 1
+        'Pendiente Factura'
+      when 2
+        'Pendiente Guía Interna'
+      when 3
+        'Pendiente Guía de Remisión'
+      when 4
+        'Creado'
+    end
+  end
   def link_to_add_fields(name, f, association)
   	new_object = f.object.send(association).klass.new
   	id = new_object.object_id
@@ -51,8 +65,6 @@ module ApplicationHelper
     case controller_name
     when 'product_lots'
       'active'
-    when 'remission_guides'
-      'active'
     else
       nil
     end
@@ -72,6 +84,19 @@ module ApplicationHelper
     when 'sales_orders'
       'active'
     when 'contracts'
+      'active'
+    when 'invoices'
+      'active'
+    else
+      nil
+    end
+  end
+  def is_active_despacho()
+    controller_name = params[:controller]
+    case controller_name
+    when 'control_guides'
+      'active'
+    when 'remission_guides'
       'active'
     else
       nil

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bussines:</strong>
+  <%= @control_guide.bussines %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @control_guide.client %>
+</p>
+
+<p>
+  <strong>Driver:</strong>
+  <%= @control_guide.driver %>
+</p>
+
+<p>
+  <strong>Vehicle:</strong>
+  <%= @control_guide.vehicle %>
+</p>
+
+<p>
+  <strong>Sales order:</strong>
+  <%= @control_guide.sales_order %>
+</p>
+
+<p>
+  <strong>Control guide number:</strong>
+  <%= @control_guide.control_guide_number %>
+</p>
+
+<p>
+  <strong>Initial point:</strong>
+  <%= @control_guide.initial_point %>
+</p>
+
+<p>
+  <strong>Final point:</strong>
+  <%= @control_guide.final_point %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @control_guide.date %>
+</p>
+
+<p>
+  <strong>Ammount:</strong>
+  <%= @control_guide.ammount %>
+</p>
+
+<%= link_to 'Edit', edit_control_guide_path(@control_guide) %> |
+<%= link_to 'Back', control_guides_path %>

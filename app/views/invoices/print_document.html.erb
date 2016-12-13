@@ -1,0 +1,77 @@
+<% provide(:title, "Propebis | Imprimir Factura") %>
+
+<div class="wrapper wrapper-content p-xl">
+  <div class="ibox-content p-xl">
+  	<div class="row">
+      <div class="form-group col-lg-6 col-lg-offset-3">
+        <h2><strong><%= Business.find(@invoice.business_id).name %></strong></h2>
+      </div>
+    </div>
+    <div class='row'>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Nro. Factura</label>
+      	<label class='control-label'><%= @invoice.invoice_number %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Cliente:</label>
+        <label class='control-label'><%= Client.find(@invoice.client_id).name %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>RUC:</label>
+        <label class='control-label'><%= Client.find(@invoice.client_id).ruc %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+        <label class='control-label'>Dirección de :</label>
+        <label class='control-label'><%= Client.find(@invoice.client_id).billing_address %></label>
+      </div>
+      <div class="form-group col-lg-8 col-lg-offset-2">
+      	<label class='control-label'>Fecha:</label>
+      	<label class='control-label'><%= @invoice.date %></label>
+      </div>
+    </div>  
+      
+	<div class="table-responsive m-t">
+    <table class="table invoice-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Unidad de Medida</th>
+          <th>Cantidad</th>
+          <th>P. Unit</th>
+          <th>Subtotal</th>
+       </tr>
+      </thead>
+      <tbody>
+      	<% @invoice_details.each do |inv_detail| %>
+      	  <tr>
+            <td><%= Product.find(inv_detail.product_id).name %></td>
+            <td><%= Product.find(inv_detail.product_id).unit_of_measurement %></td>
+            <td><%= inv_detail.quantity %></td>
+            <td><%= inv_detail.unit_price %></td>
+            <td><%= inv_detail.subtotal %></td>
+         </tr>
+       <% end %>
+      </tbody>
+    </table>
+    </div>
+    <table class="table invoice-total">
+      <tbody>
+        <tr>
+          <td><strong>TOTAL :</strong></td>
+          <td><%= @invoice.ammount %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class='row'>
+    	<label class='control-label'>Observaciones:</label>
+
+	    
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    window.print();
+  </script>
+<% end %>

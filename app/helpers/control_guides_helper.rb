@@ -1,0 +1,2 @@
+module ControlGuidesHelper
+end

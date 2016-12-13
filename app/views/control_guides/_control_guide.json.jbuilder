@@ -1,0 +1,2 @@
+json.extract! control_guide, :id, :bussines_id, :client, :driver_id, :vehicle_id, :sales_order_id, :control_guide_number, :initial_point, :final_point, :date, :ammount, :created_at, :updated_at
+json.url control_guide_url(control_guide, format: :json)

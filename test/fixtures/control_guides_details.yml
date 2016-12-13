@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  control_guide: one
+  product: one
+  quantity: 1.5
+  unit_price: 1.5
+  subtotal: 1.5
+
+two:
+  control_guide: two
+  product: two
+  quantity: 1.5
+  unit_price: 1.5
+  subtotal: 1.5

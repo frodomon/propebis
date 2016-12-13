@@ -3,112 +3,134 @@
 <%= form_for @sales_order, html: { multipart: true, id: "submit-form"  } do |f| %>
   <%= form_errors_for @sales_order %>
   
-  <div class="row">
-    <div class= "<%= field_class(@sales_order, :client_id) %> col-lg-6">
-      <%= f.label :client_id, 'Cliente', class: 'control-label' %>
-      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
+  <div class="row" id='selection-buttons'>
+    <div class='col-lg-3'>
+      <%= hidden_field_tag 'content-form' %>
     </div>
-    <div class= "<%= field_class(@sales_order, :contract_id) %> col-lg-6 contract">
-      <%= f.label :contract_id, 'Contrato', class: 'control-label' %>
-      <%= f.collection_select :contract_id, @contracts, :id, :contract_number, options = { prompt:'Seleccione un Contrato'}, html_options = { class: 'select2_demo_1 form-control' } %>
-    </div>
-  </div>
-  <div class="row">
-    <div class= "<%= field_class(@sales_order, :business_id) %> col-lg-6">
-      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
-      <%= f.collection_select :business_id, Business.order(:id), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
+    <div class='col-lg-6' id='data' data-form="" align='center'>
+      <%= link_to 'Sin Contrato', '-', id: 'without', class: 'btn btn-w-m btn-success' %>
+      <%= link_to 'Con Contrato', '+', id: 'with', class: 'btn btn-w-m btn-success' %>
     </div>
   </div>
-  <div class="row">
-    <div class= "<%= field_class(@sales_order, :sales_order_number) %> col-lg-6">
-      <%= f.label :sales_order_number, 'Nro. Orden de venta', class: 'control-label' %>
-      <%= f.text_field :sales_order_number, placeholder: 'Nro. Orden de Venta', class: 'form-control' %>
-    </div>
-    <div class= "<%= field_class(@sales_order, :date) %> col-lg-6">
-      <%= f.label :date, 'Fecha', class: 'control-label' %>
-      <div class="input-group date">
-        <span class="input-group-addon">
-          <i class="fa fa-calendar"></i>
-        </span>
-        <%= f.text_field :date, placeholder: @today, class: 'form-control' %>
+  <div id="form-content">
+    <div class="row">
+      <div class= "<%= field_class(@sales_order, :client_id) %> col-lg-6">
+        <%= f.label :client_id, 'Cliente', class: 'control-label' %>
+        <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
+      </div>
+      <div class='without'>
+        <div class= "<%= field_class(@sales_order, :contract_id) %> col-lg-6 contract">
+          <%= f.label :contract_id, 'Contrato', class: 'control-label' %>
+          <%= f.select :contract_id, options_from_collection_for_select(@contracts, :id, :contract_number), options = { prompt:'Seleccione un Contrato'}, html_options = { class: 'select2_demo_1 form-control' } %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class= "<%= field_class(@sales_order, :delivery_date) %> col-lg-6">
-      <%= f.label :delivery_date, 'Fecha de Entrega', class: 'control-label' %>
-      <div class="input-group date">
-        <span class="input-group-addon">
-          <i class="fa fa-calendar"></i>
-        </span>
-        <%= f.text_field :delivery_date, class: 'form-control' %>
+    <div class="row">
+      <div class= "<%= field_class(@sales_order, :business_id) %> col-lg-6">
+        <%= f.label :business_id, 'Empresa', class: 'control-label' %>
+        <%= f.collection_select :business_id, Business.order(:id), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control' } %>
       </div>
     </div>
-    <div class= "<%= field_class(@sales_order, :order_date) %> col-lg-6">
-      <%= f.label :order_date, 'Fecha de la Orden de Compra', class: 'control-label' %>
-      <div class="input-group date">
-        <span class="input-group-addon">
-          <i class="fa fa-calendar"></i>
-        </span>
-        <%= f.text_field :order_date, class: 'form-control' %>
+    <div class="row">
+      <div class= "<%= field_class(@sales_order, :sales_order_number) %> col-lg-6">
+        <%= f.label :sales_order_number, 'Nro. Orden de venta', class: 'control-label' %>
+        <%= f.text_field :sales_order_number, placeholder: 'Nro. Orden de Venta', class: 'form-control' %>
+      </div>
+      <div class= "<%= field_class(@sales_order, :date) %> col-lg-6">
+        <%= f.label :date, 'Fecha', class: 'control-label' %>
+        <div class="input-group date">
+          <span class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </span>
+          <%= f.text_field :date, placeholder: @today, class: 'form-control' %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class= "<%= field_class(@sales_order, :billing_address) %> col-lg-6">
-      <%= f.label :billing_address, 'Dirección de Facturación', class: 'control-label' %>
-      <%= f.text_field :billing_address, class: 'form-control' %>
-    </div>
-    <div class= "<%= field_class(@sales_order, :delivery_address) %> col-lg-6">
-      <%= f.label :delivery_address, 'Dirección de Entrega', class:'control-label' %>
-      <%= f.text_field :delivery_address, class: 'form-control' %>
-    </div>
-  </div>
-  <div class="row">
-    <div class= "<%= field_class(@sales_order, :ammount) %> col-lg-3">
-      <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
-      <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
-    </div>
-  </div>
- <div class="row">
-    <div class="col-lg-12">
-      <h3>Productos</h3>
-      <table class="footable table table-stripped toggle-arrow-tiny">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Unidad de Medida</th>
-            <th>Cantidad</th>
-            <th>P. Unit</th>
-            <th>Subtotal</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= f.fields_for :sales_order_details do |builder| %>
-            <%= render 'sales_order_detail_fields', f: builder %>
-          <% end %>
-        </tbody>
-      </table>
-      <div class= 'details'>
-        <%= link_to_add_row_fields "Añadir Producto", f, :sales_order_details %>
+    <div class="row">
+      <div class= "<%= field_class(@sales_order, :delivery_date) %> col-lg-6">
+        <%= f.label :delivery_date, 'Fecha de Entrega', class: 'control-label' %>
+        <div class="input-group date">
+          <span class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </span>
+          <%= f.text_field :delivery_date, class: 'form-control' %>
+        </div>
+      </div>
+      <div class= "<%= field_class(@sales_order, :order_date) %> col-lg-6">
+        <%= f.label :order_date, 'Fecha de la Orden de Compra', class: 'control-label' %>
+        <div class="input-group date">
+          <span class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </span>
+          <%= f.text_field :order_date, class: 'form-control' %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h3>Documentos Adjuntos</h3>
-      <%= f.fields_for :sales_order_documents do |sod| %>  
-        <%= render 'sales_order_document_fields', f: sod %> 
-      <% end %>
-      <%= link_to_add_fields "Añadir Documento", f, :sales_order_documents %>
+    <div class="row">
+      <div class= "<%= field_class(@sales_order, :billing_address) %> col-lg-6">
+        <%= f.label :billing_address, 'Dirección de Facturación', class: 'control-label' %>
+        <%= f.text_field :billing_address, class: 'form-control' %>
+      </div>
+      <div class= "<%= field_class(@sales_order, :delivery_address) %> col-lg-6">
+        <%= f.label :delivery_address, 'Dirección de Entrega', class:'control-label' %>
+        <%= f.text_field :delivery_address, class: 'form-control' %>
+      </div>
     </div>
-  </div>
-  <div class="actions">
-    <%= f.submit class: 'btn btn-primary block m-b' %>
+    <div class="row">
+      <div class= "<%= field_class(@sales_order, :ammount) %> col-lg-3">
+        <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
+        <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+      </div>
+    </div>
+    <div class="row">
+      <div class= "form-group col-lg-3">
+        <%= f.label :status, 'Estado', class: 'control-label' %>
+        <%= select_tag 'Estado', "<option value='0'>Facturado</option><option value='1'>Pendiente Factura</option><option value='2'>Pendiente Guia de Remisión Interna</option><option value='3'>Pendiente Guia de Remisión</option><option value='4' selected='selected'>Creado</option>".html_safe, {class: 'select2_demo_1 form-control', id:'select_status'} %>
+        <%= f.hidden_field :status %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Productos</h3>
+        <table class="footable table table-stripped toggle-arrow-tiny">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Unidad de Medida</th>
+              <th>Cantidad</th>
+              <th>P. Unit</th>
+              <th>Subtotal</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= f.fields_for :sales_order_details do |builder| %>
+              <%= render 'sales_order_detail_fields', f: builder %>
+            <% end %>
+          </tbody>
+        </table>
+        <div class= 'details'>
+          <%= link_to_add_row_fields "Añadir Producto", f, :sales_order_details %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Documentos Adjuntos</h3>
+        <%= f.fields_for :sales_order_documents do |sod| %>  
+          <%= render 'sales_order_document_fields', f: sod %> 
+        <% end %>
+        <%= link_to_add_fields "Añadir Documento", f, :sales_order_documents %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit class: 'btn btn-primary block m-b' %>
+    </div>
   </div>
 <% end %>
 
 <%= javascript_tag "clients = #{@clients.to_json.html_safe};" %>
 <%= javascript_tag "products = #{@products.to_json.html_safe};" %>
 <%= javascript_tag "contracts = #{@contracts.to_json.html_safe};" %>
+<%= javascript_tag "clients_with_contracts = #{@clients_with_contracts.to_json.html_safe};" %>
+<%= javascript_tag "clients_without_contracts = #{@clients_without_contracts.to_json.html_safe};" %>

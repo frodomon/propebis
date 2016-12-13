@@ -12,7 +12,7 @@ function load_partials(url, element_id, params){
       }
     });
 }
-function load_details(url, element_id, params){
+function load_details(url, element_id, params, json_filler){
   $.ajax({
       type: 'GET',
       dataType: 'json',
@@ -22,7 +22,7 @@ function load_details(url, element_id, params){
       success: function(data) {
         $.each(data, function(i,object){
           if (i===0){
-            fill_fields_from_json('#remission_guide_remission_guide_details_attributes_',i,object);
+            fill_fields_from_json(json_filler,i,object);
           }
           else{
             newNestedForm  = $('#content_details').last().clone()
@@ -41,7 +41,7 @@ function load_details(url, element_id, params){
 
             $(newNestedForm).appendTo('table').last();
 
-            fill_fields_from_json('#remission_guide_remission_guide_details_attributes_',formsOnPage,object);
+            fill_fields_from_json(json_filler,formsOnPage,object);
           }
         });
       },

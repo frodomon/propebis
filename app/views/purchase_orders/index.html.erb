@@ -47,16 +47,16 @@
               <tbody>
                 <% @purchase_orders.each do |purchase_order| %>
                   <tr>
-                    <td><%= Business.find(purchase_order.business_id).name %></td>
-                    <td><%= Supplier.find(purchase_order.supplier_id).name %></td>
-                    <td><%= purchase_order.order_number %></td>
-                    <td><%= purchase_order.date %></td>
-                    <td><%= purchase_order.order_date %></td>
-                    <td><%= purchase_order.delivery_date %></td>
-                    <td><%= purchase_order.billing_address %></td>
-                    <td><%= purchase_order.delivery_address %></td>
-                    <td><%= purchase_order.ammount %></td>
-                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: purchase_order.id}, class: 'btn btn-w-m btn-success btn-xs', form: {target: "_blank"} %></td>
+                    <td align="center"><%= Business.find(purchase_order.business_id).name %></td>
+                    <td align="center"><%= Supplier.find(purchase_order.supplier_id).name %></td>
+                    <td align="center"><%= purchase_order.order_number %></td>
+                    <td align="center"><%= purchase_order.date %></td>
+                    <td align="center"><%= purchase_order.order_date %></td>
+                    <td align="center"><%= purchase_order.delivery_date %></td>
+                    <td align="center"><%= purchase_order.billing_address %></td>
+                    <td align="center"><%= purchase_order.delivery_address %></td>
+                    <td align="center"><%= purchase_order.ammount %></td>
+                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: purchase_order.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: purchase_order.id}, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: purchase_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                   </tr>

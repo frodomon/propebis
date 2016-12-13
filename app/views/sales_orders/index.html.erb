@@ -30,6 +30,7 @@
             <table class="table table-stripped table-bordered table-hover datatable">
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Eḿpresa</th>
                   <th>Cliente</th>
                   <th>Contrato</th>
@@ -40,6 +41,8 @@
                   <th>Dirección de Facturación</th>
                   <th>Dirección de Entrega</th>
                   <th>Monto Final</th>
+                  <th>Estado</th>
+                  <th align='center'>Imprimir</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
                 </tr>
@@ -47,9 +50,16 @@
               <tbody>
                 <% @sales_orders.each do |sales_order| %>
                   <tr>
+                    <td align="center"><%= sales_order.id %></td>
                     <td align="center"><%= Business.find(sales_order.business_id).name %></td>
                     <td align="center"><%= Client.find(sales_order.client_id).name %></td>
-                    <td align="center"><%= Contract.find(sales_order.contract_id).contract_number %></td>
+                    <td align="center"><%= 
+                      if sales_order.contract_id === 0
+                        ''
+                      else
+                        Contract.find(sales_order.contract_id).contract_number
+                      end 
+                      %></td>
                     <td align="center"><%= sales_order.sales_order_number %></td>
                     <td align="center"><%= sales_order.date %></td>
                     <td align="center"><%= sales_order.order_date %></td>
@@ -57,6 +67,8 @@
                     <td align="center"><%= sales_order.billing_address %></td>
                     <td align="center"><%= sales_order.delivery_address %></td>
                     <td align="center"><%= sales_order.ammount %></td>
+                    <td align="center"><%= sales_order_status(sales_order.status) %></td>
+                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: sales_order.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: sales_order.id }, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: sales_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                   </tr>

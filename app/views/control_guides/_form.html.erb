@@ -1,0 +1,98 @@
+<%= flash_errors_for @control_guide %>
+
+<%= form_for(@control_guide, html: { multipart: true, id: 'submit-form' }) do |f| %>
+  <%= form_errors_for @control_guide %>
+
+   <div class="row">
+    <div class= "<%= field_class(@control_guide, :client_id) %> col-lg-6">
+      <%= f.label :client_id, 'Cliente', class: 'control-label' %>
+      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
+    </div>
+    <div class="<%= field_class(@control_guide, :sales_order_id) %> col-lg-6 sales_orders">
+      <%= f.label :sales_order_id, 'Orden de Venta', class: 'control-label' %>
+      <%= f.collection_select :sales_order_id, SalesOrder.order(:sales_order_number), :id, :sales_order_number, options = { prompt: 'Seleccione una Orden de Compra' },html_options = {class: 'sales_order_select select2_demo_1 form-control' } %>
+      <button class='load_details btn btn-success' align='center'>Cargar Datos</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "<%= field_class(@control_guide, :business_id) %> col-lg-6">
+      <%= f.label :business_id, 'Empresa', class: 'control-label' %>
+      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "<%= field_class(@control_guide, :driver_id) %> col-lg-6">
+      <%= f.label :driver_id, 'Transportista', class: 'control-label' %>
+      <%= f.collection_select :driver_id, Driver.order(:name), :id, :name, options = { prompt: 'Seleccione un Transportista'}, html_options = { class: 'select2_demo_1 form-control'} %>
+    </div>
+    <div class= "<%= field_class(@control_guide, :vehicle_id) %> col-lg-6">
+      <%= f.label :vehicle_id, 'Vehículo', class: 'control-label' %>
+      <%= f.collection_select :vehicle_id, Vehicle.order(:trademark), :id, :trademark, options = { prompt: 'Selecciona un Vehículo'}, html_options = { class: 'select2_demo_1 form-control' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "<%= field_class(@control_guide, :control_guide_number) %> col-lg-6">
+      <%= f.label :control_guide_number, 'Nro. Guía de Remisión Interna', class: 'control-label' %>
+      <%= f.text_field :control_guide_number, placeholder: 'Nro. Guía de Remisión Interna', class: 'form-control' %>
+    </div>
+    <div class= "<%= field_class(@control_guide, :date) %> col-lg-6">
+      <%= f.label :date, 'Fecha', class: 'control-label' %>
+      <div class="input-group date">
+        <span class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </span>
+        <%= f.text_field :date, placeholder: @today, class: 'form-control', readonly: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "<%= field_class(@control_guide, :initial_point) %> col-lg-6">
+      <%= f.label :initial_point, 'Punto Inicial', class: 'control-label' %>
+      <%= f.text_field :initial_point, class: 'form-control' %>
+    </div>
+    <div class= "<%= field_class(@control_guide, :final_point) %> col-lg-6">
+      <%= f.label :final_point, 'Punto Final', class: 'control-label' %>
+      <%= f.text_field :final_point, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class= "<%= field_class(@control_guide, :ammount) %> col-lg-3">
+      <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
+      <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Productos</h3>
+      <table class="footable table table-stripped toggle-arrow-tiny">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Unidad de Medida</th>
+            <th>Cantidad</th>
+            <th>P. Unit</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :control_guide_details do |builder| %>
+            <%= render 'control_guide_detail_fields', f: builder %>
+          <% end %>
+        </tbody>
+      </table>
+        <div class='add_fields'>
+          <%= link_to_add_row_fields "Añadir Producto", f, :control_guide_details %>
+        </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary block m-b'%>
+  </div>
+<% end %>
+
+<%= javascript_tag "clients = #{@clients.to_json.html_safe};" %>
+<%= javascript_tag "products = #{@products.to_json.html_safe};" %>
+<%= javascript_tag "businesses = #{@businesses.to_json.html_safe};" %>
+<%= javascript_tag "sales_orders = #{@sales_orders.to_json.html_safe};" %>

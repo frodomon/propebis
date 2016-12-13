@@ -5,5 +5,10 @@ class Client < ActiveRecord::Base
   validates_presence_of :delivery_address, message: "Debe ingresar una dirección de envío"
   validates :telephone, length: { in: 7..9, message: "Los números de telefono tienen entre 7 y 9 digitos"}
   validates_presence_of :contact, message: "Debe ingresar una persona de contacto"
+  
   has_many :contracts
+  has_many :sales_orders
+  has_many :remission_guides
+  has_many :control_guides
+  has_many :invoices
 end

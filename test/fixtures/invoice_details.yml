@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invoice: one
+  product: one
+  quantity: 1.5
+  unit_price: 1.5
+  subtotal: 1.5
+
+two:
+  invoice: two
+  product: two
+  quantity: 1.5
+  unit_price: 1.5
+  subtotal: 1.5
