@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     flash[:notice] = exception.message
     redirect_to :back
   end
+  before_filter :require_login
 
   protected
 
@@ -15,4 +16,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :username, :email,:password, :password_confirmation, roles: [] ])
   end
 
+  private
+  def require_login
+    unless current_user
+      redirect_to unauthenticated_root_path
+    end
+  end
 end
