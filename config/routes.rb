@@ -11,10 +11,8 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :users
   end
-  
   get 'static_pages/signup'
   get 'static_pages/forgot_password'
-  
   resources :invoices do
     collection do
       get 'search_sales_order_details' => 'invoices#search_sales_order_details', as: :search_sales_order_details
