@@ -1,5 +1,5 @@
 # Change these
-server '138.197.47.34', port: 80, roles: [:web, :app, :db], primary: true
+server '138.197.47.34', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:frodomon/propebis.git'
 set :application,     'propebis'
@@ -23,6 +23,9 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 
+
+set :rvm_type, :system
+set :rvm_ruby_version, 'ruby-2.3.0@rails5001'
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
