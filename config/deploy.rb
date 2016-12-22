@@ -1,7 +1,7 @@
 # Change these
 server '138.197.47.34', port: 80, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@example.com:username/appname.git'
+set :repo_url,        'git@github.com:frodomon/propebis.git'
 set :application,     'propebis'
 set :user,            'propebis'
 set :puma_threads,    [1, 6]
