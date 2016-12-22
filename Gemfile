@@ -17,7 +17,7 @@ gem 'coffee-rails', '>= 4.1.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'puma', '~> 3.0'
+
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -46,6 +46,12 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'mysql2'
+  gem 'capistrano',         require: false
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
 end
 group :production do
   gem 'pg'
@@ -55,4 +61,5 @@ gem 'paperclip', '~> 4.2.0'
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
+gem 'puma', '~> 3.0'
 
