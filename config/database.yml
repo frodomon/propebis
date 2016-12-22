@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: propebis_production
-  username: propebis
-  password: <%= ENV['PGAPP_DATABASE_PASSWORD'] %>
+  username: <%= ENV['PROPEBIS_DATABASE_USER'] %>
+  password: <%= ENV['PROPEBIS_DATABASE_PASSWORD'] %>
