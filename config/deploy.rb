@@ -11,6 +11,7 @@ set :puma_workers,    1
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
+set :rails_env,       "production"
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
@@ -23,9 +24,6 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 
-
-set :rvm_type, :system
-set :rvm_ruby_version, 'ruby-2.3.0@rails5001'
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
@@ -80,6 +78,54 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+end
+
+before 'deploy:starting', 'db:configure'
+before "deploy:assets:precompile", 'db:symlink'
+
+namespace :db do
+  desc "Create database yaml in shared path"
+  task :configure do
+    set :database_username do
+      "propebis"
+    end
+
+    set :database_password do
+      ask('Enter the database password:', 'default', echo: false)
+    end
+
+    db_config = <<-EOF
+      default: &default
+        adapter: postgresql
+        encoding: utf8
+        pool: 5
+        reconnect: false
+        username: #{fetch(:database_username)}
+        password: #{fetch(:database_password)}
+
+      development:
+        database: #{fetch(:application)}_development
+        <<: *default
+      test:
+        database: #{fetch(:application)}_test
+        <<: *default
+      production:
+        database: #{fetch(:application)}_production
+        <<: *default
+    EOF
+
+    on roles(:app) do
+      execute "mkdir -p #{shared_path}/config"
+    end
+    put File.write(db_config, "#{shared_path}/config/database.yml")
+end
+
+  desc "Make symlink for database yaml"
+  task :symlink do
+    on roles(:app) do
+      execute "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    end
+  end
 end
 
 # ps aux | grep puma    # Get puma pid
