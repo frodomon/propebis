@@ -32,6 +32,7 @@ class AddendumsController < ApplicationController
         format.html { 
           flash[:notice] = 'La Adenda se creó satisfactoriamente.'
           redirect_to contract_addendums_path(@addendum.contract_id)
+
         }
         format.json { render :show, status: :created, location: @addendum }
       else
@@ -80,7 +81,7 @@ class AddendumsController < ApplicationController
     value = value + @addendum.ammount
     end_date = @addendum.end_date
     contract.update_attribute(:credit,value)
-    contract.update_attribute(:end_date,end_date)
+    contract.update_attribute(:end_date,end_date) unless end_date.nil?
     contract.update_attribute(:active,true)
     @addendum.update_attribute(:updated,true)
     contract_details = contract.contract_details

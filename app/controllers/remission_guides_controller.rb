@@ -18,19 +18,19 @@ class RemissionGuidesController < ApplicationController
   def new
     @remission_guide = RemissionGuide.new
     @remission_guide.remission_guide_details.build
-    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status > 2')
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('status = 0 or status = 2')
     @businesses = Business.all
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
-    @sales_orders = SalesOrder.where('status > 2 ')
+    @sales_orders = SalesOrder.where('status = 0 or status = 2')
   end
 
   # GET /remission_guides/1/edit
   def edit
-    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status > 2')
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('status = 0 or status = 2')
     @business = Business.all
     @products = Product.all
-    @sales_orders = SalesOrder.where('status > 2')
+    @sales_orders = SalesOrder.where('status = 0 or status = 2')
   end
 
   # POST /remission_guides
@@ -95,10 +95,10 @@ class RemissionGuidesController < ApplicationController
   def update_credit
     sod_id = @remission_guide.sales_order_id
     sales_order = SalesOrder.find(sod_id)
-    if sales_order.status == 3
+    if sales_order.status == 0
       sales_order.update_attribute(:status, 1)
-    elsif sales_order.status == 4
-      sales_order.update_attribute(:status, 2)
+    elsif sales_order.status == 2
+      sales_order.update_attribute(:status, 3)
     end
     if sales_order.contract_id != 0
       contrato = Contract.find(sales_order.contract_id)

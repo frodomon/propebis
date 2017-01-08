@@ -2,6 +2,13 @@
   margin-right: 15px;
   float:left;
 }
+.group:after {
+  content: "."; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;
+}
 .align-left{
   text-align: left !important;
 }

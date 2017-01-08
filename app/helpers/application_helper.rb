@@ -5,15 +5,15 @@ module ApplicationHelper
   def sales_order_status(status)
     case status
       when 0
-        'Facturado'
-      when 1
-        'Pendiente Factura'
-      when 2
-        'Pendiente Guía Interna'
-      when 3
-        'Pendiente Guía de Remisión'
-      when 4
         'Creado'
+      when 1
+        'Pendiente Guía Interna'
+      when 2
+        'Pendiente Guía de Remisión'
+      when 3
+        'Pendiente Factura'
+      when 4
+        'Facturado'
     end
   end
   def link_to_add_fields(name, f, association)

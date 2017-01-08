@@ -18,19 +18,19 @@ class ControlGuidesController < ApplicationController
   def new
     @control_guide = ControlGuide.new
     @control_guide.control_guide_details.build
-    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status = 2 or sales_orders.status = 4')
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('status < 2')
     @businesses = Business.all
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
-    @sales_orders = SalesOrder.where('status = 2 or status = 4 ')
+    @sales_orders = SalesOrder.where('status < 2')
   end
 
   # GET /control_guides/1/edit
   def edit
-    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status = 2 or sales_orders.status = 4')
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('status < 2')
     @businesses = Business.all
     @products = Product.all
-    @sales_orders = SalesOrder.where('status = 2 or status = 4 ')
+    @sales_orders = SalesOrder.where('status < 2')
   end
 
   # POST /control_guides
@@ -95,9 +95,9 @@ class ControlGuidesController < ApplicationController
   def update_warehouse
     sod_id = @control_guide.sales_order_id
     sales_order = SalesOrder.find(sod_id)
-    if sales_order.status == 2
-      sales_order.update_attribute(:status, 1)
-    elsif sales_order.status == 4
+    if sales_order.status == 0
+      sales_order.update_attribute(:status, 2)
+    elsif sales_order.status == 1
       sales_order.update_attribute(:status, 3)
     end
     almacen = ProductLot.where('quantity > 0').order('product_id, due_date ASC')

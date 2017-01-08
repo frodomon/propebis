@@ -325,7 +325,7 @@ ActiveRecord::Schema.define(version: 20161213055121) do
     t.date     "order_date"
     t.date     "delivery_date"
     t.float    "ammount"
-    t.integer  "status",             default: 4
+    t.integer  "status",             default: 0
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.index ["business_id"], name: "index_sales_orders_on_business_id", using: :btree

@@ -11,7 +11,7 @@ class CreateSalesOrders < ActiveRecord::Migration
       t.date :order_date
       t.date :delivery_date
       t.float :ammount
-      t.integer :status, default: 4
+      t.integer :status, default: 0
 
       t.timestamps null: false
     end

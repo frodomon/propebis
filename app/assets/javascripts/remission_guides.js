@@ -1,14 +1,5 @@
 $(document).ready(function () {
   if($('#submit-form[class^="edit_"]').length > 0) {
-    $('#remission_guide_date').datepicker({
-      todayBtn: "linked",
-      keyboardNavigation: false,
-      forceParse: false,
-      calendarWeeks: true,
-      autoclose: true,
-      todayHighlight: true,
-      format: 'yyyy-mm-dd'
-    });
     $('.sales_orders').show();
   };
 
@@ -90,4 +81,13 @@ $(document).ready(function () {
     fields_flag = validate_form(fields);
     return fields_flag;
   });
+  $('#remission_guide_date').datepicker({
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true,
+      todayHighlight: true,
+      format: 'yyyy-mm-dd'
+    });
 });

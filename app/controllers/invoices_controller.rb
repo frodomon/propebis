@@ -15,18 +15,18 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
     @invoice.invoice_details.build
-    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status = 1 ')
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status > 0 and sales_orders.status < 4 ')
     @businesses = Business.all
     @products = Product.all
     @today = Time.now.strftime("%d-%m-%Y")
-    @sales_orders = SalesOrder.where('status = 1 ')
+    @sales_orders = SalesOrder.where('status > 0 and sales_orders.status < 4')
   end
   # GET /invoices/1/edit
   def edit
-    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status = 1 ')
+    @clients = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, clients.billing_address').joins("LEFT JOIN sales_orders ON clients.id = sales_orders.client_id").where('sales_orders.status > 0 and sales_orders.status < 4')
     @businesses = Business.all
     @products = Product.all
-    @sales_orders = SalesOrder.where('status = 1 ')
+    @sales_orders = SalesOrder.where('status > 0 and sales_orders.status < 4')
   end
   # POST /invoices
   # POST /invoices.json
@@ -87,7 +87,7 @@ class InvoicesController < ApplicationController
   def update_status
     sod_id = @invoice.sales_order_id
     sales_order = SalesOrder.find(sod_id)
-    sales_order.update_attribute(:status, 0)
+    sales_order.update_attribute(:status, 4)
   end
   def print_document
     @invoice_details = @invoice.invoice_details

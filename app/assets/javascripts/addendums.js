@@ -48,11 +48,9 @@ $(document).ready(function () {
     format: 'yyyy-mm-dd'
   });
   $('#submit-form').submit(function(){
-    date_flag = validate_start_end_date('#addendum_start_date','#addendum_end_date');
-    fields = ['#addendum_addendum_number','#addendum_date','#addendum_start_date','#addendum_end_date','#addendum_ammount'];
+    fields = ['#addendum_addendum_number','#addendum_date','#addendum_start_date','#addendum_ammount'];
     fields_flag = validate_form(fields);
-    flag = date_flag && fields_flag;
-    return flag;
+    return fields_flag;
   });
 });
 function calcular_monto_adenda(){

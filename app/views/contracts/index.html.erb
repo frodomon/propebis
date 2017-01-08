@@ -25,16 +25,13 @@
         </div>
         <div class="ibox-content">
           <%= button_to 'Nuevo Contrato', { action: 'new'}, method: :get, class: 'btn btn-w-m btn-primary' %>
-          <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar">
           <div class='table-responsive'>
             <table class="table table-stripped table-bordered table-hover datatable">
               <thead>
                 <tr>
-                  <th align='center'>ID</th>
                   <th align='center'>Eḿpresa</th>
                   <th align='center'>Cliente</th>
                   <th align='center'>Nro. Contrato</th>
-                  <th align='center'>Fecha</th>
                   <th align='center'>Fecha de Inicio</th>
                   <th align='center'>Fecha Final</th>
                   <th align='center'>Precio Final</th>
@@ -44,16 +41,15 @@
                   <th align='center'>Eliminar</th>
                   <th align='center'>Agregar Adenda</th>
                   <th align='center'>Ver Adendas</th>
+                  <th align='center'>Fecha</th>
                 </tr>
               </thead>
               <tbody>
                 <% @contracts.each do |contract| %>
                   <tr>
-                    <td align="center"><%= contract.id %></td>
                     <td align="center"><%= Business.find(contract.business_id).name %></td>
                     <td align="center"><%= Client.find(contract.client_id).name %></td>
                     <td align="center"><%= contract.contract_number %></td>
-                    <td align="center"><%= contract.date %></td>
                     <td align="center"><%= contract.start_date %></td>
                     <td align="center"><%= contract.end_date %></td>
                     <td align="center"><%= contract.final_price %></td>
@@ -63,6 +59,7 @@
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: contract.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
                     <td align="center"><%= link_to "Agregar Adenda", { controller: :addendums , action: :new, contract_id: contract.id}, class: 'btn btn-wm btn-success btn-xs' %></td>
                     <td align="center"><%= link_to "Ver Adendas", { controller: :addendums , action: :index, contract_id: contract.id}, class: 'btn btn-wm btn-success btn-xs' %></td>
+                    <td align="center"><%= contract.date %></td>
                   </tr>
                 <% end %>
               </tbody>
