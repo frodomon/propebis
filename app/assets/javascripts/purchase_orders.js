@@ -26,6 +26,7 @@ $(document).ready(function () {
     unit_price = parseFloat($(this).closest('tr').find('.pod_unit_price').val());
     if (isNaN(unit_price)) { unit_price = 0;}
     subtotal = unit_price * quantity;
+    $(this).closest('tr').find('.pod_pending').val(quantity);
     $(this).closest('tr').find('.pod_subtotal').val(subtotal);
     total = calculate_final_price('pod_subtotal');
     $('#purchase_order_ammount').val(total);

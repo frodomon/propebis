@@ -26,8 +26,10 @@
         <div class="ibox-content">
           <div class='group'>
             <%= link_to 'Nuevo Lote de Producto', { action: 'new'}, class: 'btn btn-w-m btn-primary inline_buttons' %>
+            <%= link_to 'Cargar Lotes de Producto', { action: "update_from_purchase_order" }, class: 'btn btn-w-m btn-primary inline_buttons' %>
             <%= link_to 'Buscar Lotes por Vencer', { action: "search_lots_close_to_expire_front"}, class: 'btn btn-w-m btn-primary inline_buttons' %>
             <%= link_to 'Buscar Lotes por Producto', { action: "search_lots_by_product_front" }, class: 'btn btn-w-m btn-primary inline_buttons' %>
+
           </div>
           <div class='table-responsive'>
             <table class="table table-stripped table-bordered table-hover datatable">

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   if($('#submit-form[class^="edit_"]').length > 0) {
     $('#selection-buttons').hide();
     $('#form-content').show();
@@ -139,30 +140,93 @@ $(document).ready(function () {
   });
   $('#submit-form').submit(function(){
     credit_flag = true;
-    contract_flag = $('#content-form').val();
+    flag_sales_order = false;
+    o_venta = [];
+    contract_flag = $('#content-form').val() === '1';
+    val_flag = $('#sales_order_contract_id').find(':selected').val() != ''
+    c_id = parseInt($('#sales_order_contract_id').find(':selected').val());
+
     $('#sales_order_business_id').attr('disabled', false);
     fields = ['#sales_order_business_id','#sales_order_client_id','#sales_order_sales_order_number','#sales_order_date', '#sales_order_delivery_date','#sales_order_order_date','#sales_order_billing_address','#sales_order_delivery_address','#sales_order_ammount'];
-    if ( contract_flag === '1'){
+    if ( contract_flag){
       fields.push('#sales_order_contract_id'); 
     }
     fields_flag = validate_form(fields);
-    if ( contract_flag === '1'){
-      val_flag = $('#sales_order_contract_id').find(':selected').val() != ''
+    if (contract_flag){
       if (val_flag){
-        c_id = parseInt($('#sales_order_contract_id').find(':selected').val());
         for(i=0; i < contracts.length; i++){
           if (c_id === contracts[i].id) {
             credit = contracts[i].credit;
           }
         }
-        result = credit - parseFloat($('#sales_order_ammount').val())
+        for(j=0; j < sales_orders.length; j++){
+          if (c_id === sales_orders[j].contract_id && sales_orders[j].status === 0) {
+            o_venta.push(sales_orders[j])
+          }
+        }
+        monto_ventas = 0
+        if (o_venta.length > 0){
+          flag_sales_order = true;
+          for(k=0;k<o_venta.length;k++){
+            monto_ventas = monto_ventas + o_venta[k].ammount;
+          }
+        }
+        ordenes = o_venta.length;
+        monto = parseFloat($('#sales_order_ammount').val());
+        result = credit - (monto + monto_ventas)
         if ( result < 0 ){
-          alert('La orden de venta excede al credito del cliente en ' + result );
-          credit_flag = false;
-        }  
+          result = Math.abs(result);
+          if (flag_sales_order){
+            if (ordenes < 2){
+              alert('La orden de venta excede al crédito del cliente en S/. ' + result + '.\nAdemás hay ' + ordenes + ' orden de venta por despachar.'); 
+            }
+            else{
+              alert('La orden de venta excede al crédito del cliente en S/. ' + result + '.\nAdemás Hay ' + ordenes + ' ordenes de venta por despachar.' );  
+            }
+          }
+          else{
+            alert('La orden de venta excede al crédito del cliente en S/. ' + result );  
+          }
+          credit_flag = false; 
+        }
       }
+    }//fin de verificacion con contrato
+    warehouse_flag = true;
+    sod_products= []
+    product_errors = []
+    $('.product_select').each(function(i){
+      p_id = parseInt($(this).find(':selected').val());
+      p_name = $(this).find(':selected').text();
+      p_qty = parseFloat($(this).closest('tr').find('.sod_quantity').val());
+      p_um = $(this).closest('tr').find('.unit_of_measurement').val();
+      item = [p_id, p_qty, p_name, p_um];
+      sod_products.push(item);
+    });
+    if (sod_products.length > 0){
+      for(l=0;l<sod_products.length;l++){
+        available = verify_warehouse(sod_products[l][0],sod_products[l][1])
+        if (available < 0){
+          missing = Math.abs(available)
+          error = 'Faltan ' + missing + ' ' + sod_products[l][3] +' de '+ sod_products[l][2] + ' en el almacén para poder hacer la orden de venta.'
+          product_errors.push(error);
+          warehouse_flag = false
+        }
+      }  
     }
-    flag = fields_flag && credit_flag;
+    if (product_errors.length > 0){
+      string_errors = ""
+      for(m=0;m<product_errors.length;m++){
+        string_errors = string_errors.concat(product_errors[m],"\n");
+      }
+      alert(string_errors)
+    }
+    flag = fields_flag && credit_flag && warehouse_flag;
     return flag;
   });
 });
+function verify_warehouse(p_id, quantity){
+  parameters = {p_id: p_id }; 
+  stock = get_data('/sales_orders/search_stock_for_product', parameters);
+  result = stock.quantity - quantity;
+  return result;
+} 

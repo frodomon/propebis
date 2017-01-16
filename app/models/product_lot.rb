@@ -18,4 +18,9 @@ class ProductLot < ActiveRecord::Base
   	  all
   	end
   end
+  def lot_attr=(lot_attr)
+    lot_attr.each do [attributes]
+      product_lot.new(attributes)
+    end
+  end
 end

@@ -9,6 +9,9 @@
   	<%= f.number_field :quantity, class: 'pod_quantity form-control', step: :any %>
   </td>
   <td>
+    <%= f.number_field :pending, class: 'pod_pending form-control', step: :any, readonly: true %>
+  </td>
+  <td>
   	<%= f.number_field :unit_price, class: 'pod_unit_price form-control', step: :any %>
   </td>
   <td>

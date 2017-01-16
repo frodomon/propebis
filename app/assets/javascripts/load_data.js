@@ -12,6 +12,28 @@ function load_partials(url, element_id, params){
       }
     });
 }
+
+function get_data(url, params){
+  result= {}
+  $.ajax({
+      type: 'GET',
+      dataType: 'json',
+      url: url,
+      async: false,
+      data: params,
+      success: function(data){
+        PopulateResult(data, result)
+      }
+  })
+  return result;
+  
+}
+function PopulateResult(data, result){
+  $.each(data, function(i,obj){
+    result.product_id = obj.product_id
+    result.quantity = obj.quantity
+  });
+}
 function load_details(url, element_id, params, json_filler){
   $.ajax({
       type: 'GET',

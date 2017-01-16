@@ -10,6 +10,7 @@ class CreatePurchaseOrders < ActiveRecord::Migration
       t.string :billing_address
       t.string :delivery_address
       t.float :ammount
+      t.boolean :registered, default: false
 
       t.timestamps null: false
     end

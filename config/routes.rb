@@ -40,7 +40,8 @@ Rails.application.routes.draw do
 
   resources :sales_orders do
     collection do
-      get 'search_contract_details' => 'sales_orders#search_contract_details', as: :search_contract_details      
+      get 'search_contract_details' => 'sales_orders#search_contract_details', as: :search_contract_details
+      get 'search_stock_for_product/' => 'sales_orders#search_stock_for_product', as: :search_stock_for_product     
       get ":id/print_document" => 'sales_orders#print_document', as: :print_document
     end
   end
@@ -73,6 +74,9 @@ Rails.application.routes.draw do
       get 'search_lots_by_product'
       get 'search_lots_close_to_expire_front' => 'product_lots#search_lots_close_to_expire_front', as: :search_lots_close_to_expire_front
       get 'search_lots_close_to_expire'
+      get 'update_from_purchase_order' => 'product_lots#update_from_purchase_order', as: :update_from_purchase_order
+      post 'create_multiple' => 'product_lots#create_multiple', as: :create_multiple
+      get 'massive_load' => 'product_lots#massive_load', as: :massive_load
     end
   end
 

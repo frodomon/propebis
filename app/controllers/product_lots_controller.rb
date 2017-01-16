@@ -102,7 +102,29 @@ class ProductLotsController < ApplicationController
     @product_lots = ProductLot.search_by_date(params[:search])
     render :partial => 'search_table'    
   end
-
+  def update_from_purchase_order
+    @product_lots = []
+    2.times do 
+      @product_lots << ProductLot.new
+    end
+    @purchase_orders = PurchaseOrder.select(:id, :order_number).where('registered = false')
+    @products = Product.select(:id, :unit_of_measurement)
+  end
+  def massive_load
+    @purchase_orders_warehouse = PurchaseOrderDetail.search_by_id(params[:search]).select(:id, :product_id, :quantity).where('pending > 0')
+    
+    respond_to do |format|
+      format.json { render json: @purchase_orders_warehouse }
+    end
+  end
+  def create_multiple
+    params['lotes'].each do |lot|
+      if lot['product_id'] != ''
+        new_lot = ProductLot.create(lotes_params(lot))
+      end
+    end
+    redirect_to product_lots_path
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product_lot
@@ -110,6 +132,9 @@ class ProductLotsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    def lotes_params(lot_params)
+      lot_params.permit(:product_id, :quantity, :sanitary_registry, :due_date, :lot_number, :production_date, )
+    end
     def product_lot_params
       params.require(:product_lot).permit(:quantity, :sanitary_registry, :due_date, :lot_number, :production_date, :product_id)
     end

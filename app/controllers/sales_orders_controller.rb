@@ -19,6 +19,7 @@ class SalesOrdersController < ApplicationController
     @sales_order = SalesOrder.new
     @sales_order.sales_order_details.build
     @sales_order.sales_order_documents.build
+    @sales_orders = SalesOrder.where('status = 0')
     @clients = Client.select(:id, :name, :delivery_address, :billing_address)
     @clients_with_contracts = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, billing_address').joins(:contracts).where('contracts.active = true')
     @clients_without_contracts = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, billing_address').joins("LEFT JOIN contracts ON clients.id = contracts.client_id").where('contracts.client_id is NULL')      
@@ -98,6 +99,12 @@ class SalesOrdersController < ApplicationController
     @sales_order_details = @sales_order.sales_order_details
     render :layout => "empty"
   end
+  def search_stock_for_product
+    @product = ProductLot.select("product_id, sum(quantity) as quantity").group("product_id").where('product_id = ?',params[:p_id])
+    respond_to do |format|
+      format.json { render json: @product}
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -107,7 +114,7 @@ class SalesOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sales_order_params
-      params.require(:sales_order).permit(:business_id, :client_id, :contract_id, :ammount, :sales_order_number, :date, :billing_address, :delivery_address, :order_date, :delivery_date,
+      params.require(:sales_order).permit(:business_id, :client_id, :contract_id, :ammount, :sales_order_number, :date, :billing_address, :delivery_address, :order_date, :delivery_date, :status,
         sales_order_details_attributes: [:id, :sales_order_id, :product_id, :quantity, :unit_price, :subtotal, :_destroy],
         sales_order_documents_attributes: [:id, :sales_order_id, :document, :_destroy])
     end

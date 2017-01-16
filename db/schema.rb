@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 20161213055121) do
     t.integer  "purchase_order_id"
     t.integer  "product_id"
     t.float    "quantity"
+    t.float    "pending"
     t.float    "unit_price"
     t.float    "subtotal"
     t.datetime "created_at",        null: false
@@ -243,8 +244,9 @@ ActiveRecord::Schema.define(version: 20161213055121) do
     t.string   "billing_address"
     t.string   "delivery_address"
     t.float    "ammount"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.boolean  "registered",       default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.index ["business_id"], name: "index_purchase_orders_on_business_id", using: :btree
     t.index ["supplier_id"], name: "index_purchase_orders_on_supplier_id", using: :btree
   end

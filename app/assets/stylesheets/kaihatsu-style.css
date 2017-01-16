@@ -21,3 +21,6 @@
 .breadcrumbs-margin{
   margin-top: 10px;
 }
+.hidden_row{
+  display:none;
+}

@@ -1,0 +1,29 @@
+<tr class='content_details'>
+  <td>
+    <%= f.collection_select :product_id, Product.order(:name), :id, :name, options = { prompt: 'Seleccione un Producto'}, html_options = {class: 'product_select select2_demo_1 form-control'} %>
+  </td>
+  <td>
+  	<%= text_field_tag 'unit_of_measurement', nil, options ={ class: 'unit_of_measurement form-control', readonly: true} %>
+  </td>
+  <td>
+    <%= f.number_field :quantity, placeholder: '0', class: 'pl_quantity form-control', step: :any  %>
+  </td>
+  <td>
+    <%= f.text_field :sanitary_registry, placeholder: 'Registro Sanitario', class: 'pl_regsan form-control' %>
+  </td>
+  <td>
+    <%= f.text_field :lot_number,  placeholder: 'Lote de Producto', class: 'pl_lotnumber form-control' %>
+  </td>
+  <td>
+    <%= f.text_field :due_date, placeholder: 'Fecha de Vencimiento', class: 'pl_due_date form-control' %>
+ </td>
+  <td>
+    <%= f.text_field :production_date, placeholder: 'Fecha de Producción', class: 'pl_prod_date form-control'  %>
+ </td>
+  <td align='center'>
+  	<%= f.hidden_field :_destroy %>
+    <button class="btn btn-danger btn-circle remove_rows" type="button">
+      <i class="fa fa-times"></i>
+    </button>
+  </td>
+</tr>
