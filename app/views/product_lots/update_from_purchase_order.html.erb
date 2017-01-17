@@ -35,7 +35,8 @@
             <% end %>
           </div>
           <div id='content' class='table-responsive col-lg-12 no-padding'>
-            <%= form_tag create_multiple_product_lots_path, { remote: true, id: "submit-massive-form" } do %>
+            <%= form_tag create_multiple_product_lots_path, { id: "submit-massive-form" } do %>
+              <%= hidden_field_tag 'pod', nil, options ={ id: 'pod'} %>
               <table class="table-stripped table-bordered table">
                 <thead>
                   <tr>

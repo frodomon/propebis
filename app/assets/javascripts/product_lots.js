@@ -40,6 +40,7 @@ $(document).ready(function () {
   $('form').on('click','.search_by_date_button', function(e){
   	e.preventDefault();
   	search = $('#search_by_date').val();
+
   	if (search != 0 ) {
   	  parameters = {search: search }; 
 	    load_partials('/product_lots/search_lots_close_to_expire','content', parameters); 
@@ -50,6 +51,7 @@ $(document).ready(function () {
   $('form').on('click','.massive_load', function(e){
     e.preventDefault();
     search = $('#massive_load').val();
+    $('#pod').val(search);
     if (search != 0 ) {
       parameters = {search: search }; 
       load_products('/product_lots/massive_load','table .content_details', parameters, '#lotes'); 
@@ -65,11 +67,11 @@ $(document).ready(function () {
     $('table .hidden_row').before(new_row);
   });
   $('#submit-massive-form').submit(function(){
+
     fields = ['#lotes__product_id','#lotes__quantity','#lotes__lot_number'];
     flag = true;
     for(i=0; i< fields.length; i++){
       $('table .content_details '+fields[i]).each(function(){
-        alert('holi')
         if ($(this).val() === '' ){
           $(this).closest('td').addClass('has-error');
           flag = false;
@@ -105,5 +107,5 @@ function load_products(url, element_id, params, json_filler){
 }
 function fill_warehouse_from_json(row, selector_str, object){
   $(row+' '+selector_str+'__product_id option[value="'+object.product_id+'"]').last().prop('selected','selected').trigger('change');
-  $(row+' '+selector_str+'__quantity').last().val(object.quantity);
+  $(row+' '+selector_str+'__quantity').last().val(object.pending);
 }

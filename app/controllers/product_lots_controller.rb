@@ -111,17 +111,30 @@ class ProductLotsController < ApplicationController
     @products = Product.select(:id, :unit_of_measurement)
   end
   def massive_load
-    @purchase_orders_warehouse = PurchaseOrderDetail.search_by_id(params[:search]).select(:id, :product_id, :quantity).where('pending > 0')
+    @purchase_orders_warehouse = PurchaseOrderDetail.search_by_id(params[:search]).select(:id, :product_id, :pending).where('pending > 0')
     
     respond_to do |format|
       format.json { render json: @purchase_orders_warehouse }
     end
   end
   def create_multiple
+    pod = PurchaseOrder.find(params[:pod] )
+    pod_details = pod.purchase_order_details
+    sum = 0
     params['lotes'].each do |lot|
       if lot['product_id'] != ''
         new_lot = ProductLot.create(lotes_params(lot))
+        pod_details.each do |pod_det|
+          if pod_det.product_id == lot['product_id'].to_i
+            new_pending = pod_det.pending - lot['quantity'].to_f
+            sum = sum + new_pending
+            pod_det.update_attribute(:pending, new_pending)
+          end
+        end
       end
+    end
+    if sum == 0
+      pod.update_attribute(:registered,true)
     end
     redirect_to product_lots_path
   end
