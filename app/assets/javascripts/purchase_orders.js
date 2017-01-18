@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  smart_checkbox('purchase_order','registered');
   if($('form[id^="edit_"]').length > 0) {
     $('.contract').show();
     $('#purchase_order_date').datepicker({
@@ -65,3 +66,8 @@ $(document).ready(function () {
     return fields_flag;
   });
 });
+function check_registered(){
+  checked = $('#purchase_order_registered').val();
+  $( "#chk_registered" ).val(checked);
+  
+}

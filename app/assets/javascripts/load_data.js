@@ -47,8 +47,8 @@ function load_details(url, element_id, params, json_filler){
             fill_fields_from_json(json_filler,i,object);
           }
           else{
-            newNestedForm  = $('#content_details').last().clone()
-            formsOnPage    = $('#content_details').length
+            newNestedForm  = $('table #content_details').last().clone()
+            formsOnPage    = $('table #content_details').length
 
             $(newNestedForm).find('select, input').each(function(){
               oldId = $(this).attr('id');

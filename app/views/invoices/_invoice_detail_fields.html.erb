@@ -9,7 +9,7 @@
   	<%= f.number_field :quantity, class: 'inv_quantity form-control', step: :any %>
   </td>
   <td>
-  	<%= f.number_field :unit_price, class: 'inv_unit_price form-control', step: :any %>
+  	<%= f.number_field :unit_price, class: 'inv_unit_price form-control', step: :any, readonly: true %>
   </td>
   <td>
   	<%= f.number_field :subtotal, class: 'inv_subtotal form-control', step: :any, readonly: true %>

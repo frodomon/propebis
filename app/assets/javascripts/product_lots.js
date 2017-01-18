@@ -55,6 +55,7 @@ $(document).ready(function () {
     if (search != 0 ) {
       parameters = {search: search }; 
       load_products('/product_lots/massive_load','table .content_details', parameters, '#lotes'); 
+      $('.search-results').show();
     }
   });
   $('form').on('click','.remove_rows', function(e){
