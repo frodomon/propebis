@@ -38,6 +38,7 @@
                   <th align='center'>Dirección de Facturación</th>
                   <th align='center'>Dirección de Entrega</th>
                   <th align='center'>Monto Final</th>
+                  <th align='center'>Nro. SIAF</th>
                   <th align='center'>Estado</th>
                   <th align='center'>Imprimir</th>
                   <th align='center'>Editar</th>
@@ -63,6 +64,7 @@
                     <td align="center"><%= sales_order.billing_address %></td>
                     <td align="center"><%= sales_order.delivery_address %></td>
                     <td align="center"><%= sales_order.ammount %></td>
+                    <td align="center"><%= sales_order.siaf_number %></td>
                     <td align="center"><%= sales_order_status(sales_order.status) %></td>
                     <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: sales_order.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: sales_order.id }, class: 'btn btn-w-m btn-warning btn-xs' %></td>

@@ -77,7 +77,11 @@
       </div>
     </div>
     <div class="row">
-      <div class= "<%= field_class(@sales_order, :ammount) %> col-lg-3">
+      <div class= "<%= field_class(@sales_order, :siaf_number) %> col-lg-6">
+        <%= f.label :siaf_number, 'Nro. SIAF', class:'control-label' %>
+        <%= f.text_field :siaf_number, class: 'form-control' %>
+      </div>
+      <div class= "<%= field_class(@sales_order, :ammount) %> col-lg-6">
         <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
         <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
       </div>
@@ -85,7 +89,7 @@
     <div class="row">
       <div class= "form-group col-lg-3">
         <%= f.label :status, 'Estado', class: 'control-label' %>
-        <%= select_tag 'Estado', "<option value='0'>Facturado</option><option value='1'>Pendiente Factura</option><option value='2'>Pendiente Guia de Remisión Interna</option><option value='3'>Pendiente Guia de Remisión</option><option value='4' selected='selected'>Creado</option>".html_safe, {class: 'select2_demo_1 form-control', id:'select_status'} %>
+        <%= select_tag 'Estado', "<option value='0' selected='selected'>Creado</option><option value='1'>Pendiente Guia de Remisión Interna</option><option value='2'>Pendiente Guia de Remisión</option><option value='3'>Pendiente Factura</option><option value='4'>Facturado</option>".html_safe, {class: 'select2_demo_1 form-control', id:'select_status', disabled: true} %>
         <%= f.hidden_field :status %>
       </div>
     </div>

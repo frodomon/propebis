@@ -5,6 +5,7 @@ class CreateSalesOrders < ActiveRecord::Migration
       t.references :client, index: true
       t.integer :contract_id
       t.string :sales_order_number
+      t.string :siaf_number
       t.date :date
       t.string :billing_address
       t.string :delivery_address

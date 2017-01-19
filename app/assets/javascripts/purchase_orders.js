@@ -1,7 +1,6 @@
 $(document).ready(function () {
-  smart_checkbox('purchase_order','registered');
-  if($('form[id^="edit_"]').length > 0) {
-    $('.contract').show();
+  smart_checkbox_multiform('purchase_order','registered');
+  if($('#submit-form[class^="edit_"]').length > 0) {
     $('#purchase_order_date').datepicker({
       todayBtn: "linked",
       keyboardNavigation: false,
@@ -11,6 +10,7 @@ $(document).ready(function () {
       todayHighlight: true,
       format: 'yyyy-mm-dd'
     });
+    $('#chk_registered').iCheck('disable');
   };
   $('form').on('change', '#purchase_order_business_id',function(e){
     e.preventDefault();
@@ -66,8 +66,3 @@ $(document).ready(function () {
     return fields_flag;
   });
 });
-function check_registered(){
-  checked = $('#purchase_order_registered').val();
-  $( "#chk_registered" ).val(checked);
-  
-}

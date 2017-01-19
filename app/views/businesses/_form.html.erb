@@ -40,7 +40,7 @@
   <div class= "<%= field_class(@business, :active) %>">
     <%= f.label :active, 'Activo', class: 'col-lg-4 control-label' %>
     <div class='col-lg-8'>
-      <%= check_box_tag '#', value='1', checked= true, options = { id: 'chk_active',class: 'checkbox', readonly: true} %>
+      <%= check_box_tag '#', value='1', checked= true, options = { id: 'chk_active', class: 'checkbox', readonly: true} %>
       <%= f.hidden_field :active %>
     </div>
   </div>
@@ -52,7 +52,6 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
       $('.checkbox').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',

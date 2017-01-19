@@ -22,7 +22,7 @@ $(document).ready(function () {
 });
 function fill_blanks(){
   $('select[class="product_select"]').each(function(i){
-    p_id = parseInt($(this).find(':selected').val()) - 1;
+    p_id = parseInt($(this).find(':selected').val());
     for(i=0;i < products.length;i++){
       if (products[i].id == p_id){
         pum= products[i].unit_of_measurement;

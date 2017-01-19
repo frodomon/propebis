@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   if($('#submit-form[class^="edit_"]').length > 0) {
     $('#selection-buttons').hide();
     $('#form-content').show();
@@ -7,6 +6,8 @@ $(document).ready(function () {
       $('.without').show();
       $('.contract').show();
     }
+    select_val = $('#sales_order_status').val();
+    $('#select_status option:eq('+select_val+')').attr('selected', 'selected')  
   };
   $('form').on('click', '#with',function(e){
     e.preventDefault();
@@ -147,7 +148,8 @@ $(document).ready(function () {
     c_id = parseInt($('#sales_order_contract_id').find(':selected').val());
 
     $('#sales_order_business_id').attr('disabled', false);
-    fields = ['#sales_order_business_id','#sales_order_client_id','#sales_order_sales_order_number','#sales_order_date', '#sales_order_delivery_date','#sales_order_order_date','#sales_order_billing_address','#sales_order_delivery_address','#sales_order_ammount'];
+    $('#sales_order_status').attr('disabled', true);
+    fields = ['#sales_order_siaf_number','#sales_order_business_id','#sales_order_client_id','#sales_order_sales_order_number','#sales_order_date', '#sales_order_delivery_date','#sales_order_order_date','#sales_order_billing_address','#sales_order_delivery_address','#sales_order_ammount'];
     if ( contract_flag){
       fields.push('#sales_order_contract_id'); 
     }

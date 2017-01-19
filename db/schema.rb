@@ -321,6 +321,7 @@ ActiveRecord::Schema.define(version: 20161213055121) do
     t.integer  "client_id"
     t.integer  "contract_id"
     t.string   "sales_order_number"
+    t.string   "siaf_number"
     t.date     "date"
     t.string   "billing_address"
     t.string   "delivery_address"

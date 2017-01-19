@@ -114,7 +114,7 @@ class SalesOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sales_order_params
-      params.require(:sales_order).permit(:business_id, :client_id, :contract_id, :ammount, :sales_order_number, :date, :billing_address, :delivery_address, :order_date, :delivery_date, :status,
+      params.require(:sales_order).permit(:business_id, :client_id, :contract_id, :ammount, :sales_order_number, :date, :billing_address, :delivery_address, :order_date, :delivery_date, :siaf_number, :status,
         sales_order_details_attributes: [:id, :sales_order_id, :product_id, :quantity, :unit_price, :subtotal, :_destroy],
         sales_order_documents_attributes: [:id, :sales_order_id, :document, :_destroy])
     end

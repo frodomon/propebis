@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  smart_checkbox('contract','active');
-  if($('form[id^="edit_"]').length > 0) {
+  smart_checkbox_multiform('contract','active');
+  if($('#submit-form[class^="edit_"]').length > 0) {
     $('#contract_date').datepicker({
       todayBtn: "linked",
       keyboardNavigation: false,
