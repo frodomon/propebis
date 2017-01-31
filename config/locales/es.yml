@@ -23,7 +23,6 @@ es:
       setting: "Configuración"
       supplier: "Proveedor"
       vehicle: "Vehículo"
-
   unauthorized:
     subject:
       client: "Cliente"
