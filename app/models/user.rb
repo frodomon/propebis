@@ -7,7 +7,8 @@ class User < ApplicationRecord
   validates_presence_of :username
   validates_presence_of :email
 
-  ROLES = %i[admin management logistic user]
+
+  ROLES = %i[Administración Logística Almacén Usuario]
 
   def roles=(roles)
     roles = [*roles].map { |r| r.to_sym }

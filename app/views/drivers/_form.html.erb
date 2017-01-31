@@ -2,14 +2,14 @@
   <%= form_errors_for @driver %>
 
   <div class= "<%= field_class(@driver, :name) %>">
-    <%= f.label :name, "Nombre del Conductor", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :name, "Nombre del Conductor", class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :name, autofocus: true, placeholder: 'Nombre del Conductor', class: 'form-control' %>
     </div>
   </div>
   <div class= "<%= field_class(@driver, :license) %>">
-    <%= f.label :license, "Licencia de Conducir", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :license, "Licencia de Conducir", class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :license, placeholder: 'Licencia de Conducir', class: 'form-control' %>
     </div>
   </div>

@@ -2,39 +2,46 @@
   <%= form_errors_for @product %>
 
   <div class= "<%= field_class(@product, :name) %>">
-    <%= f.label :name, "Nombre del Producto", class: 'col-lg-4 control-label'  %>
-    <div class='col-lg-8'>
+    <%= f.label :name, "Nombre del Producto", class: 'col-lg-4 col-md-4 col-sm-4 control-label'  %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :name, autofocus: true, placeholder: 'Nombre del Producto', class: 'form-control' %>
     </div>
   </div>
    <div class= "<%= field_class(@product, :sku) %>">
-    <%= f.label :sku, 'SKU', class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :sku, 'SKU', class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :sku, placeholder: 'Código del Producto', class: 'form-control' %>
     </div>
   </div>
   <div class= "<%= field_class(@product, :category_id) %>">
-    <%= f.label :category_id, 'Categoŕía', class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :category_id, 'Categoŕía', class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.collection_select :category_id, Category.order(:name), :id, :name , options = {  :prompt => 'Seleccione una Categoŕía'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
   <div class= "<%= field_class(@product, :unit_of_measurement) %>">
-    <%= f.label :unit_of_measurement, "Unidad de Medida", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :unit_of_measurement, "Unidad de Medida", class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :unit_of_measurement, placeholder: 'Unidad de Medida', class: 'form-control' %>
     </div>
   </div>
   <div class= "<%= field_class(@product, :description) %>">
-    <%= f.label :description, "Descripción", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :description, "Descripción", class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :description, placeholder: 'Descripción', class: 'form-control' %>
     </div>
   </div>
   <div class= "<%= field_class(@product, :trademark) %>">
-    <%= f.label :trademark, "Marca", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :trademark, "Marca", class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.text_field :trademark, placeholder: 'Marca', class: 'form-control' %>
+    </div>
+  </div>
+  <div class= "<%= field_class(@product, :igv) %>">
+    <%= f.label :igv, 'Exonerado IGV', class: 'col-lg-4 col-md-4 col-sm-4 col-xs-8 control-label' %>
+    <div class='col-lg-4 col-md-4 col-sm-4 col-xs-4'>
+      <%= check_box_tag '#', value='0', checked= false, options = { id: 'chk_igv', class: 'checkbox'} %>
+      <%= f.hidden_field :igv %>
     </div>
   </div>
   <div class="actions">
@@ -42,4 +49,14 @@
   </div>
 <% end %>
 
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.checkbox').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+      });
+    });
+  </script>
+<% end %>
  

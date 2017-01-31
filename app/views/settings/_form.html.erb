@@ -2,8 +2,8 @@
   <%= form_errors_for @setting %>
 
   <div class= "<%= field_class(@setting, :expiration_alert) %>">
-    <%= f.label :expiration_alert, "Dias por vencer", class: 'col-lg-4 control-label' %>
-    <div class='col-lg-8'>
+    <%= f.label :expiration_alert, "Dias por vencer", class: 'col-lg-4 col-md-4 col-sm-4 control-label' %>
+    <div class='col-lg-8 col-md-8 col-sm-8'>
       <%= f.number_field :expiration_alert, autofocus: true, placeholder: "30", class: 'form-control'  %>
     </div>
   </div>

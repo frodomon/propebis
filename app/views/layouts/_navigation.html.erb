@@ -102,11 +102,13 @@
           </li>
         </ul>
       </li>
-      <li class="<%= is_active_controller('settings') %>">
-        <%= link_to settings_path  do %>
-          <i class="fa fa-cog"></i> <span class="nav-label">Configuración</span>
-        <% end %>
-      </li>
+      <% if can? :manage, :all %>
+        <li class="<%= is_active_controller('settings') %>">
+          <%= link_to settings_path  do %>
+            <i class="fa fa-cog"></i> <span class="nav-label">Configuración</span>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

@@ -24,3 +24,22 @@
 .hidden_row{
   display:none;
 }
+.kai-footer{
+  background: none;
+  border: 0;
+  text-align: center;
+}
+.home-margin{
+  margin-bottom: 15px;
+}
+.home-page{
+  text-align: center;
+  width: 40%;
+  margin: 30px 30%;
+}
+#logo-img{
+  width:100%;
+}
+.show-table th{
+  text-align: center;
+}

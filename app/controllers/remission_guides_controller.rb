@@ -12,6 +12,7 @@ class RemissionGuidesController < ApplicationController
   # GET /remission_guides/1
   # GET /remission_guides/1.json
   def show
+    @remission_guide_details = @remission_guide.remission_guide_details
   end
 
   # GET /remission_guides/new

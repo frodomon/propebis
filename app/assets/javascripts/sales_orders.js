@@ -2,9 +2,12 @@ $(document).ready(function () {
   if($('#submit-form[class^="edit_"]').length > 0) {
     $('#selection-buttons').hide();
     $('#form-content').show();
-    if ($('#sales_order_contract_id').val() !== ''){
+    if (id !== 0){  
       $('.without').show();
       $('.contract').show();
+    }
+    else{
+      $('#sales_order_contract_id').val(id);
     }
     select_val = $('#sales_order_status').val();
     $('#select_status option:eq('+select_val+')').attr('selected', 'selected')  
@@ -30,6 +33,7 @@ $(document).ready(function () {
   });
   $('form').on('click', '#without',function(e){
     e.preventDefault();
+    $('#content_details .sod_unit_price').attr('readonly', false);
     if ($(this).hasClass('active') === false ){
       $(this).addClass('active');
       if ($('#with').hasClass('active')){
@@ -103,7 +107,7 @@ $(document).ready(function () {
     $('#sales_order_ammount').val(total);
   });
   $('form').on('change','.sod_quantity',function(e){
-    e.preventDefault();
+    e.preventDefault();  
     quantity = parseFloat($(this).val());
     unit_price = parseFloat($(this).closest('tr').find('.sod_unit_price').val());
     if (isNaN(unit_price)) { unit_price = 0;}
@@ -162,8 +166,10 @@ $(document).ready(function () {
           }
         }
         for(j=0; j < sales_orders.length; j++){
-          if (c_id === sales_orders[j].contract_id && sales_orders[j].status === 0) {
-            o_venta.push(sales_orders[j])
+          if (c_id === sales_orders[j].contract_id){
+            if (sales_orders[j].status === 0 || sales_orders[j].status === 2) {
+              o_venta.push(sales_orders[j])
+            }
           }
         }
         monto_ventas = 0

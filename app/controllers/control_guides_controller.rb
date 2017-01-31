@@ -12,6 +12,7 @@ class ControlGuidesController < ApplicationController
   # GET /control_guides/1
   # GET /control_guides/1.json
   def show
+    @control_guide_details = @control_guide.control_guide_details
   end
 
   # GET /control_guides/new

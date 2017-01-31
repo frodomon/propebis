@@ -4,28 +4,28 @@
   <%= form_errors_for @invoice %>
 
    <div class="row">
-    <div class= "<%= field_class(@invoice, :client_id) %> col-lg-6">
+    <div class= "<%= field_class(@invoice, :client_id) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :client_id, 'Cliente', class: 'control-label' %>
-      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control' } %>
+      <%= f.collection_select :client_id, @clients, :id, :name, options = { prompt: 'Selecciona un Cliente'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true } %>
     </div>
-    <div class="<%= field_class(@invoice, :sales_order_id) %> col-lg-6 sales_orders">
+    <div class="<%= field_class(@invoice, :sales_order_id) %> col-lg-6 col-md-6 col-sm-6 sales_orders">
       <%= f.label :sales_order_id, 'Orden de Venta', class: 'control-label' %>
       <%= f.collection_select :sales_order_id, SalesOrder.order(:sales_order_number), :id, :sales_order_number, options = { prompt: 'Seleccione una Orden de Compra' },html_options = {class: 'sales_order_select select2_demo_1 form-control' } %>
       <button class='load_details btn btn-success' align='center'>Cargar Datos</button>
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@invoice, :business_id) %> col-lg-6">
+    <div class= "<%= field_class(@invoice, :business_id) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :business_id, 'Empresa', class: 'control-label' %>
-      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
+      <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
    <div class="row">
-    <div class= "<%= field_class(@invoice, :invoice_number) %> col-lg-6">
+    <div class= "<%= field_class(@invoice, :invoice_number) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :invoice_number, 'Nro. Factura', class: 'control-label' %>
       <%= f.text_field :invoice_number, placeholder: 'Nro. Factura', class: 'form-control' %>
     </div>
-    <div class= "<%= field_class(@invoice, :date) %> col-lg-6">
+    <div class= "<%= field_class(@invoice, :date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :date, 'Fecha', class: 'control-label' %>
       <div class="input-group date">
         <span class="input-group-addon">
@@ -36,15 +36,19 @@
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@invoice, :ammount) %> col-lg-3">
+    <div class= "<%= field_class(@invoice, :ammount) %> col-lg-3 col-md-3 col-sm-3">
       <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
+      <% if can? :manage, :all %>
+      <%= f.number_field :ammount, class: 'form-control', step: :any %>
+      <% else %>
       <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+      <% end %>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
-      <h3>Productos</h3>
-      <table class="footable table table-stripped toggle-arrow-tiny">
+    <h3>Productos</h3>
+    <div class="table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <table class="footable table table-stripped">
         <thead>
           <tr>
             <th>Producto</th>

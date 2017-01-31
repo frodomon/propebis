@@ -1,6 +1,7 @@
 $(document).ready(function () {
   if($('#submit-form[class^="edit_"]').length > 0) {
     $('.sales_orders').show();
+    $('.load_details').hide();
   };
 
   $('form').on('click', '.load_details', function(e){
@@ -12,6 +13,7 @@ $(document).ready(function () {
       fill_blanks();
       total = calculate_final_price('rgd_subtotal');
       $('#remission_guide_ammount').val(total);
+      $('.load_details').hide();
     }
   });
   $('form').on('change', '#remission_guide_client_id',function(e){

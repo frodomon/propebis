@@ -1,7 +1,6 @@
 <table class="table table-stripped table-bordered table-hover datatable">
   <thead>
     <tr>
-      <th align='center'>ID</td>
       <th align='center'>Producto</th>
       <th align='center'>Cantidad</th>
       <th align='center'>Registro Sanitario</th>
@@ -15,7 +14,6 @@
   <tbody>
     <% @product_lots.each do |product_lot| %>
       <tr>
-        <td align="center"><%= product_lot.id %></td>
         <td align="center"><%= Product.find(product_lot.product_id).name %></td>
         <td align="center"><%= product_lot.quantity %></td>
         <td align="center"><%= product_lot.sanitary_registry %></td>
@@ -32,7 +30,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      load_table_controls('datatable');
+      load_table_controls('datatable','Lotes de Producto');
     });
   </script>
 <% end %>

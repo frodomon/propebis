@@ -12,6 +12,7 @@ class ContractsController < ApplicationController
   # GET /contracts/1
   # GET /contracts/1.json
   def show
+    @contract_details = @contract.contract_details
   end
 
   # GET /contracts/new

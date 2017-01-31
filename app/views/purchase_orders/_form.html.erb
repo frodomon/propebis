@@ -2,21 +2,21 @@
   <%= form_errors_for @purchase_order %>
 
   <div class="row">
-    <div class= "<%= field_class(@purchase_order, :business_id) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :business_id) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :business_id, 'Empresa', class: 'control-label' %>
       <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
-    <div class= "<%= field_class(@purchase_order, :supplier_id) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :supplier_id) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :supplier_id, 'Proveedor', class: 'control-label' %>
       <%= f.collection_select :supplier_id, Supplier.order(:name), :id, :name, options = { prompt: 'Seleccione un Proveedor'}, html_options = { class: 'select2_demo_1 form-control' } %>
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@purchase_order, :order_number) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :order_number) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :order_number, 'Nro. Orden de Compra', class: 'control-label' %>
       <%= f.text_field :order_number, placeholder: 'Nro. Orden de Compra', class: 'form-control' %>
     </div>
-    <div class= "<%= field_class(@purchase_order, :date) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :date, 'Fecha', class: 'control-label' %>
       <div class="input-group date">
         <span class="input-group-addon">
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@purchase_order, :delivery_date) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :delivery_date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :delivery_date, 'Fecha de Entrega', class: 'control-label' %>
       <div class="input-group date">
         <span class="input-group-addon">
@@ -36,7 +36,7 @@
         <%= f.text_field :delivery_date, class: 'form-control' %>
       </div>
     </div>
-    <div class= "<%= field_class(@purchase_order, :order_date) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :order_date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :order_date, 'Fecha de la Orden de Compra', class: 'control-label' %>
       <div class="input-group date">
         <span class="input-group-addon">
@@ -47,34 +47,38 @@
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@purchase_order, :billing_address) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :billing_address) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :billing_address, 'Dirección de Facturación', class: 'control-label' %>
       <%= f.text_field :billing_address, class: 'form-control' %>
     </div>
-    <div class= "<%= field_class(@purchase_order, :delivery_address) %> col-lg-6">
+    <div class= "<%= field_class(@purchase_order, :delivery_address) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :delivery_address, 'Dirección de Entrega', class:'control-label' %>
       <%= f.text_field :delivery_address, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@purchase_order, :ammount) %> col-lg-3">
+    <div class= "<%= field_class(@purchase_order, :ammount) %> col-lg-3 col-md-3 col-sm-3">
       <%= f.label :ammount, 'Monto Final', class: 'control-label' %>
-      <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+      <% if can? :manage, :all %>
+        <%= f.number_field :ammount, class: 'form-control', step: :any %>
+      <% else %>
+        <%= f.number_field :ammount, class: 'form-control', readonly: true, step: :any %>
+      <% end %>
     </div>
   </div>
-
-    <div class= "form-group col-lg-2">
+  <div class="row">
+    <div class= "form-group col-lg-6 col-md-6 col-sm-6 col-xs-8">
       <%= f.label :registered, 'Registrado', class: 'control-label' %>
     </div>
-    <div class= "form-group col-lg-4">
+    <div class= "form-group col-lg-2 col-md-2 col-sm-2 col-xs-4">
       <%= check_box_tag '*', value='0', checked= false, options = { id: 'chk_registered',class: 'checkbox'} %>
       <%= f.hidden_field :registered %>
     </div>
-
+  </div>
   <div class="row">
-    <div class="col-lg-12">
-      <h3>Productos</h3>
-      <table class="footable table table-stripped toggle-arrow-tiny">
+    <h3>Productos</h3>
+    <div class="table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <table class="footable table table-stripped">
         <thead>
           <tr>
             <th>Producto</th>
@@ -98,7 +102,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
       <h3>Documentos Adjuntos</h3>
       <%= f.fields_for :purchase_order_documents do |pod| %>  
         <%= render 'purchase_order_document_fields', f: pod %> 

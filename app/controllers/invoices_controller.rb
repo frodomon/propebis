@@ -10,6 +10,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+    @invoice_details = @invoice.invoice_details
   end
   # GET /invoices/new
   def new

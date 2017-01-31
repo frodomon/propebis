@@ -74,7 +74,14 @@ function load_details(url, element_id, params, json_filler){
 }
 function fill_fields_from_json(selector_str, id, object){
   $(selector_str+id+'_product_id option[value="'+object.product_id+'"]').prop('selected','selected').trigger('change');
-  $(selector_str+id+'_quantity').val(object.quantity);
+  if (object.pending){
+    $(selector_str+id+'_quantity').val(object.pending);
+    subtotal = object.pending * object.unit_price
+    $(selector_str+id+'_subtotal').val(subtotal);
+  }
+  else{
+    $(selector_str+id+'_quantity').val(object.quantity);
+    $(selector_str+id+'_subtotal').val(object.subtotal);
+  }
   $(selector_str+id+'_unit_price').val(object.unit_price);
-  $(selector_str+id+'_subtotal').val(object.subtotal);
 }

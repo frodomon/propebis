@@ -6,12 +6,13 @@ class SalesOrdersController < ApplicationController
   # GET /sales_orders
   # GET /sales_orders.json
   def index
-    @sales_orders = SalesOrder.all
+    @sales_orders = SalesOrder.all.order(order_date: :desc)
   end
 
   # GET /sales_orders/1
   # GET /sales_orders/1.json
   def show
+    @sales_order_details = @sales_order.sales_order_details
   end
 
   # GET /sales_orders/new
@@ -19,7 +20,7 @@ class SalesOrdersController < ApplicationController
     @sales_order = SalesOrder.new
     @sales_order.sales_order_details.build
     @sales_order.sales_order_documents.build
-    @sales_orders = SalesOrder.where('status = 0')
+    @sales_orders = SalesOrder.where('status = 0 or status = 2')
     @clients = Client.select(:id, :name, :delivery_address, :billing_address)
     @clients_with_contracts = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, billing_address').joins(:contracts).where('contracts.active = true')
     @clients_without_contracts = Client.select('DISTINCT clients.id, clients.name, clients.delivery_address, billing_address').joins("LEFT JOIN contracts ON clients.id = contracts.client_id").where('contracts.client_id is NULL')      
@@ -30,6 +31,7 @@ class SalesOrdersController < ApplicationController
 
   # GET /sales_orders/1/edit
   def edit
+    @id = @sales_order.contract_id
     @clients = Client.select(:id, :name)
     @contracts = Contract.select(:id, :contract_number, :client_id, :business_id, :credit).where('active = true')
     @products = Product.all

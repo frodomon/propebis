@@ -1,6 +1,6 @@
 $(document).ready(function () {
   if($('#submit-form[class^="edit_"]').length > 0) {
-    
+    $('.load_details').hide();
     $('.sales_orders').show();
   };
   $('form').on('click', '.load_details', function(e){
@@ -13,6 +13,7 @@ $(document).ready(function () {
       total = calculate_final_price('cgd_subtotal');
       $('#control_guide_ammount').val(total);
     }
+    $('.load_details').hide();
   });
   $('form').on('change', '#control_guide_client_id',function(e){
     e.preventDefault();

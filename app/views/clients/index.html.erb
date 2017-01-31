@@ -6,7 +6,7 @@
     <h2>Clientes</h2>
     <ol class="breadcrumb">
       <li>
-        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
       </li>
       <li class="active">
         <strong>Clientes</strong>
@@ -29,7 +29,6 @@
             <table class="table table-stripped table-bordered table-hover datatable">
               <thead>
                 <tr>
-                  <th align='center'>ID</th>
                   <th align='center'>Razón Social</th>
                   <th align='center'>RUC</th>
                   <th align='center'>Dirección de Facturación</th>
@@ -44,7 +43,6 @@
               <tbody>
                 <% @clients.each do |client| %>
                   <tr>
-                    <td class="center"><%= client.id %></td>
                     <td class="center"><%= client.name %></td>
                     <td class="center"><%= client.ruc %></td>
                     <td class="center"><%= client.billing_address %></td>
@@ -70,7 +68,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      load_table_controls('datatable');
+      load_table_controls('datatable','Clientes');
     });
   </script>
 <% end %>

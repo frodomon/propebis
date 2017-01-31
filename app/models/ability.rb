@@ -4,24 +4,35 @@ class Ability
   def initialize(user)
 
     user ||= User.new
-    if user.has_role? :admin
+    if user.has_role? :Administración
       can :manage, :all
-    elsif user.has_role? :management
-      can :manage, :all  
-    elsif user.has_role? :logistic
-      can :create, RemissionGuide # author can create status
-      can :update, RemissionGuide # author can update status
-      can :edit, RemissionGuide # author can update status
-      # can :destroy, Status # #uncomment this line, author can destroy status 
-      can :read, :all
-    elsif user.has_role? :user
-      can :create, User
+    elsif user.has_role? :Logística
+      can :manage, RemissionGuide
+      can :manage, ControlGuide
+      can :manage, ProductLot
+      can :manage, Product
+      can :manage, Category
+      can :manage, PurchaseOrder
+      can :manage, SalesOrder
+      can :manage, Contract
       can :edit, User
+      cannot :read, User  
       can :read, :all
-      cannot :read, User   
+    elsif user.has_role? :Almacén
+      can :manage, ProductLot
+      can :manage, Product
+      can :manage, Category
+      can :edit, User
+      cannot :read, User  
+    elsif user.has_role? :Usuario
+>>>>>>> d55d30c... devise configuration, cancanca configuration
+      can :edit, User
+      cannot :read, User
+      can :read, :all
     else
       can :create, User
       can :read, :all
+      cannot :read, User  
     end
     # Define abilities for the passed in user here. For example:
     #

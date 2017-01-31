@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :description
       t.string :trademark
       t.string :sku
+      t.boolean :igv, default: false
       t.references :category, index: true, foreign_key: true
 
       t.timestamps null: false

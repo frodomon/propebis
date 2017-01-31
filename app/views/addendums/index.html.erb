@@ -2,11 +2,11 @@
 <%= render 'shared/notifications' %>
 
 <div class="row wrapper border-bottom white-bg page-heading breadcrumbs-margin">
-  <div class="col-lg-10">
+  <div class="col-lg-12">
     <h2>Adendas</h2>
     <ol class="breadcrumb">
       <li>
-        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
       </li>
       <li>
         <a href="<%= url_for :controller => 'contracts', :action => 'index' %>">Contratos</a>
@@ -15,8 +15,6 @@
         <strong>Adendas</strong>
       </li>
     </ol>
-  </div>
-  <div class="col-lg-2">
   </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -27,47 +25,43 @@
           <h5>Adendas</h5>
         </div>
         <div class="ibox-content">
-          <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="25" data-filter=#filter>
-            <thead>
-              <tr>
-                <th>Nro. Contrato</th>
-                <th>Nro. Adenda</th>
-                <th>Fecha</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha Final</th>
-                <th>Monto</th>
-                <th colspan="4"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @addendums.each do |addendum| %>
+          <div class='table-responsive'>
+            <table class="table table-stripped table-bordered table-hover datatable">
+              <thead>
                 <tr>
-                  <td align="center"><%= Contract.find(addendum.contract_id).contract_number %></td>
-                  <td align="center"><%= addendum.addendum_number %></td>
-                  <td align="center"><%= addendum.date %></td>
-                  <td align="center"><%= addendum.start_date %></td>
-                  <td align="center"><%= addendum.end_date %></td>
-                  <td align="center"><%= addendum.ammount %></td>
-                  <td align="center"><%= button_to "Editar", { controller: :addendums, action: :edit, contract_id: addendum.contract_id, id: addendum.id } , method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
-                  <td align="center"><%= button_to 'Eliminar', { controller: :addendums, action: :destroy, contract_id: addendum.contract_id, id: addendum.id }, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
-                  <% if addendum.updated == false %>
-                    <td align="center"><%= button_to 'Actualizar Credito', { controller: :addendums, action: :update_credit, contract_id: addendum.contract_id, id: addendum.id } , method: :put, class: 'btn btn-wm btn-success btn-xs' %></td>
-                  <% end %>
+                  <th>Nro. Contrato</th>
+                  <th>Nro. Adenda</th>
+                  <th>Fecha</th>
+                  <th>Fecha de Inicio</th>
+                  <th>Fecha Final</th>
+                  <th>Monto</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                  <th>Actualizar Contrato</th>
                 </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan='5'>
-                  <ul class="pagination pull-right"></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-          <%= button_to 'Volver', { controller: 'contracts', action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+              </thead>
+              <tbody>
+                <% @addendums.each do |addendum| %>
+                  <tr>
+                    <td align="center"><%= Contract.find(addendum.contract_id).contract_number %></td>
+                    <td align="center"><%= addendum.addendum_number %></td>
+                    <td align="center"><%= addendum.date %></td>
+                    <td align="center"><%= addendum.start_date %></td>
+                    <td align="center"><%= addendum.end_date %></td>
+                    <td align="center"><%= addendum.ammount %></td>
+                    <td align="center"><%= button_to "Editar", { controller: :addendums, action: :edit, contract_id: addendum.contract_id, id: addendum.id } , method: :get, class: 'btn btn-w-m btn-warning btn-xs' %></td>
+                    <td align="center"><%= button_to 'Eliminar', { controller: :addendums, action: :destroy, contract_id: addendum.contract_id, id: addendum.id }, method: :delete, data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
+                    <% if addendum.updated == false %>
+                      <td align="center"><%= button_to 'Actualizar Credito', { controller: :addendums, action: :update_credit, contract_id: addendum.contract_id, id: addendum.id } , method: :put, class: 'btn btn-wm btn-success btn-xs' %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%= button_to 'Volver', { controller: 'contracts', action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+          </div>
         </div>
         <!--Fin Ibox Content-->
-        
       </div>
       <!--Fin Ibox-->
     </div>
@@ -77,7 +71,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      $('.footable').footable();
+      load_table_controls('datatable','Adendas');
     });
   </script>
 <% end %>

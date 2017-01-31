@@ -1,44 +1,133 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "Propebis | Ver Guía de Remisión") %>
 
-<p>
-  <strong>Business:</strong>
-  <%= @remission_guide.business %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @remission_guide.client %>
-</p>
-
-<p>
-  <strong>Driver:</strong>
-  <%= @remission_guide.driver %>
-</p>
-
-<p>
-  <strong>Vehicle:</strong>
-  <%= @remission_guide.vehicle %>
-</p>
-
-<p>
-  <strong>Remission guide number:</strong>
-  <%= @remission_guide.remission_guide_number %>
-</p>
-
-<p>
-  <strong>Initial point:</strong>
-  <%= @remission_guide.initial_point %>
-</p>
-
-<p>
-  <strong>Final point:</strong>
-  <%= @remission_guide.final_point %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @remission_guide.date %>
-</p>
-
-<%= link_to 'Edit', edit_remission_guide_path(@remission_guide) %> |
-<%= link_to 'Back', remission_guides_path %>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-12">
+    <h2>Ver Guía de Remisión</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'remission_guides', :action => 'index' %>">Guías de Remisión</a>
+      </li>
+      <li class="active">
+        <strong>Ver Guía de Remisión</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h3>Ver Guía de Remisión</h3>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Cliente:</strong>
+                <%= Client.find(@remission_guide.client_id).name %>
+              </p>
+              
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Nro. Orden de Venta:</strong>
+                <%= SalesOrder.find(@remission_guide.sales_order_id).sales_order_number %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Empresa:</strong>
+                <%= Business.find(@remission_guide.business_id).name %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Transportista:</strong>
+                <%= Driver.find(@remission_guide.driver_id).name %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Vehículo:</strong>
+                <% v = Vehicle.find(@remission_guide.vehicle_id) %>
+                <%= v.trademark %> <%= v.plate %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Nro. Guía de Remisión:</strong>
+                 <%= @remission_guide.remission_guide_number %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Fecha:</strong>
+                <%= @remission_guide.date %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Punto Inicial:</strong>
+                <%= @remission_guide.initial_point %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Punto Final:</strong>
+                <%= @remission_guide.final_point %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Monto Final:</strong>
+                <%= @remission_guide.ammount %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
+              <table class="footable table table-stripped">
+                <thead>
+                  <tr class="show-table">
+                    <th align="center">Producto</th>
+                    <th align="center">Unidad de Medida</th>
+                    <th align="center">Cantidad</th>
+                    <th align="center">P. Unit</th>
+                    <th align="center">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @remission_guide_details.each do |rgd| %>
+                    <tr>
+                      <% p = Product.find(rgd.product_id) %>
+                      <td align="center"><%= p.name %></td>
+                      <td align="center"><%= p.unit_of_measurement %></td>
+                      <td align="center"><%= rgd.quantity %></td>
+                      <td align="center"><%= rgd.unit_price %></td>
+                      <td align="center"><%= rgd.subtotal %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <%= link_to 'Editar Guía de Remisión', { action: 'edit', id: @remission_guide.id }, class: 'btn btn-w-m btn-success' %>
+          <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

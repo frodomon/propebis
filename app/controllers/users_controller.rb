@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
 
   	if @user.save
-  	  flash[:notice] = "Successfully created User." 
+  	  flash[:notice] = "El Usuario se creó satisfactoriamente." 
       redirect_to users_path
     else
       render :action => 'new'
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
     if @user.update_attributes(user_params)
-      flash[:notice] = "Successfully updated User."
+      flash[:notice] = "El Usuario se actualizó satisfactoriamente." 
       redirect_to users_path
     else
       render :action => 'edit'
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:notice] = "Successfully deleted User."
+      flash[:notice] = "El Usuario se eliminó satisfactoriamente." 
       redirect_to users_path
     end
   end 

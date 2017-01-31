@@ -83,8 +83,6 @@ module ApplicationHelper
     case controller_name
     when 'sales_orders'
       'active'
-    when 'contracts'
-      'active'
     when 'invoices'
       'active'
     else

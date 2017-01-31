@@ -1,6 +1,7 @@
 $(document).ready(function () {
   if($('#submit-form[class^="edit_"]').length > 0) {
     $('.sales_orders').show();
+    $('.load_details').hide();
   };
   $('#invoice_date').datepicker({
       todayBtn: "linked",
@@ -51,6 +52,7 @@ $(document).ready(function () {
       }
     }
     $('#invoice_business_id').attr('disabled', true);
+    $('.load_details').hide();
   });
   $('form').on('change','.inv_unit_price',function(event){
     event.preventDefault();

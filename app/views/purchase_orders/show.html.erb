@@ -1,44 +1,126 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "Propebis | Ver Orden de Compra") %>
 
-<p>
-  <strong>Business:</strong>
-  <%= @purchase_order.business %>
-</p>
-
-<p>
-  <strong>Order number:</strong>
-  <%= @purchase_order.order_number %>
-</p>
-
-<p>
-  <strong>Supplier:</strong>
-  <%= @purchase_order.supplier %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @purchase_order.date %>
-</p>
-
-<p>
-  <strong>Order date:</strong>
-  <%= @purchase_order.order_date %>
-</p>
-
-<p>
-  <strong>Delivery date:</strong>
-  <%= @purchase_order.delivery_date %>
-</p>
-
-<p>
-  <strong>Billing address:</strong>
-  <%= @purchase_order.billing_address %>
-</p>
-
-<p>
-  <strong>Delivery address:</strong>
-  <%= @purchase_order.delivery_address %>
-</p>
-
-<%= link_to 'Edit', edit_purchase_order_path(@purchase_order) %> |
-<%= link_to 'Back', purchase_orders_path %>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-12">
+    <h2>Ver Orden de Compra</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'purchase_orders', :action => 'index' %>">Órdenes de Compra</a>
+      </li>
+      <li class="active">
+        <strong>Ver Orden de Compra</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h3>Ver Orden de Compra</h3>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Empresa:</strong>
+                <%= Business.find(@purchase_order.business_id).name %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Proveedor:</strong>
+                <%= Supplier.find(@purchase_order.supplier_id).name %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Nro. Orden de Compra:</strong>
+                <%= @purchase_order.order_number %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Date:</strong>
+                <%= @purchase_order.date %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Fecha de la Orden:</strong>
+                <%= @purchase_order.order_date %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Fecha de Entrega:</strong>
+                <%= @purchase_order.delivery_date %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Dirección de Facturación:</strong>
+                <%= @purchase_order.billing_address %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Dirección de Entrega:</strong>
+                <%= @purchase_order.delivery_address %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Monto Final:</strong>
+                <%= @purchase_order.ammount %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
+              <table class="footable table table-stripped">
+                <thead>
+                  <tr class="show-table">
+                    <th align="center">Producto</th>
+                    <th align="center">Unidad de Medida</th>
+                    <th align="center">Cantidad</th>
+                    <th align="center">Pendiente</th>
+                    <th align="center">P. Unit</th>
+                    <th align="center">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @purchase_order_details.each do |pod| %>
+                    <tr>
+                      <% p = Product.find(pod.product_id) %>
+                      <td align="center"><%= p.name %></td>
+                      <td align="center"><%= p.unit_of_measurement %></td>
+                      <td align="center"><%= pod.quantity %></td>
+                      <td align="center"><%= pod.pending %></td>
+                      <td align="center"><%= pod.unit_price %></td>
+                      <td align="center"><%= pod.subtotal %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <%= link_to 'Editar Orden de Compra', { action: 'edit', id: @purchase_order.id }, class: 'btn btn-w-m btn-success' %>
+          <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

@@ -1,29 +1,105 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "Propebis | Ver Factura") %>
 
-<p>
-  <strong>Business:</strong>
-  <%= @invoice.business %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @invoice.client %>
-</p>
-
-<p>
-  <strong>Sales order:</strong>
-  <%= @invoice.sales_order %>
-</p>
-
-<p>
-  <strong>Invoice number:</strong>
-  <%= @invoice.invoice_number %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @invoice.date %>
-</p>
-
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-12">
+    <h2>Ver Factura</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
+      </li>
+      <li>
+        <a href="<%= url_for :controller => 'invoices', :action => 'index' %>">Facturas</a>
+      </li>
+      <li class="active">
+        <strong>Ver Facturas</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h3>Ver Factura</h3>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Cliente:</strong>
+                <%= Client.find(@invoice.client_id).name %>
+              </p>
+              
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Nro. Orden de Venta:</strong>
+                <%= SalesOrder.find(@invoice.sales_order_id).sales_order_number %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Empresa:</strong>
+                <%= Business.find(@invoice.business_id).name %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Nro. Orden de Venta:</strong>
+                <%= @invoice.invoice_number %>
+              </p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Date:</strong>
+                <%= @invoice.date %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <p>
+                <strong>Monto Final:</strong>
+                <%= @invoice.ammount %>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
+              <table class="footable table table-stripped">
+                <thead>
+                  <tr class="show-table">
+                    <th align="center">Producto</th>
+                    <th align="center">Unidad de Medida</th>
+                    <th align="center">Cantidad</th>
+                    <th align="center">P. Unit</th>
+                    <th align="center">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @invoice_details.each do |inv| %>
+                    <tr>
+                      <% p = Product.find(inv.product_id) %>
+                      <td align="center"><%= p.name %></td>
+                      <td align="center"><%= p.unit_of_measurement %></td>
+                      <td align="center"><%= inv.quantity %></td>
+                      <td align="center"><%= inv.unit_price %></td>
+                      <td align="center"><%= inv.subtotal %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <%= link_to 'Editar Factura', { action: 'edit', id: @invoice.id }, class: 'btn btn-w-m btn-success' %>
+          <%= button_to 'Volver', { action: 'index'}, method: :get, class: 'btn btn-w-m btn-info' %>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

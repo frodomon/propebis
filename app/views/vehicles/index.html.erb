@@ -6,7 +6,7 @@
     <h2>Vehículos</h2>
     <ol class="breadcrumb">
       <li>
-        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Home</a>
+        <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
       </li>
       <li class="active">
         <strong>Vehículos</strong>
@@ -29,7 +29,6 @@
             <table class="table table-stripped table-bordered table-hover datatable">
               <thead>
                 <tr>
-                  <th align='center'>ID</th>
                   <th align='center'>Placa</th>
                   <th align='center'>Marca</th>
                   <th align='center'>Capacidad</th>
@@ -40,7 +39,6 @@
               <tbody>
                 <% @vehicles.each do |vehicle| %>
                   <tr>
-                    <td align='center'><%= vehicle.id %></td>
                     <td align='center'><%= vehicle.plate %></td>
                     <td align='center'><%= vehicle.trademark %></td>
                     <td align='center'><%= vehicle.capacity %></td>
@@ -62,7 +60,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
-      load_table_controls('datatable');
+      load_table_controls('datatable','Vehículos');
     });
   </script>
 <% end %>

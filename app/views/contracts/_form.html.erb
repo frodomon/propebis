@@ -2,57 +2,65 @@
   <%= form_errors_for @contract %>
 
   <div class="row">
-    <div class= "<%= field_class(@contract, :business_id) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :business_id) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :business_id, 'Empresa', class: 'control-label' %>
       <%= f.collection_select :business_id, Business.order(:name), :id, :name, options = { prompt: 'Seleccione una Empresa'}, html_options = { class: 'select2_demo_1 form-control', autofocus: true  } %>
     </div>
-    <div class= "<%= field_class(@contract, :client_id) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :client_id) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :client_id, 'Cliente', class: 'control-label' %>
       <%= f.collection_select :client_id, Client.order(:name), :id, :name, options = { prompt: 'Seleccione un Cliente'}, html_options = { class: 'select2_demo_1 form-control'} %>
     </div>  
   </div>
   <div class="row">
-    <div class= "<%= field_class(@contract, :contract_number) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :contract_number) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :contract_number, 'Nro. de Contrato', class: 'control-label' %>
       <%= f.text_field :contract_number, placeholder: 'Nro. de Contrato', class: 'form-control' %>
     </div>
-    <div class= "<%= field_class(@contract, :date) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :date, 'Fecha', class: 'control-label' %>
       <%= f.text_field :date, placeholder: @today, class: 'form-control', readonly: true %>
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@contract, :start_date) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :start_date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :start_date, 'Fecha de Inicio', class: 'control-label' %>
       <%= f.text_field :start_date, class: 'form-control' %>
     </div>
-    <div class= "<%= field_class(@contract, :end_date) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :end_date) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :end_date, 'Fecha Final', class: 'control-label' %>
       <%= f.text_field :end_date, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class= "<%= field_class(@contract, :final_price) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :final_price) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :final_price, 'Precio Final', class: 'control-label' %>
+      <% if can? :manage, :all %>
+      <%= f.text_field :final_price, placeholder: 0, class: 'form-control' %>
+      <% else %>
       <%= f.text_field :final_price, placeholder: 0, readonly: true, class: 'form-control' %>
+      <% end %>
     </div>
-    <div class= "<%= field_class(@contract, :credit) %> col-lg-6">
+    <div class= "<%= field_class(@contract, :credit) %> col-lg-6 col-md-6 col-sm-6">
       <%= f.label :credit, 'Credito', class:'control-label' %>
+      <% if can? :manage, :all %>
+      <%= f.text_field :credit, class: 'form-control' %>
+      <% else %>
       <%= f.text_field :credit, readonly: true, class: 'form-control' %>
+      <% end %>
     </div>
   </div>
   <div class="row">
-    <div class= "form-group col-lg-2">
+    <div class= "form-group col-lg-4 col-md-4 col-sm-4">
       <%= f.label :active, 'Activo', class: 'control-label' %>
     </div>
-    <div class= "form-group col-lg-4">
+    <div class= "form-group col-lg-2">
       <%= check_box_tag '*', value='1', checked= true, options = { id: 'chk_active',class: 'checkbox', readonly: true} %>
       <%= f.hidden_field :active %>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
-      <h3>Productos</h3>
+    <h3>Productos</h3>
+    <div class="table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <table class="footable table table-stripped">
         <thead>
           <tr>
@@ -76,12 +84,14 @@
       </div>
     </div>
   </div>
-  <div class= "attachments">
-    <h3>Documentos Adjuntos</h3>
-    <%= f.fields_for :contract_documents do |pod| %>  
-      <%= render 'contract_document_fields', f: pod %> 
-    <% end %>
-    <%= link_to_add_fields "Añadir Documento", f, :contract_documents %>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h3>Documentos Adjuntos</h3>
+      <%= f.fields_for :contract_documents do |pod| %>  
+        <%= render 'contract_document_fields', f: pod %> 
+      <% end %>
+      <%= link_to_add_fields "Añadir Documento", f, :contract_documents %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit class: 'btn btn-primary block m-b' %>
@@ -93,6 +103,7 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
+      $('.footable').footable();
       $('.checkbox').iCheck({
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',

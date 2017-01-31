@@ -1,21 +1,21 @@
 <%= form_for(@user) do |f| %>
   <div class="row">
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
       <%= f.text_field :name, placeholder: 'Nombre Completo', autofocus: true, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
       <%= f.text_field :username, placeholder: 'Nombre de Usuario', class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
       <%= f.email_field :email, placeholder: 'Correo electrónico', class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %>
@@ -23,19 +23,23 @@
       <%= f.password_field :password_confirmation, placeholder:'Confirmar Contraseña', autocomplete: "off", class: 'form-control' %>
     </div>
   </div>
-  <div class="row">
-    <label class="control-label col-lg-12">Rol</label>
-    <div class='hr-line-dashed'></div>
+  <% if can? :manage, :all %>
+    <div class="row">
+      <label class="control-label col-lg-12 col-md-12 col-sm-12">Rol</label>
+      <div class='hr-line-dashed'></div>
+    </div>
     <% for role in User::ROLES %>
-      <div class='col-lg-1'>
-        <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]", class: 'checkbox' } %>
-      </div>
-      <div class="form-group col-lg-11">
-        <%= label_tag "user_roles_#{role}", role.to_s.humanize, class: 'control-label' %><br />
-      </div>
-      <%= hidden_field_tag "user[roles][]", "" %>
+      <div class= "row">
+        <div class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>
+          <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]", class: 'checkbox' } %>
+        </div>
+        <div class="form-group col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <%= label_tag "user_roles_#{role}", role.to_s.humanize, class: 'control-label' %><br />
+        </div>
+        <%= hidden_field_tag "user[roles][]", "" %>
+        </div>
     <% end %>  
-  </div>
+  <% end %>  
   <div class="actions">
     <%= f.submit class: 'btn btn-primary block m-b' %>
   </div>

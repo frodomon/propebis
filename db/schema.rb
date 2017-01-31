@@ -204,9 +204,10 @@ ActiveRecord::Schema.define(version: 20161213055121) do
     t.string   "description"
     t.string   "trademark"
     t.string   "sku"
+    t.boolean  "igv",                 default: false
     t.integer  "category_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
   end
 

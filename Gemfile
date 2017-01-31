@@ -63,4 +63,5 @@ gem 'cancancan'
 gem 'rolify'
 gem 'puma', '~> 3.0'
 gem 'unicorn'
+gem 'pg'
 

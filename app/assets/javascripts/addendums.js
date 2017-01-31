@@ -1,5 +1,10 @@
 $(document).ready(function () {
-  mostrar_numero_contrato(); 
+  if($('#submit-form[class^="new_"]').length > 0) {
+    mostrar_numero_contrato();
+  }
+  if($('#submit-form[class^="edit_"]').length > 0) {
+    mostrar_numero_contrato();
+  } 
   $('form').on('change','.addendum_quantity',function(e){
     e.preventDefault();
     quantity = parseFloat($(this).val());
