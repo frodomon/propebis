@@ -25,7 +25,6 @@ class Ability
       can :edit, User
       cannot :read, User  
     elsif user.has_role? :Usuario
->>>>>>> d55d30c... devise configuration, cancanca configuration
       can :edit, User
       cannot :read, User
       can :read, :all

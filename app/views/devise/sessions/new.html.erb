@@ -1,26 +1,26 @@
-<h2>Log in</h2>
+<% provide(:title, "Propebis | Iniciar Sesión") %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+  <div>
+    <div>
+      <h1 class="logo-name"><img id="logo-img" src="<%= image_url 'logo.png' %>" alt="PROPEBIS S.A.C."></h1>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'm-t'}) do |f| %>
+      <div class="form-group">
+        <%= f.text_field :username, placeholder: 'Nombre de Usuario', autofocus: true, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, placeholder:'Contraseña', autocomplete: "off", class: 'form-control' %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Iniciar Sesión", class: 'btn btn-primary block full-width m-b' %>
+      </div>
+    <% end %>
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+       <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %>
+    <% end -%>
+    <p class="m-t"> <small>Desarrollado por Kaihatsu Labs &copy; 2017</small> </p>
   </div>
-<% end %>
+</div> 
 
-<%= render "devise/shared/links" %>
+

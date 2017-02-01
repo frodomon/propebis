@@ -34,70 +34,65 @@
       </div>
 	</div>
 	<div class="table-responsive m-t">
-        <table class="table invoice-table">
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Unidad de Medida</th>
-              <th>Cantidad</th>
-              <th>P. Unit</th>
-              <th>Subtotal</th>
-           </tr>
-          </thead>
-          <tbody>
-          	<% @purchase_order_details.each do |pod_detail| %>
-          	  <tr>
-                <td><%= Product.find(pod_detail.product_id).name %></td>
-                <td><%= Product.find(pod_detail.product_id).unit_of_measurement %></td>
-                <td><%= pod_detail.quantity %></td>
-                <td><%= pod_detail.unit_price %></td>
-                <td><%= pod_detail.subtotal %></td>
-             </tr>
-           <% end %>
-          </tbody>
-        </table>
-      </div>
-      <table class="table invoice-total">
-        <tbody>
-          <tr>
-            <td><strong>TOTAL :</strong></td>
-            <td><%= @purchase_order.ammount %></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class='row'>
-      	<label class='control-label'>Observaciones:</label>
-	    <div class="form-group col-lg-12">
-	      <label class='control-label'>Forma de Pago:</label>
-	      <label class='control-label'>Pago a 30 días></label>
-	    </div>
-	    <div class="form-group col-lg-12">
-	      <label class='control-label'>Día de entrega:</label>
-	      <label class='control-label'><%= @purchase_order.delivery_date %></label>
-	    </div>
-	    <div class="form-group col-lg-12">
-	      <label class='control-label'>Lugar de Entrega:</label>
-	      <label class='control-label'><%= @purchase_order.delivery_address %></label>
-	    </div>
-	    <div class="form-group col-lg-12">
-	      <label class='control-label'>Referencia:</label>
-	      <label class='control-label'>Agencia de Transportes San Lorenzo</label>
-	    </div>
-	    <div class="form-group col-lg-12">
-	      <label class='control-label'>Persona de Contacto:</label>
-	      <label class='control-label'><%= Business.find(@purchase_order.business_id).contact %></label>
-	    </div>
-	    <div class="form-group col-lg-12">
-	      <label class='control-label'>Horario de Entrega:</label>
-	      <label class='control-label'>08:00 a 10:00 hrs.</label>
-	    </div>
-
-	  </div>
+    <table class="table invoice-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Unidad de Medida</th>
+          <th>Cantidad</th>
+          <th>P. Unit</th>
+          <th>Subtotal</th>
+       </tr>
+      </thead>
+      <tbody>
+      	<% @purchase_order_details.each do |pod_detail| %>
+      	  <tr>
+            <td><%= Product.find(pod_detail.product_id).name %></td>
+            <td><%= Product.find(pod_detail.product_id).unit_of_measurement %></td>
+            <td><%= pod_detail.quantity %></td>
+            <td><%= pod_detail.unit_price %></td>
+            <td><%= pod_detail.subtotal %></td>
+         </tr>
+       <% end %>
+      </tbody>
+    </table>
   </div>
+  <div >
+    <table class="table invoice-total">
+      <tbody>
+        <tr>
+          <td><strong>TOTAL :</strong></td>
+          <td><%= @purchase_order.ammount %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class='row'>
+  	<label class='control-label'>Observaciones:</label>
+    <div class="form-group col-lg-12">
+      <label class='control-label'>Forma de Pago:</label>
+      <label class='control-label'>Pago a 30 días></label>
+    </div>
+    <div class="form-group col-lg-12">
+      <label class='control-label'>Día de entrega:</label>
+      <label class='control-label'><%= @purchase_order.delivery_date %></label>
+    </div>
+    <div class="form-group col-lg-12">
+      <label class='control-label'>Lugar de Entrega:</label>
+      <label class='control-label'><%= @purchase_order.delivery_address %></label>
+    </div>
+    <div class="form-group col-lg-12">
+      <label class='control-label'>Referencia:</label>
+      <label class='control-label'>Agencia de Transportes San Lorenzo</label>
+    </div>
+    <div class="form-group col-lg-12">
+      <label class='control-label'>Persona de Contacto:</label>
+      <label class='control-label'><%= Business.find(@purchase_order.business_id).contact %></label>
+    </div>
+    <div class="form-group col-lg-12">
+      <label class='control-label'>Horario de Entrega:</label>
+      <label class='control-label'>08:00 a 10:00 hrs.</label>
+    </div>      
+  </div>
+  <%= link_to "Printable Receipt (PDF)", print_document_purchase_orders_path(@purchase_order, format: "pdf") %>  
 </div>
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    window.print();
-  </script>
-<% end %>

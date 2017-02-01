@@ -82,7 +82,17 @@ class PurchaseOrdersController < ApplicationController
 
   def print_document
     @purchase_order_details = @purchase_order.purchase_order_details
-    render :layout => "empty"
+    respond_to do |format|
+      format.html {
+        render :layout => "empty"
+      }
+      format.pdf do
+        pdf = Prawn::Document.new
+        pdf.text "Hello World"
+        send_data pdf.render, filename: "orden_nro_#{@purchase_order.order_number}.pdf",
+                              type: 'application/pdf'
+      end
+    end
   end
 
   private

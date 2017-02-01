@@ -1,8 +1,9 @@
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    self.resource = resource_class.new
+    render layout: 'empty'
+  end
 
   # POST /resource/password
   # def create
@@ -10,9 +11,12 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
+  def edit
+    self.resource = resource_class.new
+    set_minimum_password_length
+    resource.reset_password_token = params[:reset_password_token]
+    render layout: 'empty'
+  end
 
   # PUT /resource/password
   # def update

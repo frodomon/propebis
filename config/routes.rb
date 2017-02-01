@@ -1,18 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
-  devise_scope :user do
-    authenticated :user do
-      root :to => 'static_pages#home', as: :authenticated_root
-    end
-    unauthenticated :user do
-      root :to => 'static_pages#login', as: :unauthenticated_root
-    end
-  end
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', passwords:'users/passwords' },
+  path: '', path_names: {
+    sign_in: 'login',
+    sign_up: 'register',
+    password: 'forgot_password'
+  }
+  root :to => 'static_pages#index'
+  get'inicio', to: 'static_pages#home', as: :home
   scope '/admin' do
     resources :users
   end
-  get 'static_pages/signup'
-  get 'static_pages/forgot_password'
   resources :invoices do
     collection do
       get 'search_sales_order_details' => 'invoices#search_sales_order_details', as: :search_sales_order_details
