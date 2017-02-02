@@ -7,7 +7,7 @@
             <span class="clear">
               <span class="block m-t-xs">
                 <strong class="font-bold"><%= current_user.name %></strong>
-              </span> <span class="text-muted text-xs block">Nombre del Rol<b class="caret"></b></span>
+              </span> <span class="text-muted text-xs block">Opciones<b class="caret"></b></span>
             </span>
           </a>
           <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -21,12 +21,12 @@
           </ul>
         </div>
         <div class="logo-element">
-          IN+
+          <img id="logo-img" src="<%= image_url 'logo.png' %>" alt="PROPEBIS S.A.C.">
         </div>
       </li>
       <li class="<%= 'active' if current_page?('/') %>">
         <%= link_to "/" do %>
-          <i class="fa fa-home"></i> <span class="nav-label">Main page</span>
+          <i class="fa fa-home"></i> <span class="nav-label">Inicio</span>
         <% end %>
       </li>
     <% if can? :manage, :all %>

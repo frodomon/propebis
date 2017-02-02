@@ -4,7 +4,8 @@ class Product < ActiveRecord::Base
   validates_presence_of :trademark, message: "Debe ingresar la marca del producto"
   validates_presence_of :category_id, message: "Debe elegir una categoría para el producto"
   validates_presence_of :sku, message: "Debe ingresar un código para el producto"
-  
+  validates_presence_of :igv, message: "Debe indicar si el producto esta exonerado de IGV"
+
   belongs_to :category
   has_many :product_lots
   has_many :purchase_order_details

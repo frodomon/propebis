@@ -7,6 +7,11 @@ class Ability
     if user.has_role? :Administración
       can :manage, :all
     elsif user.has_role? :Logística
+      can :manage, Business
+      can :manage, Supplier
+      can :manage, Client
+      can :manage, Vehicle
+      can :manage, Driver
       can :manage, RemissionGuide
       can :manage, ControlGuide
       can :manage, ProductLot
@@ -15,6 +20,8 @@ class Ability
       can :manage, PurchaseOrder
       can :manage, SalesOrder
       can :manage, Contract
+      can :manage, Addendum
+      can :manage, Invoice
       can :edit, User
       cannot :read, User  
       can :read, :all
@@ -27,10 +34,8 @@ class Ability
     elsif user.has_role? :Usuario
       can :edit, User
       cannot :read, User
-      can :read, :all
     else
       can :create, User
-      can :read, :all
       cannot :read, User  
     end
     # Define abilities for the passed in user here. For example:

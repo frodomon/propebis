@@ -1,8 +1,7 @@
-<% provide(:title, "Cargar Lotes de Producto | Propebis") %>
-
-<div class="row wrapper border-bottom white-bg page-heading">
+<% provide(:title, "Propebis | Carga Masiva de Lotes de Producto") %>
+<div class="row wrapper border-bottom white-bg page-heading breadcrumbs-margin">
   <div class="col-lg-12">
-    <h2>Cargar Lotes de Producto</h2>
+    <h2>Carga Masiva de Lotes de Producto</h2>
     <ol class="breadcrumb">
       <li>
         <a href="<%= url_for :controller => 'static_pages', :action => 'home' %>">Inicio</a>
@@ -11,17 +10,18 @@
         <a href="<%= url_for :controller => 'product_lots', :action => 'index' %>">Almacén</a>
       </li>
       <li class="active">
-        <strong>Cargar Lotes de Producto</strong>
+        <strong>Carga Masiva de Lotes de Producto</strong>
       </li>
     </ol>
   </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
+<div class="wrapper wrapper-content animated fadeInRight no-padding">
+  <%= render 'shared/notifications' %>
+  <div class="row breadcrumbs-margin">
   	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="ibox float-e-margins">
      	  <div class="ibox-title">
-    	    <h3>Cargar Lotes de Producto</h3>
+    	    <h3>Carga Masiva de Lotes de Producto</h3>
     	  </div>
     	  <div class="ibox-content clearfix">
           <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -58,7 +58,6 @@
                   <% end %>
                 </tbody>
               </table>
-              <a href='#' class="add_rows btn btn-success">Añadir Producto</a>
               <div class="actions">
                 <%= submit_tag 'Ingresar Productos',  class: 'btn btn-primary block m-b' %>
               </div>

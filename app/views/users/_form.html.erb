@@ -1,21 +1,22 @@
 <%= form_for(@user) do |f| %>
+  <%= form_errors_for @user %>
   <div class="row">
-    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+    <div class= "<%= field_class(@user, :name) %> form-group col-lg-12 col-md-12 col-sm-12">
       <%= f.text_field :name, placeholder: 'Nombre Completo', autofocus: true, class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+    <div class= "<%= field_class(@user, :username) %> form-group col-lg-12 col-md-12 col-sm-12">
       <%= f.text_field :username, placeholder: 'Nombre de Usuario', class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+    <div class= "<%= field_class(@user, :email) %> form-group col-lg-12 col-md-12 col-sm-12">
       <%= f.email_field :email, placeholder: 'Correo electrónico', class: 'form-control' %>
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+    <div class= "<%= field_class(@user, :password) %> form-group col-lg-12 col-md-12 col-sm-12">
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %>

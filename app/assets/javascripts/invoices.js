@@ -22,6 +22,7 @@ $(document).ready(function () {
       fill_blanks();
       total = calculate_final_price('inv_subtotal');
       $('#invoice_ammount').val(total);
+      $('.load_details').hide();
     }
   });
   $('form').on('change', '#invoice_client_id',function(e){
@@ -52,7 +53,6 @@ $(document).ready(function () {
       }
     }
     $('#invoice_business_id').attr('disabled', true);
-    $('.load_details').hide();
   });
   $('form').on('change','.inv_unit_price',function(event){
     event.preventDefault();

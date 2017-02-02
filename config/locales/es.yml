@@ -5,6 +5,23 @@ es:
       submit: "Guardar %{model}"
       update: "Actualizar %{model}"
   activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Debes ingresar un correo electrónico"
+              taken: "Por favor, usa un correo electrónico distinto"
+              invalid: "Por favor, ingresa un correo electrónico válido"
+            password:
+              blank: "Por favor, ingresa una contraseña"
+              confirmation: "La contraseña no coincide con el de confirmación"
+            password_confirmation:
+              blank: "Por favor ingresa la confirmación de la contraseña"
+            username:
+              blank: "Debe ingresar un nombre de usuario"
+            name:
+              blank: "Debe ingresar su nombre"
     models:
       business: "Empresa"
       user: "Usuario"

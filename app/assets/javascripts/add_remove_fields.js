@@ -14,11 +14,11 @@ $(document).ready(function () {
   $('form').on('click','.remove_fields', function(e){
     e.preventDefault();
     $(this).prev().val('1');
-    $(this).closest('.row').hide();
+    $(this).closest('.row').remove();
   });
   $('form').on('click','.remove_row_fields', function(event){
     $(this).prev().val('1');
-    $(this).closest('tr').hide();
+    $(this).closest('tr').remove();
     event.preventDefault();
   });
   

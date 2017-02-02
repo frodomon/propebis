@@ -17,11 +17,17 @@ class UsersController < ApplicationController
   	params[:user].delete(:password) if params[:user][:password].blank?
     params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
 
-  	if @user.save
-  	  flash[:notice] = "El Usuario se creó satisfactoriamente." 
-      redirect_to users_path
-    else
-      render :action => 'new'
+    respond_to do |format|
+      if @user.save
+        format.html { 
+          flash[:notice] = "El Usuario se creó satisfactoriamente." 
+          redirect_to users_path
+        }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
