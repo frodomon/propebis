@@ -83,10 +83,5 @@
 	    
     </div>
   </div>
+  <%= link_to "Printable Receipt (PDF)", print_document_remission_guides_path(@remission_guide, format: "pdf") %>
 </div>
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    window.print();
-  </script>
-<% end %>

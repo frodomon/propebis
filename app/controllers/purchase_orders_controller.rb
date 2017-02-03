@@ -87,10 +87,10 @@ class PurchaseOrdersController < ApplicationController
         render :layout => "empty"
       }
       format.pdf do
-        pdf = Prawn::Document.new
-        pdf.text "Hello World"
+        pdf = Pdf.new(@purchase_order, @purchase_order_details)
+
         send_data pdf.render, filename: "orden_nro_#{@purchase_order.order_number}.pdf",
-                              type: 'application/pdf'
+                              type: 'application/pdf', disposition: "inline"
       end
     end
   end

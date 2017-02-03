@@ -125,7 +125,16 @@ class RemissionGuidesController < ApplicationController
   end
   def print_document
     @remission_guide_details = @remission_guide.remission_guide_details
-    render :layout => "empty"
+    respond_to do |format|
+      format.html {
+        render :layout => "empty"
+      }
+      format.pdf do
+        pdf = Pdf.new(@remission_guide, @remission_guide_details)
+        send_data pdf.render, filename: "orden_nro_#{@remission_guide.remission_guide_number}.pdf",
+                              type: 'application/pdf', disposition: "inline"
+      end
+    end
   end
 
   private
