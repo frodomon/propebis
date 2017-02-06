@@ -1,7 +1,7 @@
 class Pdf < Prawn::Document
 	def initialize(object, object_details)
-		super(margin: [20,20], page_size: 'A4')
-		font_size 8
+		super(margin: [20,20], page_size: 'LEGAL')
+		font_size 10
 		if object.is_a?(PurchaseOrder)
 			@po = object
 			@pod = object_details
@@ -31,7 +31,7 @@ class Pdf < Prawn::Document
   	@client = Client.find(@rg.client_id)
   	@vehicle = Vehicle.find(@rg.vehicle_id)
   	@driver = Driver.find(@rg.driver_id)
-  	move_down 66
+  	move_down 76
   	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [70,cursor]
 		text " "
 		move_down 3
@@ -57,6 +57,7 @@ class Pdf < Prawn::Document
     
   end
   def rg_line_items
+    font_size 12
   	data = []
     @rgd.each do |od|
       p = Product.find(od.product_id)
