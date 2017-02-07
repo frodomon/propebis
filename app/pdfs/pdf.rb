@@ -13,19 +13,46 @@ class Pdf < Prawn::Document
 			rgd_content
 		end
 		if object.is_a?(ControlGuide)
+      @rg = object
+      @rgd = object_details
+      rgd_content
 		end
 		if object.is_a?(Invoice)
+      @inv = object
+      @invd = object_details
+      inv_content
 		end
 	end
 	def pod_content
 		@supplier = Supplier.find(@po.supplier_id)
 
 		text "#{@supplier.name}", :style => :bold
+    move_down 3
     text "#{@supplier.ruc}", :style => :bold
+    move_down 3
     text "#{@po.billing_address }", :style => :bold
+    move_down 60
     text "#{@po.date.strftime("%d/%m/%Y") }"
     text "#{@po.delivery_address }"
     line_items
+  end
+  def inv_content
+    @client = Client.find(@inv.client_id)
+    so = SalesOrder.find(@inv.sales_order_id).sales_order_number
+    move_down 120
+    text_box "#{@client.name}", at: [70, cursor], :style => :bold
+    text " "
+    move_down 3
+    text_box "#{@client.ruc}", at: [70, cursor], :style => :bold
+    text " "
+    move_down 3
+    text_box "#{@client.billing_address }", at: [70, cursor], :style => :bold
+    text " "
+    move_down 20
+    data = [[@inv.date, so]]
+    table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [522,50])
+    move_down 20
+    inv_line_items    
   end
   def rgd_content
   	@client = Client.find(@rg.client_id)
@@ -63,7 +90,15 @@ class Pdf < Prawn::Document
       p = Product.find(od.product_id)
     	data += [[od.quantity, p.unit_of_measurement, p.name]]
     end
-    table(data, header: true, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,240])
+    table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,240])
 	end
-
+  def inv_line_items
+    font_size 12
+    data = []
+    @invd.each do |id|
+      p = Product.find(id.product_id)
+      data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, id.subtotal]]
+    end
+    table(data,position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold}, column_widths: [50,50,300,80,80])
+  end
 end
