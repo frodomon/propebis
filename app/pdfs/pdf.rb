@@ -99,6 +99,6 @@ class Pdf < Prawn::Document
       p = Product.find(id.product_id)
       data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, id.subtotal]]
     end
-    table(data,position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold}, column_widths: [50,50,300,80,80])
+    table(data,position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold}, column_widths: [50,50,300,86,86])
   end
 end
