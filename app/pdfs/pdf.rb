@@ -31,7 +31,7 @@ class Pdf < Prawn::Document
   	@client = Client.find(@rg.client_id)
   	@vehicle = Vehicle.find(@rg.vehicle_id)
   	@driver = Driver.find(@rg.driver_id)
-  	move_down 76
+  	move_down 86
   	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [70,cursor], :style => :bold
 		text " "
 		move_down 3
@@ -46,13 +46,13 @@ class Pdf < Prawn::Document
     move_down 4
     text_box "#{@rg.final_point }", at: [70, cursor], :style => :bold
     text " "
-    move_down 25
+    move_down 30
     text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [70, cursor], :style => :bold
     text " "
     move_down 14
     text_box "#{@driver.license}", at: [70, cursor], :style => :bold
     text " "
-    move_down 40
+    move_down 60
 		rg_line_items
     
   end
