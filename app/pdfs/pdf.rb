@@ -40,13 +40,13 @@ class Pdf < Prawn::Document
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
     move_down 80
-    text_box "#{@client.name}", at: [45, cursor], :style => :bold
+    text_box "#{@client.name}", at: [60, cursor], :style => :bold
     text " "
     move_down 5
-    text_box "#{@client.ruc}", at: [45, cursor], :style => :bold
+    text_box "#{@client.ruc}", at: [60, cursor], :style => :bold
     text " "
     move_down 5
-    text_box "#{@client.billing_address }", at: [45, cursor], :style => :bold
+    text_box "#{@client.billing_address }", at: [60, cursor], :style => :bold
     text " "
     move_down 25
     data = [[@inv.date, so]]
@@ -99,6 +99,6 @@ class Pdf < Prawn::Document
       p = Product.find(id.product_id)
       data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, id.subtotal]]
     end
-    table(data,position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold}, column_widths: [50,50,300,86,86])
+    table(data,position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold}, column_widths: [50,50,360,56,56])
   end
 end
