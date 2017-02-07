@@ -79,8 +79,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   # Devise Mailer
-  config.action_mailer.default_url_options = { host: '138.197.47.34:22'}
-  Rails.application.routes.default_url_options[:host] = '138.197.47.34:22'
+  config.action_mailer.default_url_options = { host: '138.197.47.34'}
+  Rails.application.routes.default_url_options[:host] = '138.197.47.34'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => "utf-8"
