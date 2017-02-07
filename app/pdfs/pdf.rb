@@ -40,18 +40,18 @@ class Pdf < Prawn::Document
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
     move_down 110
-    text_box "#{@client.name}", at: [70, cursor], :style => :bold
+    text_box "#{@client.name}", at: [35, cursor], :style => :bold
     text " "
     move_down 5
-    text_box "#{@client.ruc}", at: [70, cursor], :style => :bold
+    text_box "#{@client.ruc}", at: [35, cursor], :style => :bold
     text " "
     move_down 5
     text_box "#{@client.billing_address }", at: [70, cursor], :style => :bold
     text " "
-    move_down 30
+    move_down 40
     data = [[@inv.date, so]]
     table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [522,50])
-    move_down 40
+    move_down 30
     inv_line_items    
   end
   def rgd_content
