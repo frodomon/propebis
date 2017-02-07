@@ -39,14 +39,14 @@ class Pdf < Prawn::Document
   def inv_content
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
-    move_down 110
-    text_box "#{@client.name}", at: [35, cursor], :style => :bold
+    move_down 120
+    text_box "#{@client.name}", at: [20, cursor], :style => :bold
     text " "
     move_down 5
-    text_box "#{@client.ruc}", at: [35, cursor], :style => :bold
+    text_box "#{@client.ruc}", at: [20, cursor], :style => :bold
     text " "
     move_down 5
-    text_box "#{@client.billing_address }", at: [70, cursor], :style => :bold
+    text_box "#{@client.billing_address }", at: [20, cursor], :style => :bold
     text " "
     move_down 40
     data = [[@inv.date, so]]
