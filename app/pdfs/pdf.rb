@@ -40,19 +40,19 @@ class Pdf < Prawn::Document
 		move_down 3
 		text_box "#{@client.ruc}", at: [70, cursor], :style => :bold
 		text " "
-		move_down 4
+		move_down 10
     text_box "#{@rg.initial_point }", at: [70, cursor], :style => :bold
     text " "
     move_down 4
     text_box "#{@rg.final_point }", at: [70, cursor], :style => :bold
     text " "
-    move_down 25
+    move_down 45
     text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [70, cursor], :style => :bold
     text " "
     move_down 14
     text_box "#{@driver.license}", at: [70, cursor], :style => :bold
     text " "
-    move_down 30
+    move_down 50
 		rg_line_items
     
   end
