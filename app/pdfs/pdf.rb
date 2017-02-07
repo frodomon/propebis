@@ -40,19 +40,19 @@ class Pdf < Prawn::Document
 		move_down 3
 		text_box "#{@client.ruc}", at: [70, cursor], :style => :bold
 		text " "
-		move_down 20
+		move_down 25
     text_box "#{@rg.initial_point }", at: [70, cursor], :style => :bold
     text " "
     move_down 4
     text_box "#{@rg.final_point }", at: [70, cursor], :style => :bold
     text " "
-    move_down 75
+    move_down 95
     text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [70, cursor], :style => :bold
     text " "
     move_down 14
     text_box "#{@driver.license}", at: [70, cursor], :style => :bold
     text " "
-    move_down 90
+    move_down 120
 		rg_line_items
     
   end
@@ -63,7 +63,7 @@ class Pdf < Prawn::Document
       p = Product.find(od.product_id)
     	data += [[od.quantity, p.unit_of_measurement, p.name]]
     end
-    table(data, header: true, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,30,200])
+    table(data, header: true, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,40,290])
 	end
 
 end
