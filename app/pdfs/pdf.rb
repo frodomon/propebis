@@ -1,12 +1,7 @@
 class Pdf < Prawn::Document
-	def initialize(object, object_details)
-		super(margin: [20,20], page_size: 'LEGAL')
+	def initialize(object, object_details, page_size)
+    super(margin: [20,20], :page_size => page_size)
 		font_size 10
-		if object.is_a?(PurchaseOrder)
-			@po = object
-			@pod = object_details
-			pod_content
-		end
 		if object.is_a?(RemissionGuide)
 			@rg = object
 			@rgd = object_details
@@ -23,19 +18,6 @@ class Pdf < Prawn::Document
       inv_content
 		end
 	end
-	def pod_content
-		@supplier = Supplier.find(@po.supplier_id)
-
-		text "#{@supplier.name}", :style => :bold
-    move_down 3
-    text "#{@supplier.ruc}", :style => :bold
-    move_down 3
-    text "#{@po.billing_address }", :style => :bold
-    move_down 60
-    text "#{@po.date.strftime("%d/%m/%Y") }"
-    text "#{@po.delivery_address }"
-    line_items
-  end
   def inv_content
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
@@ -90,7 +72,7 @@ class Pdf < Prawn::Document
       p = Product.find(od.product_id)
     	data += [[od.quantity, p.unit_of_measurement, p.name]]
     end
-    table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,240])
+    table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,240])  
 	end
   def inv_line_items
     font_size 12

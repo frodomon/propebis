@@ -38,7 +38,6 @@
                   <th align='center'>Monto Final</th>
                   <th align='center'>Nro. SIAF</th>
                   <th align='center'>Estado</th>
-                  <th align='center'>Imprimir</th>
                   <th align='center'>Ver</th>
                   <th align='center'>Editar</th>
                   <th align='center'>Eliminar</th>
@@ -65,7 +64,6 @@
                     <td align="center"><%= sales_order.ammount %></td>
                     <td align="center"><%= sales_order.siaf_number %></td>
                     <td align="center"><%= sales_order_status(sales_order.status) %></td>
-                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: sales_order.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
                     <td align="center"><%= link_to 'Ver', { action: 'show', id: sales_order.id }, class: 'btn btn-w-m btn-success btn-xs' %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: sales_order.id }, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: sales_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>

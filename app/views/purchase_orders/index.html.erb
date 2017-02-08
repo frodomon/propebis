@@ -36,7 +36,6 @@
                   <th>Dirección de Entrega</th>
                   <th>Monto Final</th>
                   <th>Registrado</th>
-                  <th>Imprimir</th>
                   <th>Ver</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
@@ -55,7 +54,6 @@
                     <td align="center"><%= purchase_order.delivery_address %></td>
                     <td align="center"><%= purchase_order.ammount %></td>
                     <td align="center"><%= human_boolean(purchase_order.registered) %></td>
-                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', id: purchase_order.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
                     <td align="center"><%= link_to 'Ver',{ action: 'show', id: purchase_order.id}, class: 'btn btn-w-m btn-success btn-xs'%></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: purchase_order.id}, class: 'btn btn-w-m btn-warning btn-xs' %></td>
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: purchase_order.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>

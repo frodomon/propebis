@@ -92,12 +92,13 @@ class InvoicesController < ApplicationController
   end
   def print_document
     @invoice_details = @invoice.invoice_details
+    size = params[:size]
     respond_to do |format|
       format.html {
         render :layout => "empty"
       }
       format.pdf do
-        pdf = Pdf.new(@invoice, @invoice_details)
+        pdf = Pdf.new(@invoice, @invoice_details, size)
         send_data pdf.render, filename: "factura_nro_#{@invoice.invoice_number}.pdf",
                               type: 'application/pdf', disposition: "inline"
       end

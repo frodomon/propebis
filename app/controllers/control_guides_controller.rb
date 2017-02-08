@@ -127,7 +127,17 @@ class ControlGuidesController < ApplicationController
   end
   def print_document
     @control_guide_details = @control_guide.control_guide_details
-    render :layout => "empty"
+    size = params[:size]
+    respond_to do |format|
+      format.html {
+        render :layout => "empty"
+      }
+      format.pdf do
+        pdf = Pdf.new(@control_guide, @control_guide_details, size )
+        send_data pdf.render, filename: "guia_interna_nro_#{@control_guide.control_guide_number}.pdf",
+                              type: 'application/pdf', disposition: "inline"
+      end
+    end
   end
 
   private
