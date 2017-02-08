@@ -42,7 +42,7 @@ class Pdf < Prawn::Document
   	@driver = Driver.find(@rg.driver_id)
     a4 = page_size === 'A4'    
   	if a4
-      move_down 86
+      move_down 66
     else
       move_down 48
     end
@@ -60,7 +60,11 @@ class Pdf < Prawn::Document
     move_down 2
     text_box "#{@rg.final_point }", at: [80, cursor], :style => :bold
     text " "
-    move_down 24
+    if a4
+      move_down 14
+    else
+      move_down 24
+    end
     text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [80, cursor], :style => :bold
     text " "
     move_down 14
