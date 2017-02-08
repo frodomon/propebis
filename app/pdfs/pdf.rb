@@ -66,7 +66,7 @@ class Pdf < Prawn::Document
     move_down 14
     text_box "#{@driver.license}", at: [80, cursor], :style => :bold
     text " "
-    move_down 15
+    move_down 20
 		rg_line_items
     
   end
