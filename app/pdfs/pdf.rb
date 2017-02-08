@@ -46,25 +46,25 @@ class Pdf < Prawn::Document
     else
       move_down 46
     end
-  	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [70,cursor], :style => :bold
+  	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [80,cursor], :style => :bold
 		text " "
 		move_down 3
-		text_box "#{@client.name}", at: [70, cursor], :style => :bold
+		text_box "#{@client.name}", at: [80, cursor], :style => :bold
 		text " "
 		move_down 3
-		text_box "#{@client.ruc}", at: [70, cursor], :style => :bold
+		text_box "#{@client.ruc}", at: [80, cursor], :style => :bold
 		text " "
 		move_down 13
-    text_box "#{@rg.initial_point }", at: [70, cursor], :style => :bold
+    text_box "#{@rg.initial_point }", at: [80, cursor], :style => :bold
     text " "
     move_down 4
-    text_box "#{@rg.final_point }", at: [70, cursor], :style => :bold
+    text_box "#{@rg.final_point }", at: [80, cursor], :style => :bold
     text " "
-    move_down 40
-    text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [70, cursor], :style => :bold
+    move_down 20
+    text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [80, cursor], :style => :bold
     text " "
     move_down 14
-    text_box "#{@driver.license}", at: [70, cursor], :style => :bold
+    text_box "#{@driver.license}", at: [80, cursor], :style => :bold
     text " "
     move_down 35
 		rg_line_items
