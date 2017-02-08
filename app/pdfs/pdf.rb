@@ -5,12 +5,12 @@ class Pdf < Prawn::Document
 		if object.is_a?(RemissionGuide)
 			@rg = object
 			@rgd = object_details
-			rgd_content
+			rgd_content(page_size)
 		end
 		if object.is_a?(ControlGuide)
       @rg = object
       @rgd = object_details
-      rgd_content
+      rgd_content(page_size)
 		end
 		if object.is_a?(Invoice)
       @inv = object
@@ -36,11 +36,16 @@ class Pdf < Prawn::Document
     move_down 20
     inv_line_items    
   end
-  def rgd_content
+  def rgd_content(page_size)
   	@client = Client.find(@rg.client_id)
   	@vehicle = Vehicle.find(@rg.vehicle_id)
   	@driver = Driver.find(@rg.driver_id)
-  	move_down 86
+    a4 = page_size === 'A4'    
+  	if a4
+      move_down 86
+    else
+      move_down 46
+    end
   	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [70,cursor], :style => :bold
 		text " "
 		move_down 3
