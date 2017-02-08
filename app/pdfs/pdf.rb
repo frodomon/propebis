@@ -44,23 +44,23 @@ class Pdf < Prawn::Document
   	if a4
       move_down 86
     else
-      move_down 51
+      move_down 48
     end
   	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [80,cursor], :style => :bold
 		text " "
-		move_down 3
+		move_down 2
 		text_box "#{@client.name}", at: [80, cursor], :style => :bold
 		text " "
-		move_down 3
+		move_down 2
 		text_box "#{@client.ruc}", at: [80, cursor], :style => :bold
 		text " "
-		move_down 3
+		move_down 2
     text_box "#{@rg.initial_point }", at: [80, cursor], :style => :bold
     text " "
-    move_down 3
+    move_down 2
     text_box "#{@rg.final_point }", at: [80, cursor], :style => :bold
     text " "
-    move_down 20
+    move_down 24
     text_box "#{@vehicle.trademark} - #{@vehicle.plate}", at: [80, cursor], :style => :bold
     text " "
     move_down 14
