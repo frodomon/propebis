@@ -61,7 +61,7 @@ class Pdf < Prawn::Document
     text_box "#{@rg.final_point }", at: [80, cursor], :style => :bold
     text " "
     if a4
-      move_down 28
+      move_down 26
     else
       move_down 24
     end
