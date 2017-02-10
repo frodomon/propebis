@@ -6,6 +6,9 @@ class CreateSalesOrderDetails < ActiveRecord::Migration
       t.float :quantity
       t.float :unit_price
       t.float :subtotal
+      t.float :pending_rg
+      t.float :pending_cg
+      t.float :pending_inv
 
       t.timestamps null: false
     end

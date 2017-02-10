@@ -34,7 +34,7 @@ function PopulateResult(data, result){
     result.quantity = obj.quantity
   });
 }
-function load_details(url, element_id, params, json_filler){
+function load_details(url, element_id, params, json_filler, type){
   $.ajax({
       type: 'GET',
       dataType: 'json',
@@ -44,7 +44,7 @@ function load_details(url, element_id, params, json_filler){
       success: function(data) {
         $.each(data, function(i,object){
           if (i===0){
-            fill_fields_from_json(json_filler,i,object);
+            fill_fields_from_json(json_filler,i,object, type);
           }
           else{
             newNestedForm  = $('table #content_details').last().clone()
@@ -63,7 +63,7 @@ function load_details(url, element_id, params, json_filler){
 
             $(newNestedForm).appendTo('table').last();
 
-            fill_fields_from_json(json_filler,formsOnPage,object);
+            fill_fields_from_json(json_filler,formsOnPage,object, type);
           }
         });
       },
@@ -72,12 +72,27 @@ function load_details(url, element_id, params, json_filler){
       }
     });
 }
-function fill_fields_from_json(selector_str, id, object){
+function fill_fields_from_json(selector_str, id, object, type){
   $(selector_str+id+'_product_id option[value="'+object.product_id+'"]').prop('selected','selected').trigger('change');
-  if (object.pending){
+  if (type === 'contrato'){
     $(selector_str+id+'_quantity').val(object.pending);
     subtotal = object.pending * object.unit_price
     $(selector_str+id+'_subtotal').val(subtotal);
+  }
+  else if(type === 'guia_de_remision'){
+    $(selector_str+id+'_quantity').val(object.pending_rg);
+    subtotal = object.pending_rg * object.unit_price
+    $(selector_str+id+'_subtotal').val(subtotal); 
+  }
+  else if(type === 'guia_de_remision_interna'){
+    $(selector_str+id+'_quantity').val(object.pending_cg);
+    subtotal = object.pending_cg * object.unit_price
+    $(selector_str+id+'_subtotal').val(subtotal);  
+  }
+  else if(type === 'factura'){
+    $(selector_str+id+'_quantity').val(object.pending_inv);
+    subtotal = object.pending_inv * object.unit_price
+    $(selector_str+id+'_subtotal').val(subtotal); 
   }
   else{
     $(selector_str+id+'_quantity').val(object.quantity);

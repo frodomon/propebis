@@ -8,7 +8,7 @@ $(document).ready(function () {
     search = parseInt($('.sales_order_select').find(':selected').val());
     if (search != 0 ) {
       parameters = {search: search }; 
-      load_details('/control_guides/search_sales_order_details','content_details', parameters, '#control_guide_control_guide_details_attributes_');
+      load_details('/control_guides/search_sales_order_details','content_details', parameters, '#control_guide_control_guide_details_attributes_','guia_de_remision_interna');
       fill_blanks();
       total = calculate_final_price('cgd_subtotal');
       $('#control_guide_ammount').val(total);
@@ -77,6 +77,8 @@ $(document).ready(function () {
     $('#control_guide_ammount').val(total);
   });
   $('#submit-form').submit(function(){
+    total = calculate_final_price('cgd_subtotal');
+    $('#control_guide_ammount').val(total);
     $('#control_guide_business_id').attr('disabled', false);
     fields = ['#control_guide_business_id','#control_guide_client_id','#control_guide_vehicle_id','#control_guide_driver_id','#control_guide_control_guide_number','#control_guide_initial_point','#control_guide_final_point','#control_guide_ammount'];
     fields_flag = validate_form(fields);

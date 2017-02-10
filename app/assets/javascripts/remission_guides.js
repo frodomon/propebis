@@ -9,7 +9,7 @@ $(document).ready(function () {
     search = parseInt($('.sales_order_select').find(':selected').val());
     if (search != 0 ) {
       parameters = {search: search }; 
-      load_details('/remission_guides/search_sales_order_details','content_details', parameters, '#remission_guide_remission_guide_details_attributes_');
+      load_details('/remission_guides/search_sales_order_details','content_details', parameters, '#remission_guide_remission_guide_details_attributes_', 'guia_de_remision');
       fill_blanks();
       total = calculate_final_price('rgd_subtotal');
       $('#remission_guide_ammount').val(total);
@@ -78,6 +78,8 @@ $(document).ready(function () {
     $('#remission_guide_ammount').val(total);
   });
   $('#submit-form').submit(function(){
+    total = calculate_final_price('rgd_subtotal');
+    $('#remission_guide_ammount').val(total);
     $('#remission_guide_business_id').attr('disabled', false);
     fields = ['#remission_guide_business_id','#remission_guide_client_id','#remission_guide_vehicle_id','#remission_guide_driver_id','#remission_guide_remission_guide_number','#remission_guide_initial_point','#remission_guide_final_point','#remission_guide_ammount'];
     fields_flag = validate_form(fields);

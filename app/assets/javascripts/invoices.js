@@ -18,7 +18,7 @@ $(document).ready(function () {
     search = parseInt($('.sales_order_select').find(':selected').val());
     if (search != 0 ) {
       parameters = {search: search }; 
-      load_details('/invoices/search_sales_order_details','content_details', parameters, '#invoice_invoice_details_attributes_');
+      load_details('/invoices/search_sales_order_details','content_details', parameters, '#invoice_invoice_details_attributes_', 'factura');
       fill_blanks();
       total = calculate_final_price('inv_subtotal');
       $('#invoice_ammount').val(total);

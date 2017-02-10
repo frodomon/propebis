@@ -2,6 +2,7 @@ $(document).ready(function () {
   if($('#submit-form[class^="edit_"]').length > 0) {
     $('#selection-buttons').hide();
     $('#form-content').show();
+    $('.onedit').show();
     if (id !== 0){  
       $('.without').show();
       $('.contract').show();
@@ -90,7 +91,7 @@ $(document).ready(function () {
     search = c_id
     if (search != 0 ) {
       parameters = {search: search }; 
-      load_details('/sales_orders/search_contract_details','content_details', parameters,'#sales_order_sales_order_details_attributes_');
+      load_details('/sales_orders/search_contract_details','content_details', parameters,'#sales_order_sales_order_details_attributes_', 'contrato');
       fill_blanks();
       total = calculate_final_price('sod_subtotal');
       $('#sales_order_ammount').val(total);
@@ -144,6 +145,8 @@ $(document).ready(function () {
     format: 'yyyy-mm-dd'
   });
   $('#submit-form').submit(function(){
+    total = calculate_final_price('sod_subtotal');
+    $('#sales_order_ammount').val(total)
     credit_flag = true;
     flag_sales_order = false;
     o_venta = [];

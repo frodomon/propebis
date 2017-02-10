@@ -10,9 +10,9 @@
   </td>
   <td>
     <% if can? :manage, :all %>
-    <%= f.number_field :pending, class: 'contract_pending form-control', step: :any %>
+      <%= f.number_field :pending, class: 'contract_pending form-control', step: :any %>
     <% else %>
-    <%= f.number_field :pending, class: 'contract_pending form-control', readonly: true, step: :any %>
+      <%= f.number_field :pending, class: 'contract_pending form-control', readonly: true, step: :any %>
     <% end %>
   </td>
   <td>

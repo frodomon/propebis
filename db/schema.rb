@@ -300,6 +300,9 @@ ActiveRecord::Schema.define(version: 20161213055121) do
     t.float    "quantity"
     t.float    "unit_price"
     t.float    "subtotal"
+    t.float    "pending_rg"
+    t.float    "pending_cg"
+    t.float    "pending_inv"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["product_id"], name: "index_sales_order_details_on_product_id", using: :btree

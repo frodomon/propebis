@@ -8,6 +8,27 @@
   <td>
   	<%= f.number_field :quantity, class: 'sod_quantity form-control', step: :any %>
   </td>
+  <% if can? :manage, :all %>
+    <td class='onedit'>
+      <%= f.number_field :pending_rg, class: 'pending_rg form-control', step: :any %>
+    </td>
+    <td class='onedit'>
+      <%= f.number_field :pending_cg, class: 'pending_cg form-control', step: :any %>
+    </td>
+    <td class='onedit'>
+      <%= f.number_field :pending_inv, class: 'pending_inv form-control', step: :any %>
+    </td>
+  <% else %>
+    <td class='onedit'>
+      <%= f.number_field :pending_rg, class: 'pending_rg form-control', readonly: true, step: :any %>
+    </td>
+    <td class='onedit'>
+      <%= f.number_field :pending_cg, class: 'pending_cg form-control', readonly: true, step: :any %>
+    </td>
+    <td class='onedit'>
+      <%= f.number_field :pending_inv, class: 'pending_inv form-control', readonly: true, step: :any %>
+    </td>
+  <% end %>
   <td>
   	<%= f.number_field :unit_price, class: 'sod_unit_price form-control', step: :any, readonly: true %>
   </td>

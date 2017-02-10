@@ -88,7 +88,7 @@ class ControlGuidesController < ApplicationController
   end
 
   def search_sales_order_details
-    @sales_order_details = SalesOrderDetail.search_details(params[:search])
+    @sales_order_details = SalesOrderDetail.search_details_cg(params[:search])
     respond_to do |format|
       format.json { render json: @sales_order_details }
     end
@@ -96,11 +96,7 @@ class ControlGuidesController < ApplicationController
   def update_warehouse
     sod_id = @control_guide.sales_order_id
     sales_order = SalesOrder.find(sod_id)
-    if sales_order.status == 0
-      sales_order.update_attribute(:status, 2)
-    elsif sales_order.status == 1
-      sales_order.update_attribute(:status, 3)
-    end
+    
     almacen = ProductLot.where('quantity > 0').order('product_id, due_date ASC')
     control_guide_details = @control_guide.control_guide_details
     control_guide_details.each do |cgd|  
@@ -122,6 +118,28 @@ class ControlGuidesController < ApplicationController
             alm.update_attribute(:quantity,cantidad)
           end
         end
+      end
+    end
+    total_pending = 0
+    sodetails = SalesOrderDetail.where('sales_order_id = ?',sod_id)
+    sodetails.each do |sod|
+      total_pending += sod.pending_cg
+    end
+    cgdetails = @control_guide.control_guide_details
+    cgdetails.each do |cgd|  
+      sodetails.each do |sod|
+        if cgd.product_id == sod.product_id
+          new_pending = sod.pending_cg - cgd.quantity
+          total_pending -= cgd.quantity
+          sod.update_attribute(:pending_cg, new_pending)
+        end
+      end
+    end
+    if total_pending == 0
+      if sales_order.status == 0
+        sales_order.update_attribute(:status, 2)
+      elsif sales_order.status == 1
+        sales_order.update_attribute(:status, 3)
       end
     end
   end

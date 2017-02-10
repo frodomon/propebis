@@ -41,7 +41,7 @@ class RemissionGuidesController < ApplicationController
     @remission_guide.date = Time.now
     respond_to do |format|
       if @remission_guide.save
-        update_credit
+        update_credit_and_pending
         format.html {
           flash[:notice] = 'La Guía de Remisión se creó satisfactoriamente.'
           redirect_to remission_guides_path
@@ -88,19 +88,14 @@ class RemissionGuidesController < ApplicationController
   end
 
   def search_sales_order_details
-    @sales_order_details = SalesOrderDetail.search_details(params[:search])
+    @sales_order_details = SalesOrderDetail.search_details_rg(params[:search])
     respond_to do |format|
       format.json { render json: @sales_order_details }
     end
   end
-  def update_credit
+  def update_credit_and_pending
     sod_id = @remission_guide.sales_order_id
     sales_order = SalesOrder.find(sod_id)
-    if sales_order.status == 0
-      sales_order.update_attribute(:status, 1)
-    elsif sales_order.status == 2
-      sales_order.update_attribute(:status, 3)
-    end
     if sales_order.contract_id != 0
       contrato = Contract.find(sales_order.contract_id)
       value = contrato.credit
@@ -120,6 +115,28 @@ class RemissionGuidesController < ApplicationController
             contract.update_attribute(:pending, new_pending)
           end
         end
+      end
+    end
+    total_pending = 0
+    sodetails = SalesOrderDetail.where('sales_order_id = ?',sod_id)
+    sodetails.each do |sod|
+      total_pending += sod.pending_rg
+    end
+    rgdetails = @remission_guide.remission_guide_details
+    rgdetails.each do |rgd|  
+      sodetails.each do |sod|
+        if rgd.product_id == sod.product_id
+          new_pending = sod.pending_rg - rgd.quantity
+          total_pending -= rgd.quantity
+          sod.update_attribute(:pending_rg, new_pending)
+        end 
+      end
+    end
+    if total_pending == 0
+      if sales_order.status == 0
+        sales_order.update_attribute(:status, 1)
+      elsif sales_order.status == 2
+        sales_order.update_attribute(:status, 3)
       end
     end
   end

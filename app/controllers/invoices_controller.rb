@@ -80,7 +80,7 @@ class InvoicesController < ApplicationController
     end
   end
   def search_sales_order_details
-    @sales_order_details = SalesOrderDetail.search_details(params[:search])
+    @sales_order_details = SalesOrderDetail.search_details_inv(params[:search])
     respond_to do |format|
       format.json { render json: @sales_order_details }
     end
@@ -88,7 +88,24 @@ class InvoicesController < ApplicationController
   def update_status
     sod_id = @invoice.sales_order_id
     sales_order = SalesOrder.find(sod_id)
-    sales_order.update_attribute(:status, 4)
+    total_pending = 0
+    sodetails = SalesOrderDetail.where('sales_order_id = ?',sod_id)
+    sodetails.each do |sod|
+      total_pending += sod.pending_inv
+    end
+    invoice_details = @invoice.invoice_details
+    invoice_details.each do |inv|  
+      sodetails.each do |sod|
+        if inv.product_id == sod.product_id
+          new_pending = sod.pending_inv - inv.quantity
+          total_pending -= inv.quantity
+          sod.update_attribute(:pending_inv, new_pending)
+        end
+      end
+    end
+    if total_pending == 0
+      sales_order.update_attribute(:status, 4)
+    end
   end
   def print_document
     @invoice_details = @invoice.invoice_details
