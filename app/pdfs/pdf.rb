@@ -90,11 +90,8 @@ class Pdf < Prawn::Document
     @invd.each do |id|
       p = Product.find(id.product_id)
       data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, "%.2f" % id.subtotal]]
-      total = total + id.subtotal
+      total += id.subtotal
     end
-    subtotal = total/1.18
-    igv = subtotal*0.18
-    decimal = total % 1 *100
     table data, :position => :left, 
       :cell_style => {
         :padding => [0,0,0,0],
@@ -104,22 +101,43 @@ class Pdf < Prawn::Document
       column_widths: [50,50,360,56,56] do |t|
         t.column(4).style(:align => :right)
     end
+
     if exonerado === '1'
-      move_down 3
+      move_down 6
       data2 = [[ 'EXONERADO DE IGV' ]]
       table data2, :position => :center, :cell_style => { :padding => [5,30,5,30], :font_style => :bold}
+      subtotal = total
+      igv = 0
+    else
+      subtotal = total/1.18
+      igv = subtotal*0.18
     end
+    puts 'igv = ' + igv.to_s
+    decimal = total % 1 *100
     if decimal <10
       text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 499], :style => :bold  
     else
       text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 499], :style => :bold
     end
+    line [512,487],[572,487]
+    stroke
     text_box "Sub Total", at: [430,485], :style => :bold
     text_box "#{"%.2f" % subtotal.round(2)}", at: [512,485], :style => :bold, :align => :right
     text_box "IGV-18%", at: [430, 471], :style => :bold
-    text_box "#{"%.2f" % igv.round(2)}", at: [512,471], :style => :bold, :align => :right
-    text_box "Total S/.", at: [430, 457], :style => :bold
-    text_box "#{"%.2f" % total.round(2)}", at: [512,457], :style => :bold, :align => :right
+    if igv === 0
+      text_box '-', at: [542, 471], :style => :bold
+    else
+      text_box "#{"%.2f" % igv.round(2)}", at: [512,471], :style => :bold, :align => :right
+    end
+    line_width (2)
+    line [512,457],[572,457]
+    stroke
+    text_box "Total S/.", at: [430, 454], :style => :bold
+    text_box "#{"%.2f" % total.round(2)}", at: [512,454], :style => :bold, :align => :right
+
+    line [200,459],[350,459] 
+    stroke
+
     text_box "Cancelado:", at: [200,457] 
   end
 end
