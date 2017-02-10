@@ -1,5 +1,5 @@
 class Pdf < Prawn::Document
-	def initialize(object, object_details, page_size)
+	def initialize(object, object_details, page_size, exonerado)
     super(margin: [20,20], :page_size => page_size)
 		font_size 10
 		if object.is_a?(RemissionGuide)
@@ -15,10 +15,10 @@ class Pdf < Prawn::Document
 		if object.is_a?(Invoice)
       @inv = object
       @invd = object_details
-      inv_content
+      inv_content(exonerado)
 		end
 	end
-  def inv_content
+  def inv_content(exonerado)
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
     move_down 80
@@ -34,7 +34,7 @@ class Pdf < Prawn::Document
     data = [[@inv.date, so]]
     table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [522,50])
     move_down 20
-    inv_line_items    
+    inv_line_items(exonerado)   
   end
   def rgd_content(page_size)
   	@client = Client.find(@rg.client_id)
@@ -83,13 +83,43 @@ class Pdf < Prawn::Document
     end
     table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,240])  
 	end
-  def inv_line_items
+  def inv_line_items(exonerado)
     font_size 12
     data = []
+    total = 0
     @invd.each do |id|
       p = Product.find(id.product_id)
-      data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, id.subtotal]]
+      data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, "%.2f" % id.subtotal]]
+      total = total + id.subtotal
     end
-    table(data,position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold}, column_widths: [50,50,360,56,56])
+    subtotal = total/1.18
+    igv = subtotal*0.18
+    decimal = total % 1 *100
+    table data, :position => :left, 
+      :cell_style => {
+        :padding => [0,0,0,0],
+        :border_color => "FFFFFF", 
+        :font_style => :bold
+      },
+      column_widths: [50,50,360,56,56] do |t|
+        t.column(4).style(:align => :right)
+    end
+    if exonerado === '1'
+      move_down 3
+      data2 = [[ 'EXONERADO DE IGV' ]]
+      table data2, :position => :center, :cell_style => { :padding => [5,30,5,30], :font_style => :bold}
+    end
+    if decimal <10
+      text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 499], :style => :bold  
+    else
+      text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 499], :style => :bold
+    end
+    text_box "Sub Total", at: [430,485], :style => :bold
+    text_box "#{"%.2f" % subtotal.round(2)}", at: [512,485], :style => :bold, :align => :right
+    text_box "IGV-18%", at: [430, 471], :style => :bold
+    text_box "#{"%.2f" % igv.round(2)}", at: [512,471], :style => :bold, :align => :right
+    text_box "Total S/.", at: [430, 457], :style => :bold
+    text_box "#{"%.2f" % total.round(2)}", at: [512,457], :style => :bold, :align => :right
+    text_box "Cancelado:", at: [200,457] 
   end
 end

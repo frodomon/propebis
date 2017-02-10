@@ -47,7 +47,10 @@
                     <td align="center"><%= invoice.invoice_number %></td>
                     <td align="center"><%= invoice.date %></td>
                     <td align="center"><%= invoice.ammount %></td>
-                    <td align="center"><%= link_to 'Imprimir',{ action: 'print_document', format: 'pdf', size:'LEGAL',id: invoice.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %></td>
+                    <td align="center">
+                      <%= link_to 'Imprimir Con IGV',{ action: 'print_document', format: 'pdf', size:'LEGAL', exo: '0', id: invoice.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
+                      <%= link_to 'Imprimir sin IGV',{ action: 'print_document', format: 'pdf', size:'LEGAL', exo: '1', id: invoice.id}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
+                    </td>
                     <td align="center"><%= link_to 'Ver', { action: 'show', id: invoice.id},class: 'btn btn-w-m btn-success btn-xs' %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: invoice.id},class: 'btn btn-w-m btn-warning btn-xs' %></td>
                     <td align="center"><%= link_to 'Eliminar', { action: 'destroy', id: invoice.id}, method: :delete,  data: { confirm: '¿Está seguro?' }, class: 'btn btn-w-m btn-danger btn-xs' %></td>
