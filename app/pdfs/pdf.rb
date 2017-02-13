@@ -21,7 +21,7 @@ class Pdf < Prawn::Document
   def inv_content(exonerado)
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
-    move_down 70
+    move_down 71
     text_box "#{@client.name}", at: [60, cursor], :style => :bold
     text " "
     move_down 5
@@ -42,9 +42,9 @@ class Pdf < Prawn::Document
   	@driver = Driver.find(@rg.driver_id)
     a4 = page_size === 'A4'    
   	if a4
-      move_down 66
+      move_down 64
     else
-      move_down 48
+      move_down 46
     end
   	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [80,cursor], :style => :bold
 		text " "
