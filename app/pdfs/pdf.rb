@@ -115,9 +115,9 @@ class Pdf < Prawn::Document
     puts 'igv = ' + igv.to_s
     decimal = total % 1 *100
     if decimal <10
-      text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 449], :style => :bold  
+      text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 439], :style => :bold  
     else
-      text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 449], :style => :bold
+      text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 439], :style => :bold
     end
     
   end
