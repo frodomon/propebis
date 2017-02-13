@@ -143,12 +143,13 @@ class RemissionGuidesController < ApplicationController
   def print_document
     @remission_guide_details = @remission_guide.remission_guide_details
     size = params[:size]
+    exonerado = params[:exo]
     respond_to do |format|
       format.html {
         render :layout => "empty"
       }
       format.pdf do
-        pdf = Pdf.new(@remission_guide, @remission_guide_details, size)
+        pdf = Pdf.new(@remission_guide, @remission_guide_details, size, exonerado)
         send_data pdf.render, filename: "guia_remision_nro_#{@remission_guide.remission_guide_number}.pdf",
                               type: 'application/pdf', disposition: "inline"
       end

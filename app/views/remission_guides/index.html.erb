@@ -58,8 +58,8 @@
                     <td align="center"><%= remission_guide.date %></td>
                     <td align="center"><%= remission_guide.ammount %></td>
                     <td align="center">
-                      <%= link_to 'Imprimir A4',{ action: 'print_document', id: remission_guide.id, format: 'pdf', size: 'A4'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
-                      <%= link_to 'Imprimir Legal',{ action: 'print_document', id: remission_guide.id, format: 'pdf', size: 'LEGAL'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
+                      <%= link_to 'Imprimir A4',{ action: 'print_document', id: remission_guide.id, format: 'pdf', size: 'A4', exo: '0'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
+                      <%= link_to 'Imprimir Legal',{ action: 'print_document', id: remission_guide.id, format: 'pdf', size: 'LEGAL', exo: '0'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
                     </td>
                     <td align="center"><%= link_to 'Ver', { action: 'show', id: remission_guide.id},class: 'btn btn-w-m btn-success btn-xs' %></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: remission_guide.id},class: 'btn btn-w-m btn-warning btn-xs' %></td>
