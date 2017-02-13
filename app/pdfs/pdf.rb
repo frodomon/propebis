@@ -115,29 +115,10 @@ class Pdf < Prawn::Document
     puts 'igv = ' + igv.to_s
     decimal = total % 1 *100
     if decimal <10
-      text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 479], :style => :bold  
+      text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 449], :style => :bold  
     else
-      text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 479], :style => :bold
+      text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 449], :style => :bold
     end
-    line [512,487],[572,467]
-    stroke
-    text_box "Sub Total", at: [430,465], :style => :bold
-    text_box "#{"%.2f" % subtotal.round(2)}", at: [512,465], :style => :bold, :align => :right
-    text_box "IGV-18%", at: [430, 457], :style => :bold
-    if igv === 0
-      text_box '-', at: [542, 457], :style => :bold
-    else
-      text_box "#{"%.2f" % igv.round(2)}", at: [512,457], :style => :bold, :align => :right
-    end
-    line_width (2)
-    line [512,457],[572,443]
-    stroke
-    text_box "Total S/.", at: [430, 440], :style => :bold
-    text_box "#{"%.2f" % total.round(2)}", at: [512,440], :style => :bold, :align => :right
-
-    line [200,459],[350,445] 
-    stroke
-
-    text_box "Cancelado:", at: [200,443] 
+    
   end
 end
