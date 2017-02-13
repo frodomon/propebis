@@ -119,6 +119,25 @@ class Pdf < Prawn::Document
     else
       text_box "Son #{total.to_words} con #{decimal.to_i}/100 Soles", at: [0, 439], :style => :bold
     end
-    
+    line [512,427],[572,427]
+    stroke
+    text_box "Sub Total", at: [430,425], :style => :bold
+    text_box "#{"%.2f" % subtotal.round(2)}", at: [512,425], :style => :bold, :align => :right
+    text_box "IGV-18%", at: [430, 411], :style => :bold
+    if igv === 0
+      text_box '-', at: [542, 411], :style => :bold
+    else
+      text_box "#{"%.2f" % igv.round(2)}", at: [512,411], :style => :bold, :align => :right
+    end
+    line_width (2)
+    line [512,400],[572,400]
+    stroke
+    text_box "Total S/.", at: [430, 397], :style => :bold
+    text_box "#{"%.2f" % total.round(2)}", at: [512,397], :style => :bold, :align => :right
+
+    line [200,413],[350,411] 
+    stroke
+
+    text_box "Cancelado:", at: [200,408] 
   end
 end
