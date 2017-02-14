@@ -61,7 +61,7 @@ class Pdf < Prawn::Document
   	if a4
       move_down 66
     else
-      move_down 44
+      move_down 48
     end
   	text_box "#{@rg.date.strftime("%d - %b - %Y") }", at: [80,cursor], :style => :bold
 		text " "
