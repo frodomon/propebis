@@ -9,6 +9,9 @@ $(document).ready(function () {
     }
     else{
       $('#sales_order_contract_id').val(id);
+      $('.sod_unit_price').each(function(){
+        $(this).prop('readonly', false);
+      });
     }
     select_val = $('#sales_order_status').val();
     $('#select_status option:eq('+select_val+')').attr('selected', 'selected')  

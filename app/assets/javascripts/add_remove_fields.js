@@ -22,7 +22,6 @@ $(document).ready(function () {
     else{
       id=1;
     }
-    alert(id)
     set_readable(id);
   });
   $('form').on('click','.remove_fields', function(e){
