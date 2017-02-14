@@ -242,6 +242,12 @@ $(document).ready(function () {
 function verify_warehouse(p_id, quantity){
   parameters = {p_id: p_id }; 
   stock = get_data('/sales_orders/search_stock_for_product', parameters);
-  result = stock.quantity - quantity;
+  if (stock.quantity == null){
+    alert('No hay stock de ese producto')
+    result = 0
+  }
+  else{
+    result = stock.quantity - quantity;  
+  }
   return result;
 } 
