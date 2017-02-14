@@ -98,7 +98,7 @@ class Pdf < Prawn::Document
       p = Product.find(od.product_id)
     	data += [[od.quantity, p.unit_of_measurement, p.name + " - " + p.trademark]]
     end
-    table(data, position: :left, cell_style: {:padding => [0,0,0,0], border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,472])  
+    table(data, position: :left, cell_style: {:padding => [0,0,0,0], border_color: "FFFFFF", :font_style => :bold }, column_widths: [50,50,440])  
 	end
   def inv_line_items(exonerado)
     font_size 12
