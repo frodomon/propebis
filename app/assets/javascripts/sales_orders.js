@@ -15,6 +15,7 @@ $(document).ready(function () {
   };
   $('form').on('click', '#with',function(e){
     e.preventDefault();
+    $('#sales_order_contract_id').val(0);
     if ($(this).hasClass('active') === false ){
       $(this).addClass('active');
       if ($('#without').hasClass('active')){

@@ -1,5 +1,5 @@
 class Pdf < Prawn::Document
-	def initialize(object, object_details, page_size, exonerado)
+	def initialize(object, object_details, page_size, exonerado, guia)
     super(margin: [20,20], :page_size => page_size)
 		font_size 10
 		if object.is_a?(RemissionGuide)
@@ -15,12 +15,13 @@ class Pdf < Prawn::Document
 		if object.is_a?(Invoice)
       @inv = object
       @invd = object_details
-      inv_content(exonerado)
+      inv_content(exonerado, guia)
 		end
 	end
-  def inv_content(exonerado)
+  def inv_content(exonerado, guia)
     @client = Client.find(@inv.client_id)
     so = SalesOrder.find(@inv.sales_order_id).sales_order_number
+    gr = RemissionGuide.where('sales_order_id = ?',@inv.sales_order_id)
     move_down 71
     text_box "#{@client.name}", at: [60, cursor], :style => :bold
     text " "
@@ -31,9 +32,25 @@ class Pdf < Prawn::Document
     text_box "#{@client.billing_address }", at: [60, cursor], :style => :bold
     text " "
     move_down 25
-    data = [[@inv.date, so]]
-    table(data, position: :left, cell_style: {border_color: "FFFFFF", :font_style => :bold }, column_widths: [522,50])
-    move_down 20
+    if guia === '1'
+      data = [[@inv.date, gr[0].remission_guide_number, so]]
+      puts 'numero de guias'+gr.length.to_s
+      if gr.length > 1
+        for i in 2..gr.length
+          data += [[' ',gr[i-1].remission_guide_number,' ']]
+        end
+      end
+      table(data, position: :left, cell_style: {:padding => [0,0,0,0], border_color: "FFFFFF", :font_style => :bold }, column_widths: [432, 90, 50])
+    else
+      data = [[@inv.date, so]]
+      table(data, position: :left, cell_style: {:padding => [0,0,0,0], border_color: "FFFFFF", :font_style => :bold }, column_widths: [522, 50])
+    end
+    
+    if gr.length > 1
+      move_down 10
+    else
+      move_down 20
+    end
     inv_line_items(exonerado)   
   end
   def rgd_content(page_size)
@@ -42,7 +59,7 @@ class Pdf < Prawn::Document
   	@driver = Driver.find(@rg.driver_id)
     a4 = page_size === 'A4'    
   	if a4
-      move_down 64
+      move_down 66
     else
       move_down 46
     end
@@ -89,7 +106,7 @@ class Pdf < Prawn::Document
     total = 0
     @invd.each do |id|
       p = Product.find(id.product_id)
-      data += [[id.quantity, p.unit_of_measurement, p.name, id.unit_price, "%.2f" % id.subtotal]]
+      data += [[id.quantity, p.unit_of_measurement, p.name + " - " + p.trademark, id.unit_price, "%.2f" % id.subtotal]]
       total += id.subtotal
     end
     table data, :position => :left, 
@@ -112,7 +129,6 @@ class Pdf < Prawn::Document
       subtotal = total/1.18
       igv = subtotal*0.18
     end
-    puts 'igv = ' + igv.to_s
     decimal = total % 1 *100
     if decimal <10
       text_box "Son #{total.to_words} con 0#{decimal.to_i}/100 Soles", at: [0, 439], :style => :bold  

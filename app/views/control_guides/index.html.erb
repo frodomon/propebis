@@ -57,8 +57,8 @@
                     <td align="center"><%= control_guide.date %></td>
                     <td align="center"><%= control_guide.ammount %></td>
                     <td align="center">
-                      <%= link_to 'Imprimir A4',{ action: 'print_document', id: control_guide.id, format: 'pdf', size: 'A4'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
-                      <%= link_to 'Imprimir Legal',{ action: 'print_document', id: control_guide.id, format: 'pdf', size: 'LEGAL'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
+                      <%= link_to 'Imprimir A4',{ action: 'print_document', id: control_guide.id, format: 'pdf', size: 'A4', exo: '0', guia: '0'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
+                      <%= link_to 'Imprimir Legal',{ action: 'print_document', id: control_guide.id, format: 'pdf', size: 'LEGAL', exo: '0', guia: '0'}, class: 'btn btn-w-m btn-success btn-xs', target: "_blank" %>
                     </td>
                     <td align="center"><%= link_to 'Ver',{ action: 'show', id: control_guide.id}, class: 'btn btn-w-m btn-success btn-xs'%></td>
                     <td align="center"><%= link_to 'Editar', { action: 'edit', id: control_guide.id},class: 'btn btn-w-m btn-warning btn-xs' %></td>

@@ -14,6 +14,10 @@ $(document).ready(function () {
       $('#control_guide_ammount').val(total);
     }
     $('.load_details').hide();
+    qty = $('table #content_details').length
+    if (qty > 20){
+      alert('Hay demasiados items en la factura. Se imprimirá en 2 hojas')  
+    }
   });
   $('form').on('change', '#control_guide_client_id',function(e){
     e.preventDefault();

@@ -14,6 +14,10 @@ $(document).ready(function () {
       total = calculate_final_price('rgd_subtotal');
       $('#remission_guide_ammount').val(total);
       $('.load_details').hide();
+      qty = $('table #content_details').length
+      if (qty > 20){
+        alert('Hay demasiados items en la factura. Se imprimirá en 2 hojas')  
+      }
     }
   });
   $('form').on('change', '#remission_guide_client_id',function(e){

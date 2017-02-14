@@ -147,12 +147,13 @@ class ControlGuidesController < ApplicationController
     @control_guide_details = @control_guide.control_guide_details
     size = params[:size]
     exonerado = params[:exo]
+    guia = params[:guia]
     respond_to do |format|
       format.html {
         render :layout => "empty"
       }
       format.pdf do
-        pdf = Pdf.new(@control_guide, @control_guide_details, size, exonerado )
+        pdf = Pdf.new(@control_guide, @control_guide_details, size, exonerado, guia )
         send_data pdf.render, filename: "guia_interna_nro_#{@control_guide.control_guide_number}.pdf",
                               type: 'application/pdf', disposition: "inline"
       end
